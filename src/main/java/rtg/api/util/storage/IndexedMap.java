@@ -73,19 +73,7 @@ public interface IndexedMap<K, V, I extends Comparable<I>> extends Map<K, V>, Se
             return false;
         }
 
-        interface ByteLIMap<K, V> extends LimitedIndexedMap<K, V, Byte> {
-
-        }
-
-        interface ShortLIMap<K, V> extends LimitedIndexedMap<K, V, Short> {
-
-        }
-
         interface IntegerLIMap<K, V> extends LimitedIndexedMap<K, V, Integer> {
-
-        }
-
-        interface LongLIMap<K, V> extends LimitedIndexedMap<K, V, Long> {
 
         }
     }

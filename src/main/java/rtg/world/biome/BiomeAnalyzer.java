@@ -19,25 +19,29 @@ import java.util.stream.Collectors;
 
 
 public final class BiomeAnalyzer {
-    private static final int NO_BIOME   = -1;
     //Default anvil storage uses a single byte for biome data but with JustEnoughIDs, the biome ID field is expanded
     //to an integer.
-    private static final int MAX_ANVIL_BIOMES = 256;
     private static final int
+            NO_BIOME   = -1,
+            MAX_ANVIL_BIOMES = 256,
+            //biome flag constants
             RIVER_BIOME = 1,
             OCEAN_BIOME = 2,
             SWAMP_BIOME = 4,
             BEACH_BIOME = 8,
             LAND_BIOME  = 16;
     //biomeId -> bitField for biomes [ RIVER_BIOME | OCEAN_BIOME | SWAMP_BIOME | BEACH_BIOME | LAND_BIOME ]
-    private final Map<Integer, Integer> biomes = new HashMap<>();
-    private final Map<Integer, Integer> preferredBeach = new HashMap<>();
+    private final Map<Integer, Integer>
+            biomes = new HashMap<>(),
+            preferredBeach = new HashMap<>();
     //hardcode these because they are world-persistent
-    private IRealisticBiome scenicLakeBiome       = RTGAPI.getRTGBiome(Biomes.RIVER);
-    private IRealisticBiome scenicFrozenLakeBiome = RTGAPI.getRTGBiome(Biomes.FROZEN_RIVER);
-    private SmoothingSearchStatus beachSearch;
-    private SmoothingSearchStatus landSearch;
-    private SmoothingSearchStatus oceanSearch;
+    private IRealisticBiome
+            scenicLakeBiome       = RTGAPI.getRTGBiome(Biomes.RIVER),
+            scenicFrozenLakeBiome = RTGAPI.getRTGBiome(Biomes.FROZEN_RIVER);
+    private SmoothingSearchStatus
+            beachSearch,
+            landSearch,
+            oceanSearch;
 
     public BiomeAnalyzer() {
         initBiomes();
@@ -94,9 +98,10 @@ public final class BiomeAnalyzer {
                 .forEach(biome -> {
                     if (biome != null) {
                         final int id = Biome.getIdForBiome(biome);
-                        final IRealisticBiome realisticBiome = RTGAPI.RTG_BIOMES.getValueAt(id);
+//                        final IRealisticBiome realisticBiome = RTGAPI.RTG_BIOMES.getValueAt(id);
+                        final Map.Entry<Biome, IRealisticBiome> realisticBiome = RTGAPI.RTG_BIOMES.getOrDefault(id, null);
                         if (realisticBiome != null) {
-                            preferredBeach.put(id, realisticBiome.getBeachBiome().baseBiomeId());
+                            preferredBeach.put(id, realisticBiome.getValue().getBeachBiome().baseBiomeId());
                         }
                     }
                 });
