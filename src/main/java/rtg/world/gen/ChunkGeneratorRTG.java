@@ -30,6 +30,7 @@ import rtg.api.util.LimitedArrayCacheMap;
 import rtg.api.util.Logger;
 import rtg.api.util.noise.ISimplexData2D;
 import rtg.api.util.noise.SimplexData2D;
+import rtg.api.util.storage.SparseList;
 import rtg.api.world.RTGWorld;
 import rtg.api.world.biome.IRealisticBiome;
 import rtg.api.world.gen.RTGChunkGenSettings;
@@ -41,6 +42,7 @@ import rtg.world.gen.structure.WoodlandMansionRTG;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class ChunkGeneratorRTG implements IChunkGenerator {
@@ -60,10 +62,9 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
     private final int sampleSize = 8;
     private final int sampleArraySize = sampleSize * 2 + 5;
     private final int[] biomeData = new int[sampleArraySize * sampleArraySize];
-//    private final float[] weightedBiomes = new float[256];
-    private Map<Integer, Float> weightedBiomes = new HashMap<Integer, Float>() {{
+    private List<Float> weightedBiomes = new SparseList<Float>() {{
             for (int i = 0; i < 256; i++) {
-                put(i, 0F);
+                set(i, 0F);
             }
     }};
     private final float[][] weightings = new float[sampleArraySize * sampleArraySize][256];
@@ -556,35 +557,24 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
                         float weight = weightings[mapX * sampleArraySize + mapZ][x * 16 + z];
                         if (weight > 0) {
                             totalWeight += weight;
-//                            weightedBiomes[biomeData[mapX * sampleArraySize + mapZ]] += weight;
                             final int biomeId = biomeData[mapX * sampleArraySize + mapZ];
-                            float existingWeight = weightedBiomes.getOrDefault(biomeId, 0F) + weight;
-                            weightedBiomes.put(biomeId, existingWeight);
+                            Float existingWeight = weightedBiomes.get(biomeId);
+                            existingWeight = (existingWeight == null ? 0F : existingWeight) + weight;
+                            weightedBiomes.set(biomeId, existingWeight);
                         }
                     }
                 }
 
                 // normalize biome weights
-//                for (int biomeIndex = 0; biomeIndex < weightedBiomes.length; biomeIndex++) {
-//                    weightedBiomes[biomeIndex] /= totalWeight;
-//                }
-
-//                Logger.error(String.format("WeightedBiomes before: %h::%d\n", weightedBiomes, weightedBiomes.size()));
-//                weightedBiomes.forEach((k, v) -> {
-//                    Logger.error(String.format("%d(%s)::%f\n", k, Biome.getBiome(k), v));
-//                });
                 final float finalTotalWeight = totalWeight;
-                weightedBiomes = weightedBiomes
-                        .entrySet()
-                        .stream()
-//                        .parallelStream()
-                        .map(e -> new AbstractMap.SimpleEntry<>(e.getKey(), e.getValue() / finalTotalWeight))
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-//                Logger.error(String.format("WeightedBiomes after: %h\n", weightedBiomes));
-//                weightedBiomes.forEach((k, v) -> {
-//                    Logger.error(String.format("%d(%s)::%f\n", k, Biome.getBiome(k), v));
-//                });
+                IntStream
+                        .range(0, weightedBiomes.size())
+                        .forEachOrdered(i -> {
+                            Float weight = weightedBiomes.get(i);
+                            if (weight != null ) {
+                                weightedBiomes.set(i, weight / finalTotalWeight);
+                            }
+                        });
 
                 // combine mesa biomes
                 mesaCombiner.adjust(weightedBiomes);
@@ -594,36 +584,23 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
                 float river = TerrainBase.getRiverStrength(mpos.setPos(worldX + x, 0, worldZ + z), rtgWorld);
                 landscape.river[x * 16 + z] = -river;
 
-//                for (int i = 0; i < 256; i++) {
-//
-//                    if (weightedBiomes[i] > 0f) {
-//
-//                        landscape.noise[x * 16 + z] += RTGAPI.getRTGBiome(i).rNoise(this.rtgWorld, worldX + x, worldZ + z, weightedBiomes[i], river + 1f) * weightedBiomes[i];
-//
-//                        // 0 for the next column
-//                        weightedBiomes[i] = 0f;
-//                    }
-//                }
                 final int
                         finalX = x,
                         finalZ = z;
-//                Logger.error(String.format("WeightedBiomes before: %h::%d\n", weightedBiomes, weightedBiomes.size()));
-                weightedBiomes = weightedBiomes
-                        .entrySet()
-                        .stream()
-                        .map(e -> {
-                            int k = e.getKey();
-                            float v = e.getValue();
-                            if (v > 0F) {
-                                landscape.noise[finalX * 16 + finalZ] += RTGAPI
-                                        .getRTGBiome(k)
-                                        .rNoise(this.rtgWorld, worldX + finalX, worldZ + finalZ, v, river + 1F) * v;
-                                v = 0F;
+                IntStream
+                        .range(0, weightedBiomes.size())
+                        .forEachOrdered(i -> {
+                            Float v = weightedBiomes.get(i);
+                            if (v != null) {
+                                if (v > 0F) {
+                                    landscape.noise[finalX * 16 + finalZ] += RTGAPI
+                                            .getRTGBiome(i)
+                                            .rNoise(this.rtgWorld, worldX + finalX, worldZ + finalZ, v, river + 1F) * v;
+                                    v = 0F;
+                                }
+                                weightedBiomes.set(i, v);
                             }
-                            return new AbstractMap.SimpleEntry<>(k, v);
-                        })
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-//                Logger.error(String.format("WeightedBiomes after: %h\n", weightedBiomes));
+                        });
             }
         }
 

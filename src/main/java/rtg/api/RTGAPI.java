@@ -4,7 +4,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
 
@@ -18,7 +17,7 @@ import net.minecraftforge.common.DimensionManager;
 
 import rtg.api.util.Logger;
 import rtg.api.util.UtilityClass;
-import rtg.api.util.storage.BiomeMap;
+import rtg.api.util.storage.SparseList;
 import rtg.api.world.biome.IRealisticBiome;
 import rtg.world.WorldTypeRTG;
 
@@ -31,8 +30,7 @@ public final class RTGAPI {
             VERSION          = "@API_VERSION@",
             RTG_MOD_ID       = "rtg",
             RTG_WORLDTYPE_ID = "RTG";
-//    public static final BiomeMap RTG_BIOMES       = new BiomeMap();
-    public static final Map<Integer, Map.Entry<Biome, IRealisticBiome>> RTG_BIOMES = new HashMap<>();
+    public static final SparseList<Map.Entry<Biome, IRealisticBiome>> RTG_BIOMES = new SparseList<>();
     private static boolean rtgBiomesLocked = false;
 
     public static void lockRtgBiomes() {
@@ -81,9 +79,7 @@ public final class RTGAPI {
     }
 
     public static IRealisticBiome getRTGBiome(@Nonnull Biome biome) {
-//        IRealisticBiome rtgBiome = RTG_BIOMES.get(biome);
-        final Map.Entry<Biome, IRealisticBiome> entry = RTG_BIOMES.getOrDefault(Biome.getIdForBiome(biome), null);
-//        if (rtgBiome != null) {
+        final Map.Entry<Biome, IRealisticBiome> entry = RTG_BIOMES.get(Biome.getIdForBiome(biome));
         if (entry != null) {
             return entry.getValue();
         }
@@ -91,11 +87,7 @@ public final class RTGAPI {
     }
 
     public static IRealisticBiome getRTGBiome(int biomeId) {
-//        IRealisticBiome rtgBiome = RTG_BIOMES.getValueAt(biomeId);
-//        if (rtgBiome != null) {
-//            return rtgBiome;
-//        }
-        final Map.Entry<Biome, IRealisticBiome> entry = RTG_BIOMES.getOrDefault(biomeId, null);
+        final Map.Entry<Biome, IRealisticBiome> entry = RTG_BIOMES.get(biomeId);
         if (entry != null) {
             return entry.getValue();
         }
@@ -104,28 +96,17 @@ public final class RTGAPI {
 
     public static void addRTGBiomes(IRealisticBiome... biomes) {
         if (!rtgBiomesLocked) {
-            RTG_BIOMES.putAll(Arrays
-                            .stream(biomes)
-//                .parallel()
-                            .map(b -> {
-                                final Integer biomeId = Biome.getIdForBiome(b.baseBiome());
-                                return new AbstractMap.SimpleEntry<>(biomeId, new AbstractMap.SimpleEntry<>(b.baseBiome(), b));
-                            })
-                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
-            );
-//        for (final IRealisticBiome biome : biomes) {
-//            final Biome baseBiome = biome.baseBiome();
-//            RTG_BIOMES.put(Biome.getIdForBiome(baseBiome), new AbstractMap.SimpleEntry<>(baseBiome, biome));
-//        }
+            for (final IRealisticBiome biome : biomes) {
+                final Biome baseBiome = biome.baseBiome();
+                RTG_BIOMES.set(Biome.getIdForBiome(baseBiome), new AbstractMap.SimpleEntry<>(baseBiome, biome));
+            }
         }
     }
 
     public static void initPatchBiome(Biome biome) {
-//        IRealisticBiome rtgBiome = RTG_BIOMES.get(biome);
         IRealisticBiome rtgBiome = getRTGBiome(biome);
         if (rtgBiome == null) {
             Logger.error("Erroneous patch biome set in config: {} (no RTG version), Using default.", biome.getRegistryName());
-//            rtgBiome = Objects.requireNonNull(RTG_BIOMES.get(Biomes.PLAINS), "Cannot find an RTG version of minecraft:plains. This should be impossible.");
             rtgBiome = Objects.requireNonNull(getRTGBiome(Biomes.PLAINS), "Cannot find an RTG version of minecraft:plains. This should be impossible.");
         }
         Logger.debug("Setting patch biome to: {}", rtgBiome.baseBiomeResLoc());

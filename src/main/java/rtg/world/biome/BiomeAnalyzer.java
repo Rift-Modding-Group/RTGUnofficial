@@ -7,15 +7,13 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import rtg.api.RTGAPI;
 import rtg.api.util.CircularSearchCreator;
+import rtg.api.util.storage.SparseList;
 import rtg.api.world.RTGWorld;
 import rtg.api.world.biome.IRealisticBiome;
 import rtg.world.gen.ChunkLandscape;
 
-import java.util.AbstractMap;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.stream.IntStream;
 
 
 public final class BiomeAnalyzer {
@@ -31,9 +29,9 @@ public final class BiomeAnalyzer {
             BEACH_BIOME = 8,
             LAND_BIOME  = 16;
     //biomeId -> bitField for biomes [ RIVER_BIOME | OCEAN_BIOME | SWAMP_BIOME | BEACH_BIOME | LAND_BIOME ]
-    private final Map<Integer, Integer>
-            biomes = new HashMap<>(),
-            preferredBeach = new HashMap<>();
+    private final List<Integer>
+            biomes = new SparseList<>(),
+            preferredBeach = new SparseList<>();
     //hardcode these because they are world-persistent
     private IRealisticBiome
             scenicLakeBiome       = RTGAPI.getRTGBiome(Biomes.RIVER),
@@ -76,7 +74,8 @@ public final class BiomeAnalyzer {
         }};
         ForgeRegistries.BIOMES.getValuesCollection().forEach(biome -> {
             final int id = Biome.getIdForBiome(biome);
-            int biomeFlags = biomes.getOrDefault(id, 0);
+            Integer biomeFlags = biomes.get(id);
+            biomeFlags = (biomeFlags == null ? 0 : biomeFlags);
             for (final Map.Entry<Type, Integer> esac : cases.entrySet()) {
                 if (BiomeDictionary.hasType(biome, esac.getKey())) {
                     biomeFlags |= esac.getValue();
@@ -87,7 +86,7 @@ public final class BiomeAnalyzer {
             if (biomeFlags == 0) {
                 biomeFlags |= LAND_BIOME;
             }
-            biomes.put(id, biomeFlags);
+            biomes.set(id, biomeFlags);
         });
     }
 
@@ -98,10 +97,9 @@ public final class BiomeAnalyzer {
                 .forEach(biome -> {
                     if (biome != null) {
                         final int id = Biome.getIdForBiome(biome);
-//                        final IRealisticBiome realisticBiome = RTGAPI.RTG_BIOMES.getValueAt(id);
-                        final Map.Entry<Biome, IRealisticBiome> realisticBiome = RTGAPI.RTG_BIOMES.getOrDefault(id, null);
+                        final Map.Entry<Biome, IRealisticBiome> realisticBiome = RTGAPI.RTG_BIOMES.get(id);
                         if (realisticBiome != null) {
-                            preferredBeach.put(id, realisticBiome.getValue().getBeachBiome().baseBiomeId());
+                            preferredBeach.set(id, realisticBiome.getValue().getBeachBiome().baseBiomeId());
                         }
                     }
                 });
@@ -261,13 +259,17 @@ public final class BiomeAnalyzer {
         }
     }
 
-    private Map<Integer, Boolean> filterForFlag(final int flag) {
-        return biomes
-                .entrySet()
-                .stream()
-                .filter(e -> (e.getValue() & flag) != 0)
-                .map(e -> new AbstractMap.SimpleEntry<>(e.getKey(), true))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    private List<Boolean> filterForFlag(final int flag) {
+        final List<Boolean> result = new SparseList<>();
+        IntStream
+                .range(0, biomes.size())
+                .forEachOrdered(i -> {
+                    Integer biomeId = biomes.get(i);
+                    if (biomeId != null) {
+                        result.set(biomeId, (biomeId & flag) != 0);
+                    }
+                });
+        return result;
     }
 
     private void setSearches() {
@@ -297,19 +299,19 @@ public final class BiomeAnalyzer {
         private final int lowerRightFinding = 4;
         private final int[] quadrantBiome = new int[4];
         private final float[] quadrantBiomeWeighting = new float[4];
-        public Map<Integer, Integer> biomes = new HashMap<Integer, Integer>();
+        public List<Integer> biomes = new SparseList<>();
         private boolean absent = false;
         private boolean notHunted;
         private int[] findings = new int[3 * 3];
         // weightings is part of a system to generate some variability in repaired chunks weighting is
         // based on how long the search went on (so quasipsuedorandom, based on direction plus distance
         private float[] weightings = new float[3 * 3];
-        private final Map<Integer, Boolean> desired;
+        private final List<Boolean> desired;
         private int arraySize;
         private int[] pattern;
         private int biomeCount;
 
-        private SmoothingSearchStatus(final Map<Integer, Boolean> desired) {
+        private SmoothingSearchStatus(final List<Boolean> desired) {
             this.desired = desired;
         }
 
@@ -347,7 +349,9 @@ public final class BiomeAnalyzer {
             weightings[location] = 2f;
             for (int i = 0; i < pattern.length; i++) {
                 int biome = biomeNeighborhood[pattern[i] + offset];
-                if (desired.containsKey(biome) && desired.get(biome)) {
+                Boolean d = desired.get(biome);
+                d = (d == null ? false : d);
+                if (d && desired.get(biome)) {
                     findings[location] = biome;
                     weightings[location] = (float) Math.sqrt(pattern.length) - (float) Math.sqrt(i) + 2f;
                     break;
@@ -373,7 +377,7 @@ public final class BiomeAnalyzer {
                 // everythings the same; uniform fill;
                 for (int x = 0; x < 8; x++) {
                     for (int z = 0; z < 8; z++) {
-                        biomes.put(biomeIndex(x, z) + biomesOffset, upperLeft);
+                        biomes.set(biomeIndex(x, z) + biomesOffset, upperLeft);
                     }
                 }
                 return;
@@ -397,7 +401,7 @@ public final class BiomeAnalyzer {
                     addWeight(upperRight, weightings[upperRightFinding + findingsOffset] * x * (7 - z));
                     addWeight(lowerLeft, weightings[lowerLeftFinding + findingsOffset] * (7 - x) * z);
                     addWeight(lowerRight, weightings[lowerRightFinding + findingsOffset] * x * z);
-                    biomes.put(biomeIndex(x, z) + biomesOffset, preferredBiome());
+                    biomes.set(biomeIndex(x, z) + biomesOffset, preferredBiome());
                 }
             }
         }

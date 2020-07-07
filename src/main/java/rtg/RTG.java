@@ -85,8 +85,7 @@ public final class RTG {
 
     @Mod.EventHandler
     public void loadComplete(FMLLoadCompleteEvent event) {
-//        RTGAPI.RTG_BIOMES.setLocked();// We don't want the biome map to change after this point, so we lock it.
-        RTGAPI.lockRtgBiomes();
+        RTGAPI.lockRtgBiomes();// We don't want the biome map to change after this point, so we lock it.
     }
 
     @Mod.EventHandler

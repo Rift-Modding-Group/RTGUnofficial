@@ -538,7 +538,6 @@ public final class BiomeInit {
     }
 
     public static void preInit() {
-//        RTGAPI.addRTGBiomes(
         RTGAPI.addRTGBiomes(
                 RealisticBiomeBase.RiverType.NORMAL.setRTGBiome(new RealisticBiomeVanillaRiver()),
                 RealisticBiomeBase.RiverType.FROZEN.setRTGBiome(new RealisticBiomeVanillaFrozenRiver()),
@@ -550,7 +549,6 @@ public final class BiomeInit {
 
     private static void init_minecraft() {
         // vanilla rivers and beaches are initialised to enum fields during #preInit
-//        RTGAPI.addRTGBiomes(
         RTGAPI.addRTGBiomes(
                 new RealisticBiomeVanillaBirchForest(),
                 new RealisticBiomeVanillaBirchForestHills(),
