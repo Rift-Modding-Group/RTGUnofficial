@@ -126,7 +126,7 @@ public final class ModCompat {
 
         final Collection<Biome> unsupportedBiomes = ForgeRegistries.BIOMES.getValuesCollection()
             .stream()
-            .filter(b -> !invalidBiomes.contains(b) && !RTGAPI.RTG_BIOMES.containsKey(b))
+            .filter(b -> !invalidBiomes.contains(b) && !RTGAPI.RTG_BIOMES.containsKey(Biome.getIdForBiome(b)))
             .sorted(Comparator.comparingInt(Biome::getIdForBiome))
             .collect(Collectors.toList());
 
@@ -171,7 +171,7 @@ public final class ModCompat {
 
             Collection<Biome> supportedBiomes = ForgeRegistries.BIOMES.getValuesCollection()
                 .stream()
-                .filter(RTGAPI.RTG_BIOMES::containsKey)
+                .filter(b -> RTGAPI.RTG_BIOMES.containsKey(Biome.getIdForBiome(b)))
                 .sorted(Comparator.comparingInt(Biome::getIdForBiome))
                 .collect(Collectors.toList());
 
