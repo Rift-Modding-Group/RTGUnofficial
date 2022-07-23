@@ -1,18 +1,10 @@
 package rtg;
 
-import java.nio.file.Paths;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.DimensionType;
-
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-
+import net.minecraftforge.fml.common.event.*;
 import rtg.RTGConfig.RTGGuiConfigFactory;
 import rtg.api.RTGAPI;
 import rtg.api.util.PlateauUtil;
@@ -22,13 +14,15 @@ import rtg.server.RTGCommandTree;
 import rtg.util.ModCompat;
 import rtg.world.WorldTypeRTG;
 
+import java.nio.file.Paths;
+
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @Mod(
     modid        = RTG.MOD_ID,
     name         = "Realistic Terrain Generation",
-    version      = "@MOD_VERSION@",
-    dependencies = "required-after:forge@[" + "@FORGE_MINVER@" + ",);required:" + RTGAPI.RTG_API_ID + "@[" + RTGAPI.VERSION + ",);" + "@MOD_DEPS@",
+    version      = "6.1.0.0",
+    dependencies = "required-after:forge@[14.23.5.2847,);after:biomesoplenty@[7.0.1.2441,);after:traverse@[1.6.0,2.0.0)",
     guiFactory   = RTGGuiConfigFactory.LOCATION,
     acceptableRemoteVersions = "*"
 )
