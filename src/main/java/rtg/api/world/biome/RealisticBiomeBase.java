@@ -63,7 +63,7 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
         ResourceLocation resloc = baseBiome.getRegistryName();
         if (resloc == null) {
             throw new IllegalStateException(String.format("Biome with ID: %s, of class: %s, does not have a registry name set.",
-                Biome.getIdForBiome(baseBiome), baseBiome.getClass().getName()));
+                    Biome.getIdForBiome(baseBiome), baseBiome.getClass().getName()));
         }
 
         this.baseBiome = baseBiome;
@@ -72,6 +72,10 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
         this.riverType = riverType;
         this.beachType = beachType;
         this.config = new BiomeConfig(getConfigFile());
+
+        initConfig();
+        getConfig().loadConfig();
+
         this.terrain = initTerrain();
         this.surface = initSurface();
         this.surfaceRiver = new SurfaceRiverOasis(config);
@@ -81,12 +85,7 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
         this.decos = new ArrayList<>();
         this.rtgTrees = new ArrayList<>();
 
-        initConfig();
-
-        getConfig().loadConfig();
-
         initDecos();
-
         overrideDecorations();
     }
 
@@ -217,7 +216,7 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
             float irregularity = rtgWorld.simplexInstance(0).noise2f(x / 12f, y / 12f) * 2f + rtgWorld.simplexInstance(0).noise2f(x / 8f, y / 8f);
             // less on the bottom and more on the sides
             irregularity = irregularity * (1 + r);
-            return (biomeHeight * (r)) + ((55f + irregularity) * 1.0f) * (1f - r);
+            return (biomeHeight * (r)) + ((55f + irregularity)) * (1f - r);
         }
         else {
             return biomeHeight;
