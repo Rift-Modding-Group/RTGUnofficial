@@ -1,26 +1,14 @@
-![](http://i.imgur.com/fntMwQe.png)
+# Realistic Terrain Generation - Unofficial
 
+**Most notable changes:**
 
-# Screenshots
-![](http://i.imgur.com/Aem87JR.gif)
+- Fixed incompatibility with mods altering GenLayer.  
+This will fix rivers not marked as river biome when BiomeTweaker or Buildcraft is installed.
 
-# Overview
+**Planned:**
 
-Realistic Terrain Generation (RTG) is a mod that adds a new world type which generates realistic terrain. It doesn't add new blocks. It doesn't add new mobs. It doesn't even add new biomes. It simply **generates more realistic-looking terrain for existing Overworld biomes** (including those added by other mods).
-
-## Wiki
-Check out the **[Wiki](https://github.com/Team-RTG/Realistic-Terrain-Generation/wiki)** for an **[FAQ](https://github.com/Team-RTG/Realistic-Terrain-Generation/wiki/FAQ)** and info on:
-* [Biome Support](https://github.com/Team-RTG/Realistic-Terrain-Generation/wiki/Biome-Support)
-* [Mod Compatibility](https://github.com/Team-RTG/Realistic-Terrain-Generation/wiki/Mod-Compatibility)
-* [Known Issues](https://github.com/Team-RTG/Realistic-Terrain-Generation/wiki/Known-Issues)
-* [Installation](https://github.com/Team-RTG/Realistic-Terrain-Generation/wiki/Installation)
-* [Configuration](https://github.com/Team-RTG/Realistic-Terrain-Generation/wiki/Configuration)
-
-
-## Discord
-
-### Come talk with us in our [![Discord](https://img.shields.io/discord/168326116761665536.svg)](https://discord.gg/anKT7YX)
-
+- Fix incompatibility with Just Enough IDs. This is planned and is being worked on. It's **not** released yet.
+- More config options.
 
 ## Development
 
@@ -29,11 +17,6 @@ Want to contribute? Great! Please read our [contribution guidelines](https://git
 * We currently have 5 mods under our belt, but RTG is the main focus, and the 1.7.10 version specifically is what we are currently need to be concentrating on and then forward-porting features to 1.8.9/1.9 (although we've strayed several times to work on the 1.9 version because it's new and exciting!)
 
 * Check out the 'dev' branch for the newest changes. The master branch always gets 'frozen' immediately after we release a new version so that people can always build the most recent release from source if they want. Also, we use the 'etc' folder to store example configs, which reflect the latest release.
-
-
-### Minecraft Forum Thread
-----
-[For more information, please visit the official RTG thread on the Minecraft Forum](http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2524489-realistic-terrain-generation-rtg-realistic-biomes)
 
 ### Credits
 ----
