@@ -16,8 +16,8 @@ buildscript {
 apply plugin: "net.minecraftforge.gradle.forge"
 
 group = 'org.teamrtg'
-version = '1.12.2-6.1.0.0'
-archivesBaseName = 'RTGu'
+version = '1.12.2-6.1.0.0-snapshot.3'
+archivesBaseName = 'RTG'
 
 minecraft {
     version = project.forgeVersion
