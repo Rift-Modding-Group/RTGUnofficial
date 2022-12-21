@@ -3,7 +3,9 @@ package rtg.api;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
 
 import com.google.common.collect.Lists;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
@@ -22,7 +24,7 @@ import net.minecraftforge.common.DimensionManager;
 
 import rtg.api.util.Logger;
 import rtg.api.util.UtilityClass;
-import rtg.api.util.storage.SparseList;
+import rtg.api.util.storage.BiomeMap;
 import rtg.api.world.biome.IRealisticBiome;
 import rtg.world.WorldTypeRTG;
 
@@ -30,28 +32,23 @@ import rtg.world.WorldTypeRTG;
 @UtilityClass
 public final class RTGAPI {
 
-    public static final String
-            RTG_API_ID       = "rtgapi",
-            VERSION          = "@API_VERSION@",
-            RTG_MOD_ID       = "rtg",
-            RTG_WORLDTYPE_ID = "RTG";
-    public static final SparseList<Map.Entry<Biome, IRealisticBiome>> RTG_BIOMES = new SparseList<>();
-    private static boolean rtgBiomesLocked = false;
-
-    public static void lockRtgBiomes() {
-        rtgBiomesLocked = true;
-    }
+    public static final String   RTG_API_ID       = "rtgapi";
+    public static final String   VERSION          = "@API_VERSION@";
+    public static final String   RTG_MOD_ID       = "rtg";
+    public static final String   RTG_WORLDTYPE_ID = "RTG";
+    public static final BiomeMap RTG_BIOMES       = new BiomeMap();
 
     private static final Set<DimensionType> ALLOWED_DIMENSION_TYPES = new ObjectArraySet<>();
 
     private static Path            configPath;
     private static Path            biomeConfigPath;
     private static IRealisticBiome patchBiome;
-    private static IBlockState
-            shadowStoneBlock  = null,
-            shadowDesertBlock = null;
+    private static IBlockState     shadowStoneBlock  = null;
+    private static IBlockState     shadowDesertBlock = null;
 
-    private RTGAPI() {}
+    private RTGAPI() {
+
+    }
 
     public static Path getConfigPath() {
         return configPath;
@@ -90,35 +87,26 @@ public final class RTGAPI {
     }
 
     public static IRealisticBiome getRTGBiome(@Nonnull Biome biome) {
-        final Map.Entry<Biome, IRealisticBiome> entry = RTG_BIOMES.get(Biome.getIdForBiome(biome));
-        if (entry != null) {
-            return entry.getValue();
+        IRealisticBiome rtgBiome = RTG_BIOMES.get(biome);
+        if (rtgBiome != null) {
+            return rtgBiome;
         }
         return patchBiome;
     }
 
     public static IRealisticBiome getRTGBiome(int biomeId) {
-        final Map.Entry<Biome, IRealisticBiome> entry = RTG_BIOMES.get(biomeId);
-        if (entry != null) {
-            return entry.getValue();
+        IRealisticBiome rtgBiome = RTG_BIOMES.getValueAt(biomeId);
+        if (rtgBiome != null) {
+            return rtgBiome;
         }
         return patchBiome;
     }
 
-    public static void addRTGBiomes(IRealisticBiome... biomes) {
-        if (!rtgBiomesLocked) {
-            for (final IRealisticBiome biome : biomes) {
-                final Biome baseBiome = biome.baseBiome();
-                RTG_BIOMES.set(Biome.getIdForBiome(baseBiome), new AbstractMap.SimpleEntry<>(baseBiome, biome));
-            }
-        }
-    }
-
     public static void initPatchBiome(Biome biome) {
-        IRealisticBiome rtgBiome = getRTGBiome(biome);
+        IRealisticBiome rtgBiome = RTG_BIOMES.get(biome);
         if (rtgBiome == null) {
             Logger.error("Erroneous patch biome set in config: {} (no RTG version), Using default.", biome.getRegistryName());
-            rtgBiome = Objects.requireNonNull(getRTGBiome(Biomes.PLAINS), "Cannot find an RTG version of minecraft:plains. This should be impossible.");
+            rtgBiome = Objects.requireNonNull(RTG_BIOMES.get(Biomes.PLAINS), "Cannot find an RTG version of minecraft:plains. This should be impossible.");
         }
         Logger.debug("Setting patch biome to: {}", rtgBiome.baseBiomeResLoc());
         patchBiome = rtgBiome;
