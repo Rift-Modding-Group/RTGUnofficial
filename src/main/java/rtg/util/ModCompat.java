@@ -1,13 +1,5 @@
 package rtg.util;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import com.google.common.collect.Lists;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
@@ -18,6 +10,11 @@ import rtg.RTGConfig;
 import rtg.api.RTGAPI;
 import rtg.api.util.Logger;
 import rtg.api.util.UtilityClass;
+
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @UtilityClass
 public final class ModCompat {
@@ -48,60 +45,60 @@ public final class ModCompat {
 
         if (Mods.abyssalcraft.isLoaded()) {
             invalidBiomes.addAll(
-                Stream.of(
-                    Mods.abyssalcraft.getResourceLocation("abyssal_wastelands"),
-                    Mods.abyssalcraft.getResourceLocation("dark_realm"),
-                    Mods.abyssalcraft.getResourceLocation("dreadlands"),
-                    Mods.abyssalcraft.getResourceLocation("dreadlands_forest"),
-                    Mods.abyssalcraft.getResourceLocation("dreadlands_mountains"),
-                    Mods.abyssalcraft.getResourceLocation("omothol"),
-                    Mods.abyssalcraft.getResourceLocation("purified_dreadlands"),
-                    Mods.abyssalcraft.getResourceLocation("purged")
-                )
-                    .map(ForgeRegistries.BIOMES::getValue)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList())
+                    Stream.of(
+                                    Mods.abyssalcraft.getResourceLocation("abyssal_wastelands"),
+                                    Mods.abyssalcraft.getResourceLocation("dark_realm"),
+                                    Mods.abyssalcraft.getResourceLocation("dreadlands"),
+                                    Mods.abyssalcraft.getResourceLocation("dreadlands_forest"),
+                                    Mods.abyssalcraft.getResourceLocation("dreadlands_mountains"),
+                                    Mods.abyssalcraft.getResourceLocation("omothol"),
+                                    Mods.abyssalcraft.getResourceLocation("purified_dreadlands"),
+                                    Mods.abyssalcraft.getResourceLocation("purged")
+                            )
+                            .map(ForgeRegistries.BIOMES::getValue)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList())
             );
         }
 
         if (Mods.biomesoplenty.isLoaded()) {
             invalidBiomes.addAll(
-                Stream.of(
-                    Mods.biomesoplenty.getResourceLocation("corrupted_sands"),
-                    Mods.biomesoplenty.getResourceLocation("fungi_forest"),
-                    Mods.biomesoplenty.getResourceLocation("phantasmagoric_inferno"),
-                    Mods.biomesoplenty.getResourceLocation("undergarden"),
-                    Mods.biomesoplenty.getResourceLocation("visceral_heap")
-                )
-                    .map(ForgeRegistries.BIOMES::getValue)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList())
+                    Stream.of(
+                                    Mods.biomesoplenty.getResourceLocation("corrupted_sands"),
+                                    Mods.biomesoplenty.getResourceLocation("fungi_forest"),
+                                    Mods.biomesoplenty.getResourceLocation("phantasmagoric_inferno"),
+                                    Mods.biomesoplenty.getResourceLocation("undergarden"),
+                                    Mods.biomesoplenty.getResourceLocation("visceral_heap")
+                            )
+                            .map(ForgeRegistries.BIOMES::getValue)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList())
             );
         }
 
         if (Mods.byg.isLoaded()) {
             invalidBiomes.addAll(
-                Stream.of(
-                    Mods.byg.getResourceLocation("babyssalbog"),
-                    Mods.byg.getResourceLocation("bastralisle"),
-                    Mods.byg.getResourceLocation("bcosmicocean"),
-                    Mods.byg.getResourceLocation("bshattereddesert")
-                )
-                    .map(ForgeRegistries.BIOMES::getValue)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList())
+                    Stream.of(
+                                    Mods.byg.getResourceLocation("babyssalbog"),
+                                    Mods.byg.getResourceLocation("bastralisle"),
+                                    Mods.byg.getResourceLocation("bcosmicocean"),
+                                    Mods.byg.getResourceLocation("bshattereddesert")
+                            )
+                            .map(ForgeRegistries.BIOMES::getValue)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList())
             );
         }
 
         if (Mods.fyrecraft.isLoaded()) {
             invalidBiomes.addAll(
-            Stream.of(
-                Mods.fyrecraft.getResourceLocation("miner's caves"),
-                Mods.fyrecraft.getResourceLocation("waterfalls")
-            )
-                .map(Biome.REGISTRY::getObject)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList())
+                    Stream.of(
+                                    Mods.fyrecraft.getResourceLocation("miner's caves"),
+                                    Mods.fyrecraft.getResourceLocation("waterfalls")
+                            )
+                            .map(Biome.REGISTRY::getObject)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList())
             );
         }
 
@@ -114,21 +111,21 @@ public final class ModCompat {
 
         //noinspection ConstantConditions (Biome#getRegistryName can never return null here)
         RTGConfig.getBlacklistMods().stream()
-            .filter(Loader::isModLoaded)
-            .map(modId -> ForgeRegistries.BIOMES.getValuesCollection()
-                .stream()
-                .filter(biome -> biome.getRegistryName().getNamespace().equals(modId))
-                .collect(Collectors.toList()))
-            .flatMap(Collection::stream)
-            .forEach(invalidBiomes::add);
+                .filter(Loader::isModLoaded)
+                .map(modId -> ForgeRegistries.BIOMES.getValuesCollection()
+                        .stream()
+                        .filter(biome -> biome.getRegistryName().getNamespace().equals(modId))
+                        .collect(Collectors.toList()))
+                .flatMap(Collection::stream)
+                .forEach(invalidBiomes::add);
 
         // TODO: Add other biome exceptions. AE2 storage biome, Twilight Forest, etc..
 
         final Collection<Biome> unsupportedBiomes = ForgeRegistries.BIOMES.getValuesCollection()
-            .stream()
-            .filter(b -> !invalidBiomes.contains(b) && !RTGAPI.RTG_BIOMES.containsKey(Biome.getIdForBiome(b)))
-            .sorted(Comparator.comparingInt(Biome::getIdForBiome))
-            .collect(Collectors.toList());
+                .stream()
+                .filter(b -> !invalidBiomes.contains(b) && !RTGAPI.RTG_BIOMES.containsKey(Biome.getIdForBiome(b)))
+                .sorted(Comparator.comparingInt(Biome::getIdForBiome))
+                .collect(Collectors.toList());
 
         if (!unsupportedBiomes.isEmpty()) {
 
@@ -157,9 +154,9 @@ public final class ModCompat {
 
             unsupportedBiomes.forEach(b -> Logger.warn(
                     "|| " + String.format(ID_FORMAT, Biome.getIdForBiome(b))
-                    + " | " + String.format(NAME_FORMAT, b.getBiomeClass().getSimpleName())
-                    + " | " + String.format(RESLOC_FORMAT, b.getRegistryName())
-                    + " ||"));
+                            + " | " + String.format(NAME_FORMAT, b.getBiomeClass().getSimpleName())
+                            + " | " + String.format(RESLOC_FORMAT, b.getRegistryName())
+                            + " ||"));
 
             Logger.warn("`= " + String.format(ID_FORMAT, new String(new char[ID_LENGTH]).replace('\0', '='))
                     + " | " + String.format(NAME_FORMAT, new String(new char[NAME_LENGTH]).replace('\0', '='))
@@ -170,66 +167,68 @@ public final class ModCompat {
         if (RTGConfig.additionalBiomeInfo()) {
 
             Collection<Biome> supportedBiomes = ForgeRegistries.BIOMES.getValuesCollection()
-                .stream()
-                .filter(b -> RTGAPI.RTG_BIOMES.containsKey(Biome.getIdForBiome(b)))
-                .sorted(Comparator.comparingInt(Biome::getIdForBiome))
-                .collect(Collectors.toList());
+                    .stream()
+                    .filter(b -> RTGAPI.RTG_BIOMES.containsKey(Biome.getIdForBiome(b)))
+                    .sorted(Comparator.comparingInt(Biome::getIdForBiome))
+                    .collect(Collectors.toList());
 
             if (!supportedBiomes.isEmpty()) {
                 String[] supported = {""};
 
                 supported[0] += System.lineSeparator() + ".= " + String.format(ID_FORMAT, new String(new char[ID_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BIOME_NAME_FORMAT, new String(new char[BIOME_NAME_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BIOME_CLASS_FORMAT, new String(new char[BIOME_CLASS_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BIOME_RESLOC_FORMAT, new String(new char[BIOME_RESLOC_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BEACH_NAME_FORMAT, new String(new char[BEACH_NAME_LENGTH]).replace('\0', '='))
-                    + " =.";
+                        + " = " + String.format(BIOME_NAME_FORMAT, new String(new char[BIOME_NAME_LENGTH]).replace('\0', '='))
+                        + " = " + String.format(BIOME_CLASS_FORMAT, new String(new char[BIOME_CLASS_LENGTH]).replace('\0', '='))
+                        + " = " + String.format(BIOME_RESLOC_FORMAT, new String(new char[BIOME_RESLOC_LENGTH]).replace('\0', '='))
+                        + " = " + String.format(BEACH_NAME_FORMAT, new String(new char[BEACH_NAME_LENGTH]).replace('\0', '='))
+                        + " =.";
 
                 supported[0] += System.lineSeparator() + "|| " + String.format("%-139s", "                                           RTG found realistic versions of the following biomes")
-                    + " ||";
+                        + " ||";
 
                 supported[0] += System.lineSeparator() + "|| " + String.format(ID_FORMAT, new String(new char[ID_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BIOME_NAME_FORMAT, new String(new char[BIOME_NAME_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BIOME_CLASS_FORMAT, new String(new char[BIOME_CLASS_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BIOME_RESLOC_FORMAT, new String(new char[BIOME_RESLOC_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BEACH_NAME_FORMAT, new String(new char[BEACH_NAME_LENGTH]).replace('\0', '='))
-                    + " ||";
+                        + " = " + String.format(BIOME_NAME_FORMAT, new String(new char[BIOME_NAME_LENGTH]).replace('\0', '='))
+                        + " = " + String.format(BIOME_CLASS_FORMAT, new String(new char[BIOME_CLASS_LENGTH]).replace('\0', '='))
+                        + " = " + String.format(BIOME_RESLOC_FORMAT, new String(new char[BIOME_RESLOC_LENGTH]).replace('\0', '='))
+                        + " = " + String.format(BEACH_NAME_FORMAT, new String(new char[BEACH_NAME_LENGTH]).replace('\0', '='))
+                        + " ||";
 
                 supported[0] += System.lineSeparator() + "|| " + String.format(ID_FORMAT, "ID")
-                    + " | " + String.format(BIOME_NAME_FORMAT, "Biome Name")
-                    + " | " + String.format(BIOME_CLASS_FORMAT, "Class Name")
-                    + " | " + String.format(BIOME_RESLOC_FORMAT, "Registry Name")
-                    + " | " + String.format(BEACH_NAME_FORMAT, "Beach Name")
-                    + " ||";
+                        + " | " + String.format(BIOME_NAME_FORMAT, "Biome Name")
+                        + " | " + String.format(BIOME_CLASS_FORMAT, "Class Name")
+                        + " | " + String.format(BIOME_RESLOC_FORMAT, "Registry Name")
+                        + " | " + String.format(BEACH_NAME_FORMAT, "Beach Name")
+                        + " ||";
 
                 supported[0] += System.lineSeparator() + "|| " + String.format(ID_FORMAT, new String(new char[ID_LENGTH]).replace('\0', '-'))
-                    + " - " + String.format(BIOME_NAME_FORMAT, new String(new char[BIOME_NAME_LENGTH]).replace('\0', '-'))
-                    + " - " + String.format(BIOME_CLASS_FORMAT, new String(new char[BIOME_CLASS_LENGTH]).replace('\0', '-'))
-                    + " - " + String.format(BIOME_RESLOC_FORMAT, new String(new char[BIOME_RESLOC_LENGTH]).replace('\0', '-'))
-                    + " - " + String.format(BEACH_NAME_FORMAT, new String(new char[BEACH_NAME_LENGTH]).replace('\0', '-'))
-                    + " ||";
+                        + " - " + String.format(BIOME_NAME_FORMAT, new String(new char[BIOME_NAME_LENGTH]).replace('\0', '-'))
+                        + " - " + String.format(BIOME_CLASS_FORMAT, new String(new char[BIOME_CLASS_LENGTH]).replace('\0', '-'))
+                        + " - " + String.format(BIOME_RESLOC_FORMAT, new String(new char[BIOME_RESLOC_LENGTH]).replace('\0', '-'))
+                        + " - " + String.format(BEACH_NAME_FORMAT, new String(new char[BEACH_NAME_LENGTH]).replace('\0', '-'))
+                        + " ||";
 
                 supportedBiomes.forEach(b -> supported[0] +=
-                    System.lineSeparator() + "|| " + String.format(ID_FORMAT, Biome.getIdForBiome(b))
-                    + " | " + String.format(BIOME_NAME_FORMAT, b.biomeName)
-                    + " | " + String.format(BIOME_CLASS_FORMAT, b.getBiomeClass().getSimpleName())
-                    + " | " + String.format(BIOME_RESLOC_FORMAT, b.getRegistryName())
-                    + " | " + String.format(BEACH_NAME_FORMAT, RTGAPI.getRTGBiome(b).getBeachBiome().baseBiome().biomeName)
-                    + " ||");
+                        System.lineSeparator() + "|| " + String.format(ID_FORMAT, Biome.getIdForBiome(b))
+                                + " | " + String.format(BIOME_NAME_FORMAT, b.biomeName)
+                                + " | " + String.format(BIOME_CLASS_FORMAT, b.getBiomeClass().getSimpleName())
+                                + " | " + String.format(BIOME_RESLOC_FORMAT, b.getRegistryName())
+                                + " | " + String.format(BEACH_NAME_FORMAT, RTGAPI.getRTGBiome(b).getBeachBiome().baseBiome().biomeName)
+                                + " ||");
 
                 supported[0] += System.lineSeparator() + ".= " + String.format(ID_FORMAT, new String(new char[ID_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BIOME_NAME_FORMAT, new String(new char[BIOME_NAME_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BIOME_CLASS_FORMAT, new String(new char[BIOME_CLASS_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BIOME_RESLOC_FORMAT, new String(new char[BIOME_RESLOC_LENGTH]).replace('\0', '='))
-                    + " = " + String.format(BEACH_NAME_FORMAT, new String(new char[BEACH_NAME_LENGTH]).replace('\0', '='))
-                    + " =." + System.lineSeparator();
+                        + " = " + String.format(BIOME_NAME_FORMAT, new String(new char[BIOME_NAME_LENGTH]).replace('\0', '='))
+                        + " = " + String.format(BIOME_CLASS_FORMAT, new String(new char[BIOME_CLASS_LENGTH]).replace('\0', '='))
+                        + " = " + String.format(BIOME_RESLOC_FORMAT, new String(new char[BIOME_RESLOC_LENGTH]).replace('\0', '='))
+                        + " = " + String.format(BEACH_NAME_FORMAT, new String(new char[BEACH_NAME_LENGTH]).replace('\0', '='))
+                        + " =." + System.lineSeparator();
 
                 Logger.info(supported[0]);
             }
         }
     }
 
-    public static void init() { Mods.init(); }
+    public static void init() {
+        Mods.init();
+    }
 
     // enum entries must match mod ids
     // optional 'friendly name' used for configs
@@ -269,9 +268,13 @@ public final class ModCompat {
         private final String prettyName;
         private boolean loaded;
 
-        Mods() { this(""); }
+        Mods() {
+            this("");
+        }
 
-        Mods(String name) { this.prettyName = (!name.isEmpty()) ? name : name(); }
+        Mods(String name) {
+            this.prettyName = (!name.isEmpty()) ? name : name();
+        }
 
         private static void init() {
             Arrays.stream(Mods.values()).forEach(mod -> mod.loaded = Loader.isModLoaded(mod.name()));
@@ -280,17 +283,16 @@ public final class ModCompat {
         @Nullable
         public static Mods get(final String modId) {
             return Arrays.stream(values())
-                .filter(mod -> mod.name().equals(modId))
-                .findFirst()
-                .orElse(null);
+                    .filter(mod -> mod.name().equals(modId))
+                    .findFirst()
+                    .orElse(null);
         }
 
         public boolean isLoaded() {
             return this.loaded;
         }
 
-        public ResourceLocation getResourceLocation(final String biome)
-        {
+        public ResourceLocation getResourceLocation(final String biome) {
             return new ResourceLocation(name() + ":" + biome);
         }
 

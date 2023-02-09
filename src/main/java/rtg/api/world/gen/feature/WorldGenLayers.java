@@ -1,9 +1,5 @@
 package rtg.api.world.gen.feature;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
@@ -12,6 +8,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 
 public class WorldGenLayers extends WorldGenerator {
@@ -34,10 +34,10 @@ public class WorldGenLayers extends WorldGenerator {
         this.setScatter(scatter < 1 ? 1 : scatter);
 
         this.validGroundBlocks = new ArrayList<IBlockState>(Arrays.asList(
-            Blocks.GRASS.getDefaultState(),
-            Blocks.DIRT.getDefaultState(),
-            Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL),
-            Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT)
+                Blocks.GRASS.getDefaultState(),
+                Blocks.DIRT.getDefaultState(),
+                Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.PODZOL),
+                Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.COARSE_DIRT)
         ));
     }
 
@@ -77,8 +77,7 @@ public class WorldGenLayers extends WorldGenerator {
                     if (this.validGroundBlocks.contains(state)) {
                         setBlockAndNotifyAdequately(world, blockpos, this.layerBlock);
                     }
-                }
-                else {
+                } else {
 
                     blockpos.move(EnumFacing.DOWN);
                     state = world.getBlockState(new BlockPos(blockpos));

@@ -8,8 +8,6 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
-import rtg.api.world.deco.collection.DecoCollectionDesert;
-import rtg.api.world.deco.collection.DecoCollectionDesertRiver;
 import rtg.api.world.gen.RTGChunkGenSettings;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
@@ -97,23 +95,19 @@ public class RealisticBiomeBYGRedDesert extends RealisticBiomeBYGBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (riverPaint) {
                         if (grass && depth < 4) {
                             //primer.setBlockState(x, k, z, Blocks.GRASS.getDefaultState());
                             primer.setBlockState(x, k, z, fillerBlock);
-                        }
-                        else if (depth == 0) {
+                        } else if (depth == 0) {
                             primer.setBlockState(x, k, z, rand.nextInt(2) == 0 ? topBlock : fillerBlock);
                         }
-                    }
-                    else if (depth > -1 && depth < 5) {
+                    } else if (depth > -1 && depth < 5) {
                         primer.setBlockState(x, k, z, topBlock);
-                    }
-                    else if (depth < 8) {
+                    } else if (depth < 8) {
                         primer.setBlockState(x, k, z, fillerBlock);
                     }
                 }

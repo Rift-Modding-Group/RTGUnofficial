@@ -149,8 +149,7 @@ public class RealisticBiomeVanillaSavannaM extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     float p = simplex.noise3f(i / 8f, j / 8f, k / 8f) * 0.5f;
@@ -166,55 +165,44 @@ public class RealisticBiomeVanillaSavannaM extends RealisticBiomeBase {
                         if (rand.nextInt(3) == 0) {
 
                             primer.setBlockState(x, k, z, hcCobble());
-                        }
-                        else {
+                        } else {
 
                             primer.setBlockState(x, k, z, hcStone());
                         }
-                    }
-                    else if (cliff == 2) {
+                    } else if (cliff == 2) {
 
                         if (depth > -1 && depth < 2) {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (depth < 10) {
+                        } else if (depth < 10) {
                             primer.setBlockState(x, k, z, hcStone());
                         }
-                    }
-                    else {
+                    } else {
                         if (k > 74) {
                             if (depth == 0) {
                                 if (rand.nextInt(5) == 0) {
                                     primer.setBlockState(x, k, z, mixBlock);
-                                }
-                                else {
+                                } else {
                                     primer.setBlockState(x, k, z, topBlock);
                                 }
-                            }
-                            else if (depth < 4) {
+                            } else if (depth < 4) {
                                 primer.setBlockState(x, k, z, fillerBlock);
                             }
-                        }
-                        else if (depth == 0 && k > 61) {
+                        } else if (depth == 0 && k > 61) {
                             int r = (int) ((k - 62) / 2f);
                             if (rand.nextInt(r + 2) == 0) {
                                 primer.setBlockState(x, k, z, Blocks.GRASS.getDefaultState());
-                            }
-                            else if (rand.nextInt((int) (r / 2f) + 2) == 0) {
+                            } else if (rand.nextInt((int) (r / 2f) + 2) == 0) {
                                 primer.setBlockState(x, k, z, mixBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }

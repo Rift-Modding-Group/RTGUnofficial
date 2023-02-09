@@ -3,7 +3,6 @@ package rtg.world.biome.realistic.novamterram;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
-
 import rtg.api.util.BlockUtil;
 
 
@@ -27,12 +26,12 @@ public class RealisticBiomeNTMonsoonForest extends RealisticBiomeNTBaseForest {
 
         super.initDecos();
         fallenTrees(
-            new IBlockState[]{
-                BlockUtil.getStateLog(BlockPlanks.EnumType.JUNGLE),
-                BlockUtil.getStateLog(BlockPlanks.EnumType.ACACIA),
-                BlockUtil.getStateLog(BlockPlanks.EnumType.OAK)
-            },
-            new int[]{4, 1, 1}
+                new IBlockState[]{
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.JUNGLE),
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.ACACIA),
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.OAK)
+                },
+                new int[]{4, 1, 1}
         );
     }
 }

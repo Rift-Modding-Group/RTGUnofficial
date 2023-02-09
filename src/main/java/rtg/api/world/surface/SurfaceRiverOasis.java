@@ -18,7 +18,7 @@ public class SurfaceRiverOasis extends SurfaceBase {
     @Override
     public void paintTerrain(ChunkPrimer primer, int i, int j, int x, int z, int depth, RTGWorld rtgWorld, float[] noise, float river, Biome[] base) {
 
-        final float cutOffScale     = rtgWorld.getGeneratorSettings().riverCutOffScale;
+        final float cutOffScale = rtgWorld.getGeneratorSettings().riverCutOffScale;
         final float cutOffAmplitude = rtgWorld.getGeneratorSettings().riverCutOffAmpl;
         IBlockState blockState;
         int highestY;
@@ -47,17 +47,14 @@ public class SurfaceRiverOasis extends SurfaceBase {
                 blockState = primer.getBlockState(x, k, z);
                 if (blockState.getBlock() == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (blockState.getMaterial() != Material.WATER) {
+                } else if (blockState.getMaterial() != Material.WATER) {
                     depth++;
 
                     if (depth == 0 && k > 61) {
                         primer.setBlockState(x, k, z, Blocks.GRASS.getDefaultState());
-                    }
-                    else if (depth < 4) {
+                    } else if (depth < 4) {
                         primer.setBlockState(x, k, z, Blocks.DIRT.getDefaultState());
-                    }
-                    else if (depth > 4) {
+                    } else if (depth > 4) {
                         return;
                     }
                 }

@@ -23,8 +23,7 @@ public class HillockEffect extends HeightEffect {
         float noise = rtgWorld.simplexInstance(octave).noise2f(x / wavelength, y / wavelength);
         if (noise < minimumSimplex) {
             noise = 0;
-        }
-        else {
+        } else {
             noise = (noise - minimumSimplex) / (1f - minimumSimplex);
         }
         return noise * height;

@@ -1,15 +1,11 @@
 package rtg.world.biome.realistic.biomesoplenty;
 
-import java.util.Random;
-
 import biomesoplenty.api.block.BOPBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
@@ -20,13 +16,18 @@ import rtg.api.world.terrain.heighteffect.HeightEffect;
 import rtg.api.world.terrain.heighteffect.HeightVariation;
 import rtg.api.world.terrain.heighteffect.JitterEffect;
 
+import java.util.Random;
+
 
 public class RealisticBiomeBOPDeadSwamp extends RealisticBiomeBase {
 
-    public RealisticBiomeBOPDeadSwamp(final Biome biome) { super(biome); }
+    public RealisticBiomeBOPDeadSwamp(final Biome biome) {
+        super(biome);
+    }
 
     @Override
-    public void initDecos() {}
+    public void initDecos() {
+    }
 
     @Override
     public Biome preferredBeach() {
@@ -95,8 +96,7 @@ public class RealisticBiomeBOPDeadSwamp extends RealisticBiomeBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (cliff && k > 64) {
@@ -104,27 +104,22 @@ public class RealisticBiomeBOPDeadSwamp extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (depth < 10) {
+                        } else if (depth < 10) {
                             primer.setBlockState(x, k, z, hcStone());
                         }
-                    }
-                    else {
+                    } else {
                         if (depth == 0 && k > 61) {
 
                             if (simplex.noise2f(i / 12f, j / 12f) > mixHeight + (noise[x * 16 + z] - 63f) / 10f) {
                                 primer.setBlockState(x, k, z, mix);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }

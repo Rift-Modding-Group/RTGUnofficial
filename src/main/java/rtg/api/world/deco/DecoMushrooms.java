@@ -65,8 +65,7 @@ public class DecoMushrooms extends DecoBase {
                     BlockPos pos = getOffsetPos(chunkPos).add(rand.nextInt(16), rand.nextInt(this.maxY), rand.nextInt(16));
                     if (rand.nextBoolean()) {
                         new WorldGenBush(Blocks.BROWN_MUSHROOM).generate(rtgWorld.world(), rand, pos);
-                    }
-                    else {
+                    } else {
                         new WorldGenBush(Blocks.RED_MUSHROOM).generate(rtgWorld.world(), rand, pos);
                     }
                 }

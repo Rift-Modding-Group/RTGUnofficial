@@ -1,20 +1,11 @@
 package rtg.world.biome.realistic.novamterram;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkPrimer;
-
-import rtg.api.config.BiomeConfig;
-import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
 import rtg.api.world.gen.RTGChunkGenSettings;
-import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
 
 
 public abstract class RealisticBiomeNTBaseDesert extends RealisticBiomeNTBase {

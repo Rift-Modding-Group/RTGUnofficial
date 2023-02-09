@@ -1,12 +1,12 @@
 package rtg.api.world.gen.feature.tree.rtg;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 
 /**
@@ -53,10 +53,10 @@ public class TreeRTGPinusPonderosa extends TreeRTG {
         this.trunkLog = this.getTrunkLog(this.logBlock);
 
         if (!this.isGroundValid(world, new ArrayList<BlockPos>(Arrays.asList(
-            new BlockPos(x + 1, y, z),
-            new BlockPos(x - 1, y, z),
-            new BlockPos(x, y, z + 1),
-            new BlockPos(x, y, z - 1)
+                new BlockPos(x + 1, y, z),
+                new BlockPos(x - 1, y, z),
+                new BlockPos(x, y, z + 1),
+                new BlockPos(x, y, z - 1)
         )))) {
             return false;
         }
@@ -108,8 +108,8 @@ public class TreeRTGPinusPonderosa extends TreeRTG {
                 pZ = dZ;
 
                 buildBranch(world, rand, x, y, z, dX, dZ,
-                    i < crownSize - 12 && i > 3 ? 3 : i < crownSize - 8 ? 2 : 1,
-                    i < crownSize - 5 ? 2 : 1
+                        i < crownSize - 12 && i > 3 ? 3 : i < crownSize - 8 ? 2 : 1,
+                        i < crownSize - 5 ? 2 : 1
                 );
             }
 

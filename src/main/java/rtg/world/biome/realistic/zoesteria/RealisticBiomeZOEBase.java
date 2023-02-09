@@ -1,9 +1,7 @@
 package rtg.world.biome.realistic.zoesteria;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
-import rtg.api.util.BlockUtil;
 import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.surface.SurfaceGeneric;

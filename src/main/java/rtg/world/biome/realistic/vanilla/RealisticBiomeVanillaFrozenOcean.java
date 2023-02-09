@@ -1,7 +1,5 @@
 package rtg.world.biome.realistic.vanilla;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
@@ -11,9 +9,11 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
+import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
-import rtg.api.world.biome.RealisticBiomeBase;
+
+import java.util.Random;
 
 
 public class RealisticBiomeVanillaFrozenOcean extends RealisticBiomeBase {
@@ -89,8 +89,7 @@ public class RealisticBiomeVanillaFrozenOcean extends RealisticBiomeBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0 && k > 0 && k < 63) {
@@ -99,15 +98,12 @@ public class RealisticBiomeVanillaFrozenOcean extends RealisticBiomeBase {
                         if (mixCheck > height) // > 0.27f, i / 12f
                         {
                             primer.setBlockState(x, k, z, mixBlock);
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, topBlock);
                         }
-                    }
-                    else if (depth < 4 && k < 63) {
+                    } else if (depth < 4 && k < 63) {
                         primer.setBlockState(x, k, z, fillerBlock);
-                    }
-                    else if (depth == 0 && k < 69) {
+                    } else if (depth == 0 && k < 69) {
                         primer.setBlockState(x, k, z, Blocks.SAND.getDefaultState());
 
                     }

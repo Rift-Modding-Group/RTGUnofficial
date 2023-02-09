@@ -4,7 +4,6 @@ import net.minecraft.block.BlockSnow;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.util.noise.CellularNoise;
 import rtg.api.util.noise.ISimplexData2D;
 import rtg.api.util.noise.SimplexData2D;
@@ -197,8 +196,7 @@ public abstract class TerrainBase {
                     bn *= bn / 4.5f;
                 }
             }
-        }
-        else if (b < 5f) {
+        } else if (b < 5f) {
             bn = (simplex.noise2f(x / 7f, y / 7f) * 1.3f + simplex.noise2f(x / 15f, y / 15f) * 2f) * (5f - b) * 0.2f;
         }
 
@@ -214,8 +212,8 @@ public abstract class TerrainBase {
         h += simplex.noise2f(x / 15f, y / 15f) * (12f - h) * 0.15f;*/
 
         float ruggedNoise = rtgWorld.simplexInstance(1).noise2f(
-            x / VariableRuggednessEffect.STANDARD_RUGGEDNESS_WAVELENGTH,
-            y / VariableRuggednessEffect.STANDARD_RUGGEDNESS_WAVELENGTH
+                x / VariableRuggednessEffect.STANDARD_RUGGEDNESS_WAVELENGTH,
+                y / VariableRuggednessEffect.STANDARD_RUGGEDNESS_WAVELENGTH
         );
 
         ruggedNoise = blendedHillHeight(ruggedNoise);
@@ -232,8 +230,8 @@ public abstract class TerrainBase {
         h += simplex.noise2d(x / 15d, y / 15d) * 2d;
         h += simplex.noise2d(x / 7d, y / 7d);
 
-        return riverized(baseHeight + 20f + (float)h, river);
-}
+        return riverized(baseHeight + 20f + (float) h, river);
+    }
 
     public static float terrainGrasslandFlats(int x, int y, RTGWorld rtgWorld, float river, float mPitch, float baseHeight) {
 
@@ -421,8 +419,7 @@ public abstract class TerrainBase {
                     bn *= bn / 4.5f;
                 }
             }
-        }
-        else if (b < 5f) {
+        } else if (b < 5f) {
             bn = (simplex.noise2f(x / 7f, y / 7f) * 1.3f + simplex.noise2f(x / 15f, y / 15f) * 2f) * (5f - b) * 0.2f;
         }
 
@@ -604,8 +601,7 @@ public abstract class TerrainBase {
             if (h > 7) {
                 primer.setBlockState(x, y + 2, z, Blocks.SNOW_LAYER.getDefaultState());
                 primer.setBlockState(x, y + 1, z, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, 7));
-            }
-            else if (h > 0) {
+            } else if (h > 0) {
                 primer.setBlockState(x, y + 1, z, Blocks.SNOW_LAYER.getDefaultState().withProperty(BlockSnow.LAYERS, (int) h));
             }
         }

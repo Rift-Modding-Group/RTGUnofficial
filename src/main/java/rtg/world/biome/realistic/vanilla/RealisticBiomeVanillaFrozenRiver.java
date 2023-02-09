@@ -1,7 +1,5 @@
 package rtg.world.biome.realistic.vanilla;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -10,9 +8,11 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
+import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
-import rtg.api.world.biome.RealisticBiomeBase;
+
+import java.util.Random;
 
 
 public class RealisticBiomeVanillaFrozenRiver extends RealisticBiomeBase {
@@ -78,17 +78,14 @@ public class RealisticBiomeVanillaFrozenRiver extends RealisticBiomeBase {
                     b = primer.getBlockState(x, k, z).getBlock();
                     if (b == Blocks.AIR) {
                         depth = -1;
-                    }
-                    else if (b != Blocks.WATER) {
+                    } else if (b != Blocks.WATER) {
                         depth++;
 
                         if (depth == 0 && k > 61) {
                             primer.setBlockState(x, k, z, Blocks.GRASS.getDefaultState());
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             primer.setBlockState(x, k, z, Blocks.DIRT.getDefaultState());
-                        }
-                        else if (depth > 4) {
+                        } else if (depth > 4) {
                             return;
                         }
                     }

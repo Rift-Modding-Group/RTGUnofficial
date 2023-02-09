@@ -1,12 +1,12 @@
 package rtg.api.config.property;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import javax.annotation.Nullable;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 
 @SuppressWarnings("unused")

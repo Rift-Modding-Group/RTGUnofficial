@@ -1,13 +1,13 @@
 package rtg.api.world.gen.feature;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 
 public class WorldGenJungleCane extends WorldGenerator {
@@ -58,8 +58,7 @@ public class WorldGenJungleCane extends WorldGenerator {
                     b = world.getBlockState(new BlockPos(sx, y + 1 + k, sz));
                     if (b.getMaterial() == Material.AIR || b.getMaterial() == Material.VINE) {
                         world.setBlockState(new BlockPos(sx, y + 1 + k, sz), Blocks.REEDS.getDefaultState(), 2);
-                    }
-                    else {
+                    } else {
                         break;
                     }
                 }

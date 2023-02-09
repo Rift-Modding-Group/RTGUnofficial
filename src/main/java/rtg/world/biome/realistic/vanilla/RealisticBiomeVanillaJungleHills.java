@@ -116,8 +116,7 @@ public class RealisticBiomeVanillaJungleHills extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0) {
@@ -134,35 +133,27 @@ public class RealisticBiomeVanillaJungleHills extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else if (k < 63) {
+                        } else if (k < 63) {
                             if (k < 62) {
                                 primer.setBlockState(x, k, z, fillerBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, topBlock);
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
                         if (cliff == 1) {
                             primer.setBlockState(x, k, z, hcStone());
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }

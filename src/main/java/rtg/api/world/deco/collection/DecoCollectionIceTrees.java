@@ -1,7 +1,5 @@
 package rtg.api.world.deco.collection;
 
-import java.util.ArrayList;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import rtg.api.config.BiomeConfig;
@@ -14,6 +12,8 @@ import rtg.api.world.gen.feature.tree.rtg.TreeRTG;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGPiceaPungens;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGPiceaSitchensis;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGPinusPonderosa;
+
+import java.util.ArrayList;
 
 
 /**
@@ -36,18 +36,18 @@ public class DecoCollectionIceTrees extends DecoCollectionBase {
         super(config);
 
         this
-            .addDeco(tallTrees(tallMin, tallMax)) // Tall trees first.
-            .addDeco(shortTrees(short1Min, short1Max)) // Short trees next.
-            .addDeco(shortTrees(short2Min, short2Max)) // More short trees (on the other 'side' of the noise spectrum).
-            .addDeco(randomPungensTrees()) // More trees.
-            .addDeco(shrubsIce()) // Shrubs to fill in the blanks.
+                .addDeco(tallTrees(tallMin, tallMax)) // Tall trees first.
+                .addDeco(shortTrees(short1Min, short1Max)) // Short trees next.
+                .addDeco(shortTrees(short2Min, short2Max)) // More short trees (on the other 'side' of the noise spectrum).
+                .addDeco(randomPungensTrees()) // More trees.
+                .addDeco(shrubsIce()) // Shrubs to fill in the blanks.
         ;
     }
 
     private DecoHelper5050 tallTrees(float noiseMin, float noiseMax) {
         return new DecoHelper5050(
-            tallPineTrees(Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), noiseMin, noiseMax),
-            tallPineTrees(Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), noiseMin, noiseMax)
+                tallPineTrees(Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), noiseMin, noiseMax),
+                tallPineTrees(Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), noiseMin, noiseMax)
         );
     }
 
@@ -68,32 +68,32 @@ public class DecoCollectionIceTrees extends DecoCollectionBase {
         this.addTree(pinusPonderosa);
 
         return new DecoTree(pinusPonderosa)
-            .setStrengthFactorForLoops(4f)
-            .setTreeType(TreeType.RTG_TREE)
-            .setDistribution(forestDistribution)
-            .setTreeCondition(TreeCondition.NOISE_BETWEEN_AND_RANDOM_CHANCE)
-            .setTreeConditionNoise(noiseMin)
-            .setTreeConditionNoise2(noiseMax)
-            .setTreeConditionChance(2)
-            .setMaxY(85);
+                .setStrengthFactorForLoops(4f)
+                .setTreeType(TreeType.RTG_TREE)
+                .setDistribution(forestDistribution)
+                .setTreeCondition(TreeCondition.NOISE_BETWEEN_AND_RANDOM_CHANCE)
+                .setTreeConditionNoise(noiseMin)
+                .setTreeConditionNoise2(noiseMax)
+                .setTreeConditionChance(2)
+                .setMaxY(85);
     }
 
     private DecoHelper5050 shortTrees(float noiseMin, float noiseMax) {
         return new DecoHelper5050(
-            shortPineTrees(Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), noiseMin, noiseMax),
-            shortPineTrees(Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), noiseMin, noiseMax)
+                shortPineTrees(Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), noiseMin, noiseMax),
+                shortPineTrees(Blocks.PACKED_ICE.getDefaultState(), Blocks.ICE.getDefaultState(), noiseMin, noiseMax)
         );
     }
 
     private DecoTree shortPineTrees(IBlockState log, IBlockState leaves, float noiseMin, float noiseMax) {
 
         TreeRTG piceaSitchensis = new TreeRTGPiceaSitchensis()
-            .setLogBlock(log)
-            .setLeavesBlock(leaves)
-            .setMinTrunkSize(4)
-            .setMaxTrunkSize(8)
-            .setMinCrownSize(4)
-            .setMaxCrownSize(14);
+                .setLogBlock(log)
+                .setLeavesBlock(leaves)
+                .setMinTrunkSize(4)
+                .setMaxTrunkSize(8)
+                .setMinCrownSize(4)
+                .setMaxCrownSize(14);
 
         ArrayList<IBlockState> validBlocks = piceaSitchensis.getValidGroundBlocks();
         validBlocks.add(Blocks.SNOW.getDefaultState());
@@ -102,25 +102,25 @@ public class DecoCollectionIceTrees extends DecoCollectionBase {
         this.addTree(piceaSitchensis);
 
         return new DecoTree(piceaSitchensis)
-            .setStrengthFactorForLoops(4f)
-            .setTreeType(TreeType.RTG_TREE)
-            .setDistribution(forestDistribution)
-            .setTreeCondition(TreeCondition.NOISE_BETWEEN_AND_RANDOM_CHANCE)
-            .setTreeConditionNoise(noiseMin)
-            .setTreeConditionNoise2(noiseMax)
-            .setTreeConditionChance(2)
-            .setMaxY(85);
+                .setStrengthFactorForLoops(4f)
+                .setTreeType(TreeType.RTG_TREE)
+                .setDistribution(forestDistribution)
+                .setTreeCondition(TreeCondition.NOISE_BETWEEN_AND_RANDOM_CHANCE)
+                .setTreeConditionNoise(noiseMin)
+                .setTreeConditionNoise2(noiseMax)
+                .setTreeConditionChance(2)
+                .setMaxY(85);
     }
 
     private DecoTree randomPungensTrees() {
 
         TreeRTG piceaPungens = new TreeRTGPiceaPungens()
-            .setLogBlock(Blocks.PACKED_ICE.getDefaultState())
-            .setLeavesBlock(Blocks.ICE.getDefaultState())
-            .setMinTrunkSize(2)
-            .setMaxTrunkSize(4)
-            .setMinCrownSize(4)
-            .setMaxCrownSize(8);
+                .setLogBlock(Blocks.PACKED_ICE.getDefaultState())
+                .setLeavesBlock(Blocks.ICE.getDefaultState())
+                .setMinTrunkSize(2)
+                .setMaxTrunkSize(4)
+                .setMinCrownSize(4)
+                .setMaxCrownSize(8);
 
         ArrayList<IBlockState> validBlocks = piceaPungens.getValidGroundBlocks();
         validBlocks.add(Blocks.SNOW.getDefaultState());
@@ -129,19 +129,19 @@ public class DecoCollectionIceTrees extends DecoCollectionBase {
         this.addTree(piceaPungens);
 
         return new DecoTree(piceaPungens)
-            .setStrengthFactorForLoops(3f)
-            .setTreeType(TreeType.RTG_TREE)
-            .setTreeCondition(TreeCondition.RANDOM_CHANCE)
-            .setTreeConditionChance(8)
-            .setMaxY(100);
+                .setStrengthFactorForLoops(3f)
+                .setTreeType(TreeType.RTG_TREE)
+                .setTreeCondition(TreeCondition.RANDOM_CHANCE)
+                .setTreeConditionChance(8)
+                .setMaxY(100);
     }
 
     private DecoShrub shrubsIce() {
         return new DecoShrub()
-            .setLogBlock(Blocks.PACKED_ICE.getDefaultState())
-            .setLeavesBlock(Blocks.ICE.getDefaultState())
-            .setMaxY(140)
-            .setLoopMultiplier(4f)
-            .setChance(3);
+                .setLogBlock(Blocks.PACKED_ICE.getDefaultState())
+                .setLeavesBlock(Blocks.ICE.getDefaultState())
+                .setMaxY(140)
+                .setLoopMultiplier(4f)
+                .setChance(3);
     }
 }

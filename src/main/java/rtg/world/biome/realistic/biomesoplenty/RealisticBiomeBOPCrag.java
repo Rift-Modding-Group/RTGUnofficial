@@ -1,13 +1,10 @@
 package rtg.world.biome.realistic.biomesoplenty;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
@@ -15,13 +12,18 @@ import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 
+import java.util.Random;
+
 
 public class RealisticBiomeBOPCrag extends RealisticBiomeBase {
 
-    public RealisticBiomeBOPCrag(final Biome biome) { super(biome); }
+    public RealisticBiomeBOPCrag(final Biome biome) {
+        super(biome);
+    }
 
     @Override
-    public void initDecos() {}
+    public void initDecos() {
+    }
 
     @Override
     public Biome preferredBeach() {
@@ -38,7 +40,7 @@ public class RealisticBiomeBOPCrag extends RealisticBiomeBase {
 
     @Override
     public TerrainBase initTerrain() {
-        return new TerrainBOPCrag(false, new float[] {2.0f, 0.5f, 6.5f, 0.5f, 14.0f, 0.5f, 19.0f, 0.5f, 23.0f, 0.5f}, 35f, 80f, 60f, 40f, 69f);
+        return new TerrainBOPCrag(false, new float[]{2.0f, 0.5f, 6.5f, 0.5f, 14.0f, 0.5f, 19.0f, 0.5f, 23.0f, 0.5f}, 35f, 80f, 60f, 40f, 69f);
     }
 
     @Override
@@ -132,8 +134,7 @@ public class RealisticBiomeBOPCrag extends RealisticBiomeBase {
                         bn *= bn / 4.5f;
                     }
                 }
-            }
-            else if (b < 5f) {
+            } else if (b < 5f) {
                 bn = (simplex.noise2f(x / 7f, y / 7f) * 1.3f + simplex.noise2f(x / 15f, y / 15f) * 2f) * (5f - b) * 0.2f;
             }
 
@@ -159,7 +160,7 @@ public class RealisticBiomeBOPCrag extends RealisticBiomeBase {
         private float mix2Height;
 
         public SurfaceBOPCrag(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff, float stoneCliff,
-                                    float stoneHeight, float stoneStrength, float clayCliff, IBlockState mix, float mixHeight, IBlockState mix2, float mix2Height) {
+                              float stoneHeight, float stoneStrength, float clayCliff, IBlockState mix, float mixHeight, IBlockState mix2, float mix2Height) {
 
             super(config, top, fill);
             min = minCliff;
@@ -189,8 +190,7 @@ public class RealisticBiomeBOPCrag extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0) {
@@ -207,47 +207,37 @@ public class RealisticBiomeBOPCrag extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else if (k < 63) {
+                        } else if (k < 63) {
                             if (k < 62) {
                                 primer.setBlockState(x, k, z, fillerBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else {
+                        } else {
                             float mixNoise = simplex.noise2f(i / 12f, j / 12f);
 
                             if (mixNoise < mix2Height) {
                                 primer.setBlockState(x, k, z, mix2Block);
                                 m = true;
-                            }
-                            else if (mixNoise > mixHeight) {
+                            } else if (mixNoise > mixHeight) {
                                 primer.setBlockState(x, k, z, mixBlock);
                                 m = true;
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
                         if (cliff == 1) {
                             primer.setBlockState(x, k, z, hcStone());
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }

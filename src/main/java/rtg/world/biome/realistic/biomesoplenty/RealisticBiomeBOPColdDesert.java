@@ -1,13 +1,10 @@
 package rtg.world.biome.realistic.biomesoplenty;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
@@ -15,13 +12,18 @@ import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 
+import java.util.Random;
+
 
 public class RealisticBiomeBOPColdDesert extends RealisticBiomeBase {
 
-    public RealisticBiomeBOPColdDesert(final Biome biome) { super(biome, RiverType.FROZEN, BeachType.COLD); }
+    public RealisticBiomeBOPColdDesert(final Biome biome) {
+        super(biome, RiverType.FROZEN, BeachType.COLD);
+    }
 
     @Override
-    public void initDecos() {}
+    public void initDecos() {
+    }
 
     @Override
     public void initConfig() {
@@ -35,7 +37,7 @@ public class RealisticBiomeBOPColdDesert extends RealisticBiomeBase {
 
     @Override
     public SurfaceBase initSurface() {
-        return new SurfaceBOPColdDesert(getConfig(), Blocks.SNOW.getDefaultState(), baseBiome().fillerBlock, Blocks.SNOW.getDefaultState(), baseBiome().fillerBlock, 80f, -0.15f, 10f, 0.5f );
+        return new SurfaceBOPColdDesert(getConfig(), Blocks.SNOW.getDefaultState(), baseBiome().fillerBlock, Blocks.SNOW.getDefaultState(), baseBiome().fillerBlock, 80f, -0.15f, 10f, 0.5f);
     }
 
     public static class TerrainBOPColdDesert extends TerrainBase {
@@ -103,34 +105,29 @@ public class RealisticBiomeBOPColdDesert extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (riverPaint) {
                         if (grass && depth < 4) {
                             primer.setBlockState(x, k, z, fillerBlock);
-                        }
-                        else if (depth == 0) {
+                        } else if (depth == 0) {
                             if (rand.nextInt(2) == 0) {
 
                                 primer.setBlockState(x, k, z, hcStone());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcCobble());
                             }
                         }
-                    }
-                    else if (depth > -1 && depth < 9) {
+                    } else if (depth > -1 && depth < 9) {
                         primer.setBlockState(x, k, z, topBlock);
 
                         if (depth == 0 && k > 61 && k < 254) {
                             TerrainBase.calcSnowHeight(x, k, z, primer, noise);
                         }
                     }
-                }
-                else if (!water && b == Blocks.WATER) {
+                } else if (!water && b == Blocks.WATER) {
                     primer.setBlockState(x, k, z, Blocks.ICE.getDefaultState());
                     water = true;
                 }

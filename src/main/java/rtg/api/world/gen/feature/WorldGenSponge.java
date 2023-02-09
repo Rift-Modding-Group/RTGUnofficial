@@ -1,9 +1,5 @@
 package rtg.api.world.gen.feature;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -11,6 +7,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import rtg.api.util.Logger;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 
 public class WorldGenSponge extends WorldGenerator {
@@ -28,15 +28,15 @@ public class WorldGenSponge extends WorldGenerator {
         this.spongeSize = s;
 
         this.validGroundBlocks = new ArrayList<Block>(Arrays.asList(
-            Blocks.GRAVEL,
-            Blocks.CLAY,
-            Blocks.SAND,
-            Blocks.SPONGE
+                Blocks.GRAVEL,
+                Blocks.CLAY,
+                Blocks.SAND,
+                Blocks.SPONGE
         ));
 
         this.validAdjacentBlocks = new ArrayList<Block>(Arrays.asList(
-            Blocks.SPONGE,
-            Blocks.WATER
+                Blocks.SPONGE,
+                Blocks.WATER
         ));
 
         this.minAdjacents = 3;
@@ -93,7 +93,7 @@ public class WorldGenSponge extends WorldGenerator {
                             float f3 = (float) (j2 - y);
 
                             if (f1 * f1 + f2 * f2 + f3 * f3 <= f * f) {
-                                if (hasValidAdjacentBlocks(world, l1, j2, i2)){
+                                if (hasValidAdjacentBlocks(world, l1, j2, i2)) {
                                     world.setBlockState(new BlockPos(l1, j2, i2), spongeBlock, 2);
                                     Logger.rtgDebug("Sponge generated at {} {} {}", l1, j2, i2);
                                 }

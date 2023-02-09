@@ -1,7 +1,5 @@
 package rtg.api.world.gen.feature;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockVine;
 import net.minecraft.block.properties.PropertyBool;
@@ -11,6 +9,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+
+import java.util.Random;
 
 
 public class WorldGenVinesRTG extends WorldGenerator {
@@ -64,8 +64,7 @@ public class WorldGenVinesRTG extends WorldGenerator {
                         break;
                     }
                 }
-            }
-            else {
+            } else {
                 position = position.add(rand.nextInt(4) - rand.nextInt(4), 0, rand.nextInt(4) - rand.nextInt(4));
             }
         }
@@ -75,10 +74,10 @@ public class WorldGenVinesRTG extends WorldGenerator {
 
     protected void addVine(World worldIn, Random rand, BlockPos pos, EnumFacing enumfacing) {
         IBlockState iblockstate = this.vineBlock.getDefaultState()
-            .withProperty(this.propNorth, enumfacing == EnumFacing.SOUTH)
-            .withProperty(this.propEast, enumfacing == EnumFacing.WEST)
-            .withProperty(this.propSouth, enumfacing == EnumFacing.NORTH)
-            .withProperty(this.propWest, enumfacing == EnumFacing.EAST);
+                .withProperty(this.propNorth, enumfacing == EnumFacing.SOUTH)
+                .withProperty(this.propEast, enumfacing == EnumFacing.WEST)
+                .withProperty(this.propSouth, enumfacing == EnumFacing.NORTH)
+                .withProperty(this.propWest, enumfacing == EnumFacing.EAST);
 
         this.setBlockAndNotifyAdequately(worldIn, pos, iblockstate);
 

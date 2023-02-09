@@ -57,7 +57,7 @@ public class VariableRuggednessEffect extends HeightEffect {
         float smooth = smoothTerrain.added(rtgWorld, x, y);
         float rugged = ruggedTerrain.added(rtgWorld, x, y);
         return ((choice - startTransition) * rugged + (startTransition + transitionWidth - choice) * smooth) /
-            transitionWidth;
+                transitionWidth;
     }
 
 }

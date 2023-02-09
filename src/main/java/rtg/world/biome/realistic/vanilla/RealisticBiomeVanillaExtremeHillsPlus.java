@@ -1,7 +1,5 @@
 package rtg.world.biome.realistic.vanilla;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
@@ -11,6 +9,7 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
+import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.deco.collection.DecoCollectionExtremeHillsCommon;
 import rtg.api.world.deco.collection.DecoCollectionExtremeHillsPlus;
 import rtg.api.world.surface.SurfaceBase;
@@ -18,7 +17,8 @@ import rtg.api.world.terrain.TerrainBase;
 import rtg.api.world.terrain.heighteffect.HeightEffect;
 import rtg.api.world.terrain.heighteffect.JitterEffect;
 import rtg.api.world.terrain.heighteffect.MountainsWithPassesEffect;
-import rtg.api.world.biome.RealisticBiomeBase;
+
+import java.util.Random;
 
 
 public class RealisticBiomeVanillaExtremeHillsPlus extends RealisticBiomeBase {
@@ -130,8 +130,7 @@ public class RealisticBiomeVanillaExtremeHillsPlus extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0) {
@@ -148,39 +147,30 @@ public class RealisticBiomeVanillaExtremeHillsPlus extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else if (k < 63) {
+                        } else if (k < 63) {
                             if (k < 62) {
                                 primer.setBlockState(x, k, z, fillerBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else if (simplex.noise2f(i / 12f, j / 12f) > mixHeight) {
+                        } else if (simplex.noise2f(i / 12f, j / 12f) > mixHeight) {
                             primer.setBlockState(x, k, z, mixBlock);
                             m = true;
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, topBlock);
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
                         if (cliff == 1) {
                             primer.setBlockState(x, k, z, hcStone());
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }

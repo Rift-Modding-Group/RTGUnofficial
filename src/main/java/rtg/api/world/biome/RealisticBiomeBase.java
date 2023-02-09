@@ -63,7 +63,7 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
         ResourceLocation resloc = baseBiome.getRegistryName();
         if (resloc == null) {
             throw new IllegalStateException(String.format("Biome with ID: %s, of class: %s, does not have a registry name set.",
-                Biome.getIdForBiome(baseBiome), baseBiome.getClass().getName()));
+                    Biome.getIdForBiome(baseBiome), baseBiome.getClass().getName()));
         }
 
         this.baseBiome = baseBiome;
@@ -169,15 +169,14 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
         }
 
         float lakeStrength = lakePressure(rtgWorld, x, y, border, rtgWorld.getLakeFrequency(),
-            rtgWorld.getLakeBendSizeLarge(), rtgWorld.getLakeBendSizeMedium(), rtgWorld.getLakeBendSizeSmall());
+                rtgWorld.getLakeBendSizeLarge(), rtgWorld.getLakeBendSizeMedium(), rtgWorld.getLakeBendSizeSmall());
         float lakeFlattening = lakeFlattening(lakeStrength, rtgWorld.getLakeShoreLevel(), rtgWorld.getLakeDepressionLevel());
 
         // combine rivers and lakes
         if ((river < 1) && (lakeFlattening < 1)) {
             river = (1f - river) / river + (1f - lakeFlattening) / lakeFlattening;
             river = (1f / (river + 1f));
-        }
-        else if (lakeFlattening < river) {
+        } else if (lakeFlattening < river) {
             river = lakeFlattening;
         }
 
@@ -218,8 +217,7 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
             // less on the bottom and more on the sides
             irregularity = irregularity * (1 + r);
             return (biomeHeight * (r)) + ((55f + irregularity) * 1.0f) * (1f - r);
-        }
-        else {
+        } else {
             return biomeHeight;
         }
     }
@@ -248,7 +246,7 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
         pY += jitterData.getDeltaY() * smallBendSize;
 
         VoronoiResult lakeResults = rtgWorld.cellularInstance(0).eval2D(pX / lakeInterval, pY / lakeInterval);
-        return (float)(1.0d - lakeResults.interiorValue());
+        return (float) (1.0d - lakeResults.interiorValue());
     }
 
     public float lakeFlattening(float pressure, float shoreLevel, float topLevel) {
@@ -273,13 +271,17 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
 
     @Override
     public void rReplace(ChunkPrimer primer, int i, int j, int x, int y, int depth, RTGWorld rtgWorld, float[] noise, float river, Biome[] base) {
-        if (RTG.surfacesDisabled() || this.getConfig().DISABLE_RTG_SURFACES.get()) { return; }
+        if (RTG.surfacesDisabled() || this.getConfig().DISABLE_RTG_SURFACES.get()) {
+            return;
+        }
         float riverRegion = !this.getConfig().ALLOW_RIVERS.get() ? 0f : river;
         this.surface.paintTerrain(primer, i, j, x, y, depth, rtgWorld, noise, riverRegion, base);
     }
 
     protected void rReplaceWithRiver(ChunkPrimer primer, int i, int j, int x, int y, int depth, RTGWorld rtgWorld, float[] noise, float river, Biome[] base) {
-        if (RTG.surfacesDisabled() || this.getConfig().DISABLE_RTG_SURFACES.get()) { return; }
+        if (RTG.surfacesDisabled() || this.getConfig().DISABLE_RTG_SURFACES.get()) {
+            return;
+        }
         float riverRegion = !this.getConfig().ALLOW_RIVERS.get() ? 0f : river;
         this.surface.paintTerrain(primer, i, j, x, y, depth, rtgWorld, noise, riverRegion, base);
         if (RTGConfig.lushRiverbanksInDesert()) {
@@ -310,9 +312,9 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
     private File getConfigFile() {
         final Mods mod = Objects.requireNonNull(Mods.get(baseBiomeResLoc().getNamespace()), "ModCompat.Mods does not have a value for the mod that added this biome.");
         return RTGAPI.getBiomeConfigPath()
-            .resolve(mod.getPrettyName())
-            .resolve(baseBiomeResLoc().getPath() + ".cfg")
-            .toFile();
+                .resolve(mod.getPrettyName())
+                .resolve(baseBiomeResLoc().getPath() + ".cfg")
+                .toFile();
     }
 
     protected BeachType determineBeachType() {
@@ -331,8 +333,8 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
 
     private boolean isTaigaBiome(Biome biome) {
         return BiomeDictionary.hasType(biome, BiomeDictionary.Type.COLD)
-            && BiomeDictionary.hasType(biome, BiomeDictionary.Type.CONIFEROUS)
-            && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST);
+                && BiomeDictionary.hasType(biome, BiomeDictionary.Type.CONIFEROUS)
+                && BiomeDictionary.hasType(biome, BiomeDictionary.Type.FOREST);
     }
 
     public enum BeachType {

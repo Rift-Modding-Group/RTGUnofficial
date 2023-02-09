@@ -1,14 +1,11 @@
 package rtg.world.biome.realistic.biomesoplenty;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.BlockUtil;
 import rtg.api.util.noise.SimplexNoise;
@@ -17,14 +14,19 @@ import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 
+import java.util.Random;
+
 
 public class RealisticBiomeBOPMountainFoothills extends RealisticBiomeBase {
 
     //TODO: Decidious
-    public RealisticBiomeBOPMountainFoothills(final Biome biome) { super(biome); }
+    public RealisticBiomeBOPMountainFoothills(final Biome biome) {
+        super(biome);
+    }
 
     @Override
-    public void initDecos() {}
+    public void initDecos() {
+    }
 
     @Override
     public Biome preferredBeach() {
@@ -45,7 +47,7 @@ public class RealisticBiomeBOPMountainFoothills extends RealisticBiomeBase {
 
     @Override
     public SurfaceBase initSurface() {
-        return new SurfaceBOPMountainFoothills(getConfig(), baseBiome().topBlock, baseBiome().fillerBlock, BlockUtil.getStateDirt(BlockDirt.DirtType.COARSE_DIRT), baseBiome().fillerBlock, 80f, -0.15f, 10f, 0.5f );
+        return new SurfaceBOPMountainFoothills(getConfig(), baseBiome().topBlock, baseBiome().fillerBlock, BlockUtil.getStateDirt(BlockDirt.DirtType.COARSE_DIRT), baseBiome().fillerBlock, 80f, -0.15f, 10f, 0.5f);
     }
 
     public static class TerrainBOPMountainFoothills extends TerrainBase {
@@ -111,8 +113,7 @@ public class RealisticBiomeBOPMountainFoothills extends RealisticBiomeBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (cliff) {
@@ -120,33 +121,27 @@ public class RealisticBiomeBOPMountainFoothills extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (depth < 10) {
+                        } else if (depth < 10) {
                             primer.setBlockState(x, k, z, hcStone());
                         }
-                    }
-                    else {
+                    } else {
                         if (depth == 0 && k > 61) {
                             if (simplex.noise2f(i / floMixWidth, j / floMixWidth) + simplex.noise2f(i / floSmallWidth, j / floSmallWidth)
-                                * floSmallStrength > floMixHeight) {
+                                    * floSmallStrength > floMixHeight) {
                                 primer.setBlockState(x, k, z, blockMixTop);
 
                                 mix = true;
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             if (mix) {
                                 primer.setBlockState(x, k, z, blockMixFiller);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, fillerBlock);
                             }
                         }

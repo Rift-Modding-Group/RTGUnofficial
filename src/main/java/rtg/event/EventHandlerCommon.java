@@ -1,10 +1,5 @@
 package rtg.event;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -12,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenLiquids;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent.Decorate;
@@ -20,7 +14,6 @@ import net.minecraftforge.event.terraingen.SaplingGrowTreeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
 import rtg.RTGConfig;
 import rtg.api.RTGAPI;
 import rtg.api.util.BlockUtil;
@@ -31,11 +24,16 @@ import rtg.api.world.deco.DecoBase;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTG;
 import rtg.world.biome.BiomeProviderRTG;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
 
 @UtilityClass
-public final class EventHandlerCommon
-{
-    private EventHandlerCommon() {}
+public final class EventHandlerCommon {
+    private EventHandlerCommon() {
+    }
 
     public static void init() {
         MinecraftForge.TERRAIN_GEN_BUS.register(EventHandlerCommon.class);
@@ -62,14 +60,14 @@ public final class EventHandlerCommon
                 // reduced chance due to reduced random y level
                 for (int i = 0; i < 20; i++) {
                     (new WorldGenLiquids(Blocks.FLOWING_WATER))
-                        .generate(world, rand, offsetpos.add(rand.nextInt(16), rand.nextInt(64) + 8, rand.nextInt(16)));
+                            .generate(world, rand, offsetpos.add(rand.nextInt(16), rand.nextInt(64) + 8, rand.nextInt(16)));
                 }
                 break;
             case LAKE_LAVA:
                 // reduced chance due to reduced random y level
                 for (int i = 0; i < 5; i++) {
                     (new WorldGenLiquids(Blocks.FLOWING_LAVA))
-                        .generate(world, rand, offsetpos.add(rand.nextInt(16), rand.nextInt(rand.nextInt(rand.nextInt(64) + 8) + 8), rand.nextInt(16)));
+                            .generate(world, rand, offsetpos.add(rand.nextInt(16), rand.nextInt(rand.nextInt(rand.nextInt(64) + 8) + 8), rand.nextInt(16)));
                 }
                 break;
             default:
@@ -118,9 +116,9 @@ public final class EventHandlerCommon
 
         // First, let's get all of the trees in this biome that match the sapling on the ground.
         List<TreeRTG> validTrees = biomeTrees.stream()
-            .filter(tree-> saplingBlock.getBlock() == tree.getSaplingBlock().getBlock() &&
-                BlockUtil.getTypeFromSapling(saplingBlock) == BlockUtil.getTypeFromSapling(tree.getSaplingBlock()))
-            .collect(Collectors.toList());
+                .filter(tree -> saplingBlock.getBlock() == tree.getSaplingBlock().getBlock() &&
+                        BlockUtil.getTypeFromSapling(saplingBlock) == BlockUtil.getTypeFromSapling(tree.getSaplingBlock()))
+                .collect(Collectors.toList());
 
         // Abort if there are no valid trees.
         if (validTrees.isEmpty()) {
@@ -144,7 +142,7 @@ public final class EventHandlerCommon
         int treeHeight = tree.getTrunkSize() + tree.getCrownSize();
         if (treeHeight < 1) {
             Logger.debug("[SaplingGrowTreeEvent] Unable to grow RTG tree with no height: {}[logblock={}, leafblock={}, saplingblock={}]",
-                tree.getClass().getSimpleName(), tree.getLogBlock(), tree.getLeavesBlock(), tree.getSaplingBlock());
+                    tree.getClass().getSimpleName(), tree.getLogBlock(), tree.getLeavesBlock(), tree.getSaplingBlock());
             return;
         }
 

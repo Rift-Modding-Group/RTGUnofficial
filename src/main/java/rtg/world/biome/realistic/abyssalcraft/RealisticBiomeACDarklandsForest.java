@@ -1,7 +1,5 @@
 package rtg.world.biome.realistic.abyssalcraft;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -18,10 +16,14 @@ import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 import rtg.util.ModCompat.Mods;
 
+import java.util.Random;
+
 
 public class RealisticBiomeACDarklandsForest extends RealisticBiomeBase {
 
-    public RealisticBiomeACDarklandsForest(final Biome biome) { super(biome); }
+    public RealisticBiomeACDarklandsForest(final Biome biome) {
+        super(biome);
+    }
 
     @Override
     public void initConfig() {
@@ -36,6 +38,32 @@ public class RealisticBiomeACDarklandsForest extends RealisticBiomeBase {
     public TerrainBase initTerrain() {
 
         return new TerrainACDarklandsForest();
+    }
+
+    @Override
+    public SurfaceBase initSurface() {
+
+        return new SurfaceACDarklandsForest(getConfig(), baseBiome().topBlock, baseBiome().fillerBlock, 0f, 1.5f, 60f, 65f, 1.5f, baseBiome().topBlock, 0.10f);
+    }
+
+    @Override
+    public void initDecos() {
+
+        DecoFallenTree decoFallenTree = new DecoFallenTree();
+        decoFallenTree.setLogConditionChance(12);
+        decoFallenTree.setLogBlock(BlockUtil.getBlock(Mods.abyssalcraft.getResourceLocation("dltlog"), Blocks.LOG).getDefaultState());
+        decoFallenTree.setLeavesBlock(BlockUtil.getBlock(Mods.abyssalcraft.getResourceLocation("dltleaves"), Blocks.LEAVES).getDefaultState());
+        decoFallenTree.setMinSize(2);
+        decoFallenTree.setMaxSize(3);
+        this.addDeco(decoFallenTree, this.getConfig().ALLOW_LOGS.get());
+
+        DecoShrub decoShrubCustom = new DecoShrub();
+        decoShrubCustom.setLogBlock(BlockUtil.getBlock(Mods.abyssalcraft.getResourceLocation("dltlog"), Blocks.LOG).getDefaultState());
+        decoShrubCustom.setLeavesBlock(BlockUtil.getBlock(Mods.abyssalcraft.getResourceLocation("dltleaves"), Blocks.LEAVES).getDefaultState());
+        decoShrubCustom.setMaxY(110);
+        decoShrubCustom.setNotEqualsZeroChance(3);
+        decoShrubCustom.setLoopMultiplier(3f);
+        this.addDeco(decoShrubCustom);
     }
 
     public static class TerrainACDarklandsForest extends TerrainBase {
@@ -57,12 +85,6 @@ public class RealisticBiomeACDarklandsForest extends RealisticBiomeBase {
 
             return riverized(floNoise, river);
         }
-    }
-
-    @Override
-    public SurfaceBase initSurface() {
-
-        return new SurfaceACDarklandsForest(getConfig(), baseBiome().topBlock, baseBiome().fillerBlock, 0f, 1.5f, 60f, 65f, 1.5f, baseBiome().topBlock, 0.10f);
     }
 
     public static class SurfaceACDarklandsForest extends SurfaceBase {
@@ -106,8 +128,7 @@ public class RealisticBiomeACDarklandsForest extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0) {
@@ -124,64 +145,35 @@ public class RealisticBiomeACDarklandsForest extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else if (k < 63) {
+                        } else if (k < 63) {
                             if (k < 62) {
                                 primer.setBlockState(x, k, z, fillerBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else if (simplex.noise2f(i / 12f, j / 12f) > mixHeight) {
+                        } else if (simplex.noise2f(i / 12f, j / 12f) > mixHeight) {
                             primer.setBlockState(x, k, z, mixBlock);
                             m = true;
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, topBlock);
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
                         if (cliff == 1) {
                             primer.setBlockState(x, k, z, hcStone());
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }
                 }
             }
         }
-    }
-
-    @Override
-    public void initDecos() {
-
-        DecoFallenTree decoFallenTree = new DecoFallenTree();
-        decoFallenTree.setLogConditionChance(12);
-        decoFallenTree.setLogBlock(BlockUtil.getBlock(Mods.abyssalcraft.getResourceLocation("dltlog"), Blocks.LOG).getDefaultState());
-        decoFallenTree.setLeavesBlock(BlockUtil.getBlock(Mods.abyssalcraft.getResourceLocation("dltleaves"), Blocks.LEAVES).getDefaultState());
-        decoFallenTree.setMinSize(2);
-        decoFallenTree.setMaxSize(3);
-        this.addDeco(decoFallenTree, this.getConfig().ALLOW_LOGS.get());
-
-        DecoShrub decoShrubCustom = new DecoShrub();
-        decoShrubCustom.setLogBlock(BlockUtil.getBlock(Mods.abyssalcraft.getResourceLocation("dltlog"), Blocks.LOG).getDefaultState());
-        decoShrubCustom.setLeavesBlock(BlockUtil.getBlock(Mods.abyssalcraft.getResourceLocation("dltleaves"), Blocks.LEAVES).getDefaultState());
-        decoShrubCustom.setMaxY(110);
-        decoShrubCustom.setNotEqualsZeroChance(3);
-        decoShrubCustom.setLoopMultiplier(3f);
-        this.addDeco(decoShrubCustom);
     }
 }

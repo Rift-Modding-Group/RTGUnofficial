@@ -1,26 +1,19 @@
 package rtg.world.biome.realistic.explorercraft;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.BlockUtil;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
-import rtg.api.world.terrain.heighteffect.BumpyHillsEffect;
-import rtg.api.world.terrain.heighteffect.GroundEffect;
-import rtg.api.world.terrain.heighteffect.HeightEffect;
-import rtg.api.world.terrain.heighteffect.JitterEffect;
-import rtg.api.world.terrain.heighteffect.RaiseEffect;
-import rtg.api.world.terrain.heighteffect.VariableRuggednessEffect;
+
+import java.util.Random;
 
 
 public class RealisticBiomeECBambooForest extends RealisticBiomeECBase {
@@ -45,8 +38,8 @@ public class RealisticBiomeECBambooForest extends RealisticBiomeECBase {
     public SurfaceBase initSurface() {
 
         return new SurfaceVanillaForest(getConfig(), baseBiome().topBlock, baseBiome().fillerBlock,
-            0f, 1.7f, 60f, 65f, 1.5f,
-            BlockUtil.getStateDirt(BlockDirt.DirtType.PODZOL), 0.6f, BlockUtil.getStateDirt(BlockDirt.DirtType.PODZOL), -0.4f);
+                0f, 1.7f, 60f, 65f, 1.5f,
+                BlockUtil.getStateDirt(BlockDirt.DirtType.PODZOL), 0.6f, BlockUtil.getStateDirt(BlockDirt.DirtType.PODZOL), -0.4f);
     }
 
     public static class TerrainBOPBrushland extends TerrainBase {
@@ -114,8 +107,7 @@ public class RealisticBiomeECBambooForest extends RealisticBiomeECBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0) {
@@ -132,47 +124,37 @@ public class RealisticBiomeECBambooForest extends RealisticBiomeECBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else if (k < 63) {
+                        } else if (k < 63) {
                             if (k < 62) {
                                 primer.setBlockState(x, k, z, fillerBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else {
+                        } else {
                             float mixNoise = simplex.noise2f(i / 12f, j / 12f);
 
                             if (mixNoise < mix2Height) {
                                 primer.setBlockState(x, k, z, mix2Block);
                                 m = true;
-                            }
-                            else if (mixNoise > mixHeight) {
+                            } else if (mixNoise > mixHeight) {
                                 primer.setBlockState(x, k, z, mixBlock);
                                 m = true;
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
                         if (cliff == 1) {
                             primer.setBlockState(x, k, z, hcStone());
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }

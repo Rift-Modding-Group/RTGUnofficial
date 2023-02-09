@@ -1,7 +1,5 @@
 package rtg.world.biome.realistic.vanilla;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
@@ -11,9 +9,11 @@ import net.minecraft.world.chunk.ChunkPrimer;
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
+import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
-import rtg.api.world.biome.RealisticBiomeBase;
+
+import java.util.Random;
 
 
 public class RealisticBiomeVanillaIcePlains extends RealisticBiomeBase {
@@ -45,16 +45,15 @@ public class RealisticBiomeVanillaIcePlains extends RealisticBiomeBase {
         if (this.getConfig().USE_ARCTIC_SURFACE.get()) {
 
             return new SurfacePolar(getConfig(), Blocks.SNOW.getDefaultState(), //Block top
-                biome.fillerBlock, //Block filler,
-                Blocks.SNOW.getDefaultState(), //IBlockState mixTop,
-                biome.fillerBlock, //IBlockState mixFill,
-                80f, //float mixWidth,
-                -0.15f, //float mixHeight,
-                10f, //float smallWidth,
-                0.5f //float smallStrength
+                    biome.fillerBlock, //Block filler,
+                    Blocks.SNOW.getDefaultState(), //IBlockState mixTop,
+                    biome.fillerBlock, //IBlockState mixFill,
+                    80f, //float mixWidth,
+                    -0.15f, //float mixHeight,
+                    10f, //float smallWidth,
+                    0.5f //float smallStrength
             );
-        }
-        else {
+        } else {
 
             return new SurfaceVanillaIcePlains(getConfig(), biome.topBlock, biome.fillerBlock, biome.topBlock, biome.topBlock);
         }
@@ -101,23 +100,19 @@ public class RealisticBiomeVanillaIcePlains extends RealisticBiomeBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (cliff) {
                         if (depth > -1 && depth < 2) {
                             primer.setBlockState(x, k, z, rand.nextInt(3) == 0 ? cliffBlock2 : cliffBlock1);
-                        }
-                        else if (depth < 10) {
+                        } else if (depth < 10) {
                             primer.setBlockState(x, k, z, cliffBlock1);
                         }
-                    }
-                    else {
+                    } else {
                         if (depth == 0 && k > 61) {
                             primer.setBlockState(x, k, z, topBlock);
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }
@@ -171,34 +166,29 @@ public class RealisticBiomeVanillaIcePlains extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (riverPaint) {
                         if (grass && depth < 4) {
                             primer.setBlockState(x, k, z, fillerBlock);
-                        }
-                        else if (depth == 0) {
+                        } else if (depth == 0) {
                             if (rand.nextInt(2) == 0) {
 
                                 primer.setBlockState(x, k, z, hcStone());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcCobble());
                             }
                         }
-                    }
-                    else if (depth > -1 && depth < 9) {
+                    } else if (depth > -1 && depth < 9) {
                         primer.setBlockState(x, k, z, topBlock);
 
                         if (depth == 0 && k > 61 && k < 254) {
                             TerrainBase.calcSnowHeight(x, k, z, primer, noise);
                         }
                     }
-                }
-                else if (!water && b == Blocks.WATER) {
+                } else if (!water && b == Blocks.WATER) {
                     primer.setBlockState(x, k, z, Blocks.ICE.getDefaultState());
                     water = true;
                 }

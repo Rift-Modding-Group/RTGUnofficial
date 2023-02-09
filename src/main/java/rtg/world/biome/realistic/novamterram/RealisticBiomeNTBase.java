@@ -6,8 +6,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
-import rtg.api.RTGAPI;
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
@@ -45,6 +43,18 @@ public abstract class RealisticBiomeNTBase extends RealisticBiomeBase {
         this(baseBiome, RiverType.NORMAL, beachType);
     }
 
+    public static Biome getNTBiome(String biomeName, Biome fallbackBiome) {
+
+        Biome biome;
+        String modid = ModCompat.Mods.nt.name();
+        ResourceLocation resLoc = new ResourceLocation(modid, biomeName);
+        if ((biome = Biome.REGISTRY.getObject(resLoc)) != null) {
+            return biome;
+        } else {
+            return fallbackBiome;
+        }
+    }
+
     @Override
     public void initConfig() {
 
@@ -57,8 +67,8 @@ public abstract class RealisticBiomeNTBase extends RealisticBiomeBase {
     public SurfaceBase initSurface() {
 
         return new SurfaceNTGeneric(getConfig(), baseBiome().topBlock, baseBiome().fillerBlock,
-            0f, 1.5f, 60f, 65f, 1.5f,
-            getMixBlock1(), 0.6f, getMixBlock2(), -0.2f, getMixBlock3(), -0.4f
+                0f, 1.5f, 60f, 65f, 1.5f,
+                getMixBlock1(), 0.6f, getMixBlock2(), -0.2f, getMixBlock3(), -0.4f
         );
     }
 
@@ -80,6 +90,26 @@ public abstract class RealisticBiomeNTBase extends RealisticBiomeBase {
     protected IBlockState getMixBlock3() {
 
         return baseBiome().topBlock;
+    }
+
+    public void fallenTrees(IBlockState[] fallenTreeLogs, int[] fallenTreeChances) {
+
+        if (fallenTreeLogs.length < 1 || (fallenTreeLogs.length != fallenTreeChances.length)) {
+            return;
+        }
+
+        DecoBase[] fallenTreeDecos = new DecoBase[fallenTreeLogs.length];
+
+        for (int i = 0; i < fallenTreeLogs.length; i++) {
+            fallenTreeDecos[i] = new DecoFallenTree()
+                    .setLogBlock(fallenTreeLogs[i])
+                    .setLogConditionChance(20)
+                    .setMaxSize(4);
+        }
+
+        this.addDeco(new DecoHelperRandomSplit()
+                .setDecos(fallenTreeDecos)
+                .setChances(fallenTreeChances));
     }
 
     public static class SurfaceNTGeneric extends SurfaceBase {
@@ -132,8 +162,7 @@ public abstract class RealisticBiomeNTBase extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0) {
@@ -150,90 +179,45 @@ public abstract class RealisticBiomeNTBase extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else if (k < 63) {
+                        } else if (k < 63) {
                             if (k < 62) {
                                 primer.setBlockState(x, k, z, fillerBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else {
+                        } else {
                             float mixNoise = simplex.noise2f(i / 12f, j / 12f);
 
                             if (mixNoise < mix3Height) {
                                 primer.setBlockState(x, k, z, mix3Block);
                                 m = true;
-                            }
-                            else if (mixNoise < mix2Height) {
+                            } else if (mixNoise < mix2Height) {
                                 primer.setBlockState(x, k, z, mix2Block);
                                 m = true;
-                            }
-                            else if (mixNoise > mixHeight) {
+                            } else if (mixNoise > mixHeight) {
                                 primer.setBlockState(x, k, z, mixBlock);
                                 m = true;
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
                         if (cliff == 1) {
                             primer.setBlockState(x, k, z, hcStone());
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }
                 }
             }
         }
-    }
-
-
-    public static Biome getNTBiome(String biomeName, Biome fallbackBiome) {
-
-        Biome biome;
-        String modid = ModCompat.Mods.nt.name();
-        ResourceLocation resLoc = new ResourceLocation(modid, biomeName);
-        if ((biome = Biome.REGISTRY.getObject(resLoc)) != null) {
-            return biome;
-        }
-        else {
-            return fallbackBiome;
-        }
-    }
-
-    public void fallenTrees(IBlockState[] fallenTreeLogs, int[] fallenTreeChances) {
-
-        if (fallenTreeLogs.length < 1 || (fallenTreeLogs.length != fallenTreeChances.length)) {
-            return;
-        }
-
-        DecoBase[] fallenTreeDecos = new DecoBase[fallenTreeLogs.length];
-
-        for (int i = 0; i < fallenTreeLogs.length; i++) {
-            fallenTreeDecos[i] = new DecoFallenTree()
-                                     .setLogBlock(fallenTreeLogs[i])
-                                     .setLogConditionChance(20)
-                                     .setMaxSize(4);
-        }
-
-        this.addDeco(new DecoHelperRandomSplit()
-                         .setDecos(fallenTreeDecos)
-                         .setChances(fallenTreeChances));
     }
 }

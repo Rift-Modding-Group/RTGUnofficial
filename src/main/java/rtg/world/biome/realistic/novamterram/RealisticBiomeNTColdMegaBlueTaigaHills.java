@@ -5,7 +5,6 @@ import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
-
 import rtg.api.util.BlockUtil;
 
 
@@ -29,11 +28,11 @@ public class RealisticBiomeNTColdMegaBlueTaigaHills extends RealisticBiomeNTBase
 
         super.initDecos();
         fallenTrees(
-            new IBlockState[]{
-                BlockUtil.getStateLog(BlockPlanks.EnumType.SPRUCE),
-                BlockUtil.getStateLog(BlockPlanks.EnumType.SPRUCE)
-            },
-            new int[]{2, 2}
+                new IBlockState[]{
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.SPRUCE),
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.SPRUCE)
+                },
+                new int[]{2, 2}
         );
     }
 

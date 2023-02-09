@@ -1,7 +1,5 @@
 package rtg.world.biome.realistic.candyworld;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,6 +11,8 @@ import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
+
+import java.util.Random;
 
 
 public class RealisticBiomeCWGummySwamp extends RealisticBiomeCWBase {
@@ -142,8 +142,7 @@ public class RealisticBiomeCWGummySwamp extends RealisticBiomeCWBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0) {
@@ -160,48 +159,38 @@ public class RealisticBiomeCWGummySwamp extends RealisticBiomeCWBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, topBlock);
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, topBlock);
-                        }
-                        else if (k < 63) {
+                        } else if (k < 63) {
                             if (k < 62) {
                                 primer.setBlockState(x, k, z, fillerBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else {
+                        } else {
                             float mixNoise = simplex.noise2f(i / 12f, j / 12f); // Range = -0.8f to 0.8f (approximately)
 
                             if (mixNoise < mix4Height) {
                                 primer.setBlockState(x, k, z, mix4Block);
                                 mix_filler = mixFill4Block;
-                            }
-                            else if (mixNoise < mix3Height) {
+                            } else if (mixNoise < mix3Height) {
                                 primer.setBlockState(x, k, z, mix3Block);
                                 mix_filler = mixFill3Block;
-                            }
-                            else if (mixNoise < mix2Height) {
+                            } else if (mixNoise < mix2Height) {
                                 primer.setBlockState(x, k, z, mix2Block);
                                 mix_filler = mixFill2Block;
-                            }
-                            else if (mixNoise < mixHeight) {
+                            } else if (mixNoise < mixHeight) {
                                 primer.setBlockState(x, k, z, mixBlock);
                                 mix_filler = mixFillBlock;
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
 //                        if (cliff == 1) {
 //                            primer.setBlockState(x, k, z, topBlock);
 //                        }
@@ -209,7 +198,7 @@ public class RealisticBiomeCWGummySwamp extends RealisticBiomeCWBase {
 //                            primer.setBlockState(x, k, z, topBlock);
 //                        }
 //                        else {
-                            primer.setBlockState(x, k, z, mix_filler);
+                        primer.setBlockState(x, k, z, mix_filler);
 //                        }
                     }
                 }

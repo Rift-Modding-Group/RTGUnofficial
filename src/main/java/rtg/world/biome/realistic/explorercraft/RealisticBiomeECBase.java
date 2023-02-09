@@ -1,12 +1,11 @@
 package rtg.world.biome.realistic.explorercraft;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.world.biome.Biome;
-
 import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.surface.SurfaceGeneric;
+
+import javax.annotation.Nonnull;
 
 
 public abstract class RealisticBiomeECBase extends RealisticBiomeBase {

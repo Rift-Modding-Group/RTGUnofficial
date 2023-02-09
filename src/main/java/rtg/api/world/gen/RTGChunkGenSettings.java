@@ -25,7 +25,7 @@ public final class RTGChunkGenSettings {
     public final int sandDuneHeight;        // RTG
     //  public final int     snowDuneHeight;        // RTG - No current use
     public final boolean useSnowLayers;         // RTG
-    public final float   snowLayerTemp;
+    public final float snowLayerTemp;
 
     public final int bedrockLayers;         // RTG
     public final boolean useCaves;              // Vanilla
@@ -270,6 +270,18 @@ public final class RTGChunkGenSettings {
         this.lapisSpread = settingsFactory.lapisSpread;
     }
 
+    public int getSurfaceWaterLakeChance(final double multiplier) {
+        return this.waterLakeChance <= 0 || multiplier <= 0.0 ? 0 : (int) (this.waterLakeChance / multiplier);
+    }
+
+    public int getSurfaceLavaLakeChance(final double multiplier) {
+        return this.lavaLakeChance <= 0 || multiplier <= 0.0 ? 0 : (int) (this.lavaLakeChance / multiplier);
+    }
+
+    public float getClampedSnowLayerTemp() {
+        return Math.max(0.05f, Math.min(0.15f, this.snowLayerTemp));
+    }
+
     public static class Factory {
 
         static final Gson JSON_ADAPTER = (new GsonBuilder()).registerTypeAdapter(RTGChunkGenSettings.Factory.class, new RTGChunkGenSettings.Serializer()).create();
@@ -283,7 +295,7 @@ public final class RTGChunkGenSettings {
         public int sandDuneHeight = 4;
         //      public int      snowDuneHeight       = 4;
         public boolean useSnowLayers = true;
-        public float   snowLayerTemp = 0.12f;
+        public float snowLayerTemp = 0.12f;
 
         public int bedrockLayers = 5;
 
@@ -413,8 +425,7 @@ public final class RTGChunkGenSettings {
                 JsonReader reader = new JsonReader(new StringReader(generatorSettings));
                 reader.setLenient(true);
                 return JSON_ADAPTER.getAdapter(Factory.class).read(reader);
-            }
-            catch (IOException ex) {
+            } catch (IOException ex) {
                 Logger.error("Error parsing chunk generator settings: {}", ex.getMessage());
                 Logger.error("Settings: {}", generatorSettings);
                 return new RTGChunkGenSettings.Factory();
@@ -697,8 +708,7 @@ public final class RTGChunkGenSettings {
                 settings.lapisCount = JsonUtils.getInt(json, "lapisCount", settings.lapisCount);
                 settings.lapisCenterHeight = JsonUtils.getInt(json, "lapisCenterHeight", settings.lapisCenterHeight);
                 settings.lapisSpread = JsonUtils.getInt(json, "lapisSpread", settings.lapisSpread);
-            }
-            catch (Exception ignore) {
+            } catch (Exception ignore) {
             }
 
             return settings;
@@ -835,17 +845,5 @@ public final class RTGChunkGenSettings {
             json.addProperty("lapisSpread", factory.lapisSpread);
             return json;
         }
-    }
-
-    public int getSurfaceWaterLakeChance(final double multiplier) {
-        return this.waterLakeChance <= 0 || multiplier <= 0.0 ? 0 : (int) (this.waterLakeChance / multiplier);
-    }
-
-    public int getSurfaceLavaLakeChance(final double multiplier) {
-        return this.lavaLakeChance <= 0 || multiplier <= 0.0 ? 0 : (int) (this.lavaLakeChance / multiplier);
-    }
-
-    public float getClampedSnowLayerTemp() {
-        return Math.max(0.05f, Math.min(0.15f, this.snowLayerTemp));
     }
 }

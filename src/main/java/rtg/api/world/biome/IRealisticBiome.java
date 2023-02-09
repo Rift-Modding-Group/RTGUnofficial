@@ -88,7 +88,8 @@ public interface IRealisticBiome {
     }
 
     // Use this method to override a base biome's decorations.
-    default void overrideDecorations() {}
+    default void overrideDecorations() {
+    }
 
     /**
      * Convenience method for addDeco() where 'allowed' is assumed to be true.
@@ -147,8 +148,7 @@ public interface IRealisticBiome {
             try {
                 IBlockState leaves = tree.getLeavesBlock().withProperty(BlockLeaves.CHECK_DECAY, false);
                 tree.setLeavesBlock(leaves);
-            }
-            catch (Exception ignore) {
+            } catch (Exception ignore) {
                 // Do nothing.
             }
 
@@ -181,7 +181,9 @@ public interface IRealisticBiome {
      * Some biomes have hard-coded decorations.
      * If true, RTG will call the biome decorator's decorate() method instead of the biome's decorate() method.
      */
-    default boolean overridesHardcoded() { return false; }
+    default boolean overridesHardcoded() {
+        return false;
+    }
 
     TerrainBase initTerrain();
 

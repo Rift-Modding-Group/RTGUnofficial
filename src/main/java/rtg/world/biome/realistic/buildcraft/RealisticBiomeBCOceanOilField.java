@@ -1,7 +1,5 @@
 package rtg.world.biome.realistic.buildcraft;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,6 +11,8 @@ import rtg.api.world.RTGWorld;
 import rtg.api.world.deco.collection.DecoCollectionOcean;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
+
+import java.util.Random;
 
 
 public class RealisticBiomeBCOceanOilField extends RealisticBiomeBCBase {
@@ -88,8 +88,7 @@ public class RealisticBiomeBCOceanOilField extends RealisticBiomeBCBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0 && k > 0 && k < 63) {
@@ -98,15 +97,12 @@ public class RealisticBiomeBCOceanOilField extends RealisticBiomeBCBase {
                         if (mixCheck > height) // > 0.27f, i / 12f
                         {
                             primer.setBlockState(x, k, z, mixBlock);
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, topBlock);
                         }
-                    }
-                    else if (depth < 4 && k < 63) {
+                    } else if (depth < 4 && k < 63) {
                         primer.setBlockState(x, k, z, fillerBlock);
-                    }
-                    else if (depth == 0 && k < 69) {
+                    } else if (depth == 0 && k < 69) {
                         primer.setBlockState(x, k, z, Blocks.SAND.getDefaultState());
 
                     }

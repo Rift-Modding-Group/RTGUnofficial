@@ -20,16 +20,16 @@ public class DecoCollectionOcean extends DecoCollectionBase {
         super(config);
 
         this.addDeco(boulderDecos()) // Mossy cobble & prismarine boulders.
-            .addDeco(sponge(), config.ALLOW_SPONGE.get()); // Rare, wet sponge (only in deeper waters).
+                .addDeco(sponge(), config.ALLOW_SPONGE.get()); // Rare, wet sponge (only in deeper waters).
     }
 
     private DecoHelperRandomSplit boulderDecos() {
         return new DecoHelperRandomSplit()
-            .setDecos(new DecoBase[]{
-                boulders(Blocks.MOSSY_COBBLESTONE.getDefaultState()),
-                boulders(Blocks.PRISMARINE.getDefaultState())
-            })
-            .setChances(new int[]{8, 8});
+                .setDecos(new DecoBase[]{
+                        boulders(Blocks.MOSSY_COBBLESTONE.getDefaultState()),
+                        boulders(Blocks.PRISMARINE.getDefaultState())
+                })
+                .setChances(new int[]{8, 8});
     }
 
     private DecoBoulder boulders(IBlockState boulderBlock) {

@@ -1,26 +1,28 @@
 package rtg.world.biome.realistic.biomesoplenty;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.world.RTGWorld;
 import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 
+import java.util.Random;
+
 
 public class RealisticBiomeBOPGravelBeach extends RealisticBiomeBase {
 
-    public RealisticBiomeBOPGravelBeach(final Biome biome) { super(biome); }
+    public RealisticBiomeBOPGravelBeach(final Biome biome) {
+        super(biome);
+    }
 
     @Override
-    public void initDecos() {}
+    public void initDecos() {
+    }
 
     @Override
     public Biome preferredBeach() {
@@ -79,17 +81,14 @@ public class RealisticBiomeBOPGravelBeach extends RealisticBiomeBase {
 
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0 && k > 61) {
                         primer.setBlockState(x, k, z, topBlock);
-                    }
-                    else if (k > 63 && depth > 3 && depth < 6) {
+                    } else if (k > 63 && depth > 3 && depth < 6) {
                         primer.setBlockState(x, k, z, mixBlockFill);
-                    }
-                    else if (depth < 4) {
+                    } else if (depth < 4) {
                         primer.setBlockState(x, k, z, fillerBlock);
                     }
                 }

@@ -1,13 +1,13 @@
 package rtg.api.world.gen.feature.tree.rtg;
 
-import java.util.Random;
-
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import rtg.api.util.BlockUtil;
+
+import java.util.Random;
 
 
 /**
@@ -17,58 +17,58 @@ public class TreeRTGCocosNucifera extends TreeRTG {
 
     private static int leavesLength = 133;
     private static int[] leaves = new int[]{
-        1, 0, 0,
-        2, 0, 0,
-        3, -1, 0,
-        3, -2, 0,
-        -1, 0, 0,
-        -2, 0, 0,
-        -3, -1, 0,
-        -3, -2, 0,
-        0, 0, 1,
-        0, 0, 2,
-        0, -1, 3,
-        0, -2, 3,
-        0, 0, -1,
-        0, 0, -2,
-        0, -1, -3,
-        0, -2, -3,
-        0, 1, 0,
-        1, 1, 1,
-        -1, 1, -1,
-        -1, 1, 1,
-        1, 1, -1,
-        1, 2, 0,
-        -1, 2, 0,
-        0, 2, 1,
-        0, 2, -1,
-        2, 3, 0,
-        3, 3, 0,
-        4, 2, 0,
-        -2, 3, 0,
-        -3, 3, 0,
-        -4, 2, 0,
-        0, 3, 2,
-        0, 3, 3,
-        0, 2, 4,
-        0, 3, -2,
-        0, 3, -3,
-        0, 2, -4,
-        2, 2, -2,
-        -2, 2, 2,
-        -2, 2, -2,
-        2, 2, 2,
-        3, 2, -3,
-        -3, 2, 3,
-        -3, 2, -3,
-        3, 2, 3
+            1, 0, 0,
+            2, 0, 0,
+            3, -1, 0,
+            3, -2, 0,
+            -1, 0, 0,
+            -2, 0, 0,
+            -3, -1, 0,
+            -3, -2, 0,
+            0, 0, 1,
+            0, 0, 2,
+            0, -1, 3,
+            0, -2, 3,
+            0, 0, -1,
+            0, 0, -2,
+            0, -1, -3,
+            0, -2, -3,
+            0, 1, 0,
+            1, 1, 1,
+            -1, 1, -1,
+            -1, 1, 1,
+            1, 1, -1,
+            1, 2, 0,
+            -1, 2, 0,
+            0, 2, 1,
+            0, 2, -1,
+            2, 3, 0,
+            3, 3, 0,
+            4, 2, 0,
+            -2, 3, 0,
+            -3, 3, 0,
+            -4, 2, 0,
+            0, 3, 2,
+            0, 3, 3,
+            0, 2, 4,
+            0, 3, -2,
+            0, 3, -3,
+            0, 2, -4,
+            2, 2, -2,
+            -2, 2, 2,
+            -2, 2, -2,
+            2, 2, 2,
+            3, 2, -3,
+            -3, 2, 3,
+            -3, 2, -3,
+            3, 2, 3
     };
     private static int cocoasLength = 16;
     private static int[] cocoas = new int[]{
-        2, 0, -2, 1,
-        1, 1, -2, 0,
-        0, 0, -2, -1,
-        3, -1, -2, 0
+            2, 0, -2, 1,
+            1, 1, -2, 0,
+            0, 0, -2, -1,
+            3, -1, -2, 0
     };
     protected IBlockState trunkLog;
 
@@ -149,8 +149,7 @@ public class TreeRTGCocosNucifera extends TreeRTG {
                 posZ += velZ *= 0.9f;
                 loss = loss - (Math.abs(velX) + Math.abs(velZ));
                 posY += velY += loss;
-            }
-            else {
+            } else {
                 posY += velY;
             }
 

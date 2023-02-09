@@ -1,13 +1,12 @@
 package rtg.api.world.gen.feature.tree.rtg;
 
-import java.util.Random;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 import rtg.RTGConfig;
+
+import java.util.Random;
 
 
 /**
@@ -88,7 +87,7 @@ public class TreeRTGSalixMyrtilloides extends TreeRTG {
                 hd += 0.5f;
 
                 this.placeLogBlock(world,
-                    new BlockPos(x + (int) (c * xd), y + (int) hd, z + (int) (c * yd)), this.trunkLog, this.generateFlag
+                        new BlockPos(x + (int) (c * xd), y + (int) hd, z + (int) (c * yd)), this.trunkLog, this.generateFlag
                 );
             }
             createLeavesAroundBranch(world, rand, x + (int) (c * xd), y + (int) hd, z + (int) (c * yd), 2, 1);
@@ -161,8 +160,7 @@ public class TreeRTGSalixMyrtilloides extends TreeRTG {
                     cb = world.getBlockState(posTemp);
                     if (this.validGroundBlocks.contains(cb)) {
                         earth = true;
-                    }
-                    else if (cb == Blocks.WATER.getDefaultState()) {
+                    } else if (cb == Blocks.WATER.getDefaultState()) {
                         water = true;
                     }
                 }

@@ -19,37 +19,48 @@ import java.nio.file.Paths;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @Mod(
-    modid        = RTG.MOD_ID,
-    name         = "Realistic Terrain Generation",
-    version      = "6.1.0.0",
-    dependencies = "required-after:forge@[14.23.5.2847,);after:biomesoplenty@[7.0.1.2441,);after:traverse@[1.6.0,2.0.0)",
-    guiFactory   = RTGGuiConfigFactory.LOCATION,
-    acceptableRemoteVersions = "*"
+        modid = RTG.MOD_ID,
+        name = "RTG Unofficial",
+        version = "6.1.0.1",
+        dependencies = "required-after:forge@[14.23.5.2847,);after:biomesoplenty@[7.0.1.2441,);after:traverse@[1.6.0,2.0.0)",
+        guiFactory = RTGGuiConfigFactory.LOCATION,
+        acceptableRemoteVersions = "*"
 )
 public final class RTG {
 
-    public  static final String MOD_ID      = RTGAPI.RTG_MOD_ID;
-    private static final RTG    instance    = new RTG();
+    public static final String MOD_ID = RTGAPI.RTG_MOD_ID;
+    private static final RTG instance = new RTG();
 
     private static boolean DISABLE_DECORATIONS;
     private static boolean DISABLE_SURFACES;
+    @SidedProxy
+    private static RTGProxy proxy;
 
-    private RTG() {}
+    private RTG() {
+    }
 
     @Mod.InstanceFactory
     public static RTG getInstance() {
         return instance;
     }
 
-    @SidedProxy
-    private static RTGProxy proxy;
-    public  static RTGProxy getProxy() { return proxy; }
+    public static RTGProxy getProxy() {
+        return proxy;
+    }
+
+    public static boolean decorationsDisable() {
+        return DISABLE_DECORATIONS;
+    }
+
+    public static boolean surfacesDisabled() {
+        return DISABLE_SURFACES;
+    }
 
     @Mod.EventHandler
     public void initPre(FMLPreInitializationEvent event) {
 
         DISABLE_DECORATIONS = System.getProperties().containsKey("rtg.disableDecorations");
-        DISABLE_SURFACES    = System.getProperties().containsKey("rtg.disableSurfaces");
+        DISABLE_SURFACES = System.getProperties().containsKey("rtg.disableSurfaces");
 
         RTGAPI.setConfigPath(Paths.get(event.getModConfigurationDirectory().getPath(), RTG.MOD_ID.toUpperCase()));
         RTGConfig.init(event);
@@ -58,7 +69,6 @@ public final class RTG {
 
         WorldTypeRTG.init();
         ModCompat.init();
-        BiomeInit.preInit();// initialise river and beach biomes
     }
 
     @Mod.EventHandler
@@ -68,6 +78,8 @@ public final class RTG {
 
     @Mod.EventHandler
     public void initPost(FMLPostInitializationEvent event) {
+        BiomeInit.preInit();// initialise river and beach biomes
+
         BiomeInit.init();// initialise all biomes supported internally
         ModCompat.doBiomeCheck();
         PlateauUtil.init();
@@ -83,21 +95,20 @@ public final class RTG {
         event.registerServerCommand(new RTGCommandTree());
     }
 
-    public static boolean decorationsDisable() {
-        return DISABLE_DECORATIONS;
-    }
-
-    public static boolean surfacesDisabled() {
-        return DISABLE_SURFACES;
+    public interface RTGProxy {
+        void displayCustomizeWorldScreen(net.minecraft.client.gui.GuiCreateWorld guiCreateWorld);
     }
 
     public static final class ClientProxy implements RTGProxy {
-        @Override public void displayCustomizeWorldScreen(net.minecraft.client.gui.GuiCreateWorld guiCreateWorld) {
+        @Override
+        public void displayCustomizeWorldScreen(net.minecraft.client.gui.GuiCreateWorld guiCreateWorld) {
             Minecraft.getMinecraft().displayGuiScreen(new rtg.client.GuiCustomizeWorldScreenRTG(guiCreateWorld, guiCreateWorld.chunkProviderSettingsJson));
         }
     }
 
-    public static class ServerProxy implements RTGProxy { @Override public void displayCustomizeWorldScreen(net.minecraft.client.gui.GuiCreateWorld guiCreateWorld) {} }
-
-    public interface RTGProxy { void displayCustomizeWorldScreen(net.minecraft.client.gui.GuiCreateWorld guiCreateWorld); }
+    public static class ServerProxy implements RTGProxy {
+        @Override
+        public void displayCustomizeWorldScreen(net.minecraft.client.gui.GuiCreateWorld guiCreateWorld) {
+        }
+    }
 }

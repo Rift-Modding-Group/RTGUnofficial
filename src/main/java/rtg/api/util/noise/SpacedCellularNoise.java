@@ -25,12 +25,12 @@
 
 package rtg.api.util.noise;
 
-import java.awt.Point;
+import rtg.api.util.LimitedArrayCacheMap;
+
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.Map;
 import java.util.Random;
-
-import rtg.api.util.LimitedArrayCacheMap;
 
 
 /**

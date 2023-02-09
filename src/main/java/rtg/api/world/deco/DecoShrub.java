@@ -88,7 +88,7 @@ public class DecoShrub extends DecoBase {
             // Only tweak the leaves after all calls to setLeavesBlock().
             DecoBase.tweakShrubLeaves(this, false, true);
 
-            final int loopCount = (int)((float)this.loops * this.loopMultiplier);
+            final int loopCount = (int) ((float) this.loops * this.loopMultiplier);
             for (int i = 0; i < loopCount; i++) {
 
                 final BlockPos pos = rtgWorld.world().getHeight(getOffsetPos(chunkPos).add(rand.nextInt(16), 0, rand.nextInt(16)));
@@ -99,8 +99,7 @@ public class DecoShrub extends DecoBase {
                             new WorldGenShrubRTG(this.size, this.logBlock, this.leavesBlock, this.sand)
                                     .generate(rtgWorld.world(), rand, pos);
                         }
-                    }
-                    else {
+                    } else {
                         if (rand.nextInt(this.chance) == 0) {
                             new WorldGenShrubRTG(this.size, this.logBlock, this.leavesBlock, this.sand)
                                     .generate(rtgWorld.world(), rand, pos);

@@ -57,7 +57,7 @@ public class DecoCrop extends DecoBase {
                 int y = rtgWorld.world().getHeight(pos).getY();
                 if (y >= this.minY && y <= this.maxY) {
                     new WorldGenCrops(type, size, density, height, water)
-                        .generate(rtgWorld.world(), rand, pos.up(y));
+                            .generate(rtgWorld.world(), rand, pos.up(y));
                 }
             }
         }

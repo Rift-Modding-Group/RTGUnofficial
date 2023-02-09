@@ -1,26 +1,10 @@
 package rtg.client;
 
-import javax.annotation.Nullable;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiCreateWorld;
-import net.minecraft.client.gui.GuiListButton;
-import net.minecraft.client.gui.GuiPageButtonList;
-import net.minecraft.client.gui.GuiPageButtonList.GuiButtonEntry;
-import net.minecraft.client.gui.GuiPageButtonList.GuiLabelEntry;
-import net.minecraft.client.gui.GuiPageButtonList.GuiListEntry;
-import net.minecraft.client.gui.GuiPageButtonList.GuiResponder;
-import net.minecraft.client.gui.GuiPageButtonList.GuiSlideEntry;
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.GuiPageButtonList.*;
 import net.minecraft.client.gui.GuiSlider.FormatHelper;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -29,6 +13,14 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import rtg.api.util.Logger;
 import rtg.api.world.gen.RTGChunkGenSettings;
+
+import javax.annotation.Nullable;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 @SuppressWarnings("unused")
@@ -81,8 +73,7 @@ public class GuiCustomizeWorldScreenRTG extends GuiScreen implements FormatHelpe
         if (!generatorSettings.isEmpty()) {
             Setting.parseSettings(generatorSettings);
             this.settingsModified = true;
-        }
-        else {
+        } else {
             // Reset to defaults for a new world
             Setting.resetToDefaults();
         }
@@ -160,8 +151,7 @@ public class GuiCustomizeWorldScreenRTG extends GuiScreen implements FormatHelpe
         if (setting != null) {
             if (setting.getSettingType().equals(SettingType.INTEGER)) {
                 setting.setCurValue((int) value);
-            }
-            else {
+            } else {
                 setting.setCurValue(value);
             }
             this.setSettingsModified(Setting.isModified());
@@ -178,8 +168,7 @@ public class GuiCustomizeWorldScreenRTG extends GuiScreen implements FormatHelpe
                     RTGChunkGenSettings.Factory factory = RTGChunkGenSettings.Factory.jsonToFactory(Setting.buildJson().toString());
                     if (factory != null) {
                         this.parent.chunkProviderSettingsJson = factory.toString();
-                    }
-                    else {
+                    } else {
                         Logger.error("Error parsing RTGChunkGenSettings settings from string: {}", Setting.buildJson().toString());
                     }
                     this.mc.displayGuiScreen(this.parent);
@@ -241,46 +230,46 @@ public class GuiCustomizeWorldScreenRTG extends GuiScreen implements FormatHelpe
 
                     if (setting.getSettingType().equals(SettingType.BOOLEAN)) {
                         pages[pg][id.next()] = new GuiButtonEntry(
-                            setting.getID(),
-                            setting.getLangKey(),
-                            setting.isPage1(),
-                            setting.curValue().getBool()
+                                setting.getID(),
+                                setting.getLangKey(),
+                                setting.isPage1(),
+                                setting.curValue().getBool()
                         );
                     }
                     if (setting.getSettingType().equals(SettingType.INTEGER)) {
                         pages[pg][id.next()] = new GuiSlideEntry(
-                            setting.getID(),
-                            setting.getLangKey(),
-                            setting.isPage1(),
-                            (fid, fname, fval) -> {
+                                setting.getID(),
+                                setting.getLangKey(),
+                                setting.isPage1(),
+                                (fid, fname, fval) -> {
 // TODO: [Generator settings] Disable fixedBiome for now as it requires modification to the GenLayer classes to work.
                             /*if (setting.equals(Setting.fixedBiome)) { // special handling for fixedBiome
                                   return ((int)fval == -1) ? "Biome: All Biomes" : "Biome: " + biomeList.get((int)fval).getBiomeName();
                               }
                               else*/
-                                if (setting.equals(Setting.waterSpoutChance) || setting.equals(Setting.lavaSpoutChance)) { // special handling for waterSpoutChance/lavaSpoutChance
-                                    return fname + (((int) fval == 0) ? ": Disabled" : ": " + String.format("%d", (int) fval));
-                                }
-                                return fname + ": " + String.format("%d", (int) fval);
-                            },
-                            setting.minValue().getInt(),
+                                    if (setting.equals(Setting.waterSpoutChance) || setting.equals(Setting.lavaSpoutChance)) { // special handling for waterSpoutChance/lavaSpoutChance
+                                        return fname + (((int) fval == 0) ? ": Disabled" : ": " + String.format("%d", (int) fval));
+                                    }
+                                    return fname + ": " + String.format("%d", (int) fval);
+                                },
+                                setting.minValue().getInt(),
 // TODO: [Generator settings] Disable fixedBiome for now as it requires modification to the GenLayer classes to work.
-                            /*setting.equals(Setting.fixedBiome) ? biomeList.size() - 1 :*/ setting.maxValue().getInt(), // special handling for fixedBiome
-                            setting.curValue().getInt()
+                                /*setting.equals(Setting.fixedBiome) ? biomeList.size() - 1 :*/ setting.maxValue().getInt(), // special handling for fixedBiome
+                                setting.curValue().getInt()
                         );
                     }
 
                     if (setting.getSettingType().equals(SettingType.FLOAT)) {
                         pages[pg][id.next()] = new GuiSlideEntry(
-                            setting.getID(),
-                            setting.getLangKey(),
-                            setting.isPage1(),
-                            (fid, fname, fval) -> setting.equals(Setting.riverCutOffScale) // special handling for riverCutOffScale
-                                ? fname + ": " + String.format("%3.3f", fval)
-                                : fname + ": " + String.format("%1.3f", fval),
-                            setting.minValue().getFloat(),
-                            setting.maxValue().getFloat(),
-                            setting.curValue().getFloat()
+                                setting.getID(),
+                                setting.getLangKey(),
+                                setting.isPage1(),
+                                (fid, fname, fval) -> setting.equals(Setting.riverCutOffScale) // special handling for riverCutOffScale
+                                        ? fname + ": " + String.format("%3.3f", fval)
+                                        : fname + ": " + String.format("%1.3f", fval),
+                                setting.minValue().getFloat(),
+                                setting.maxValue().getFloat(),
+                                setting.curValue().getFloat()
                         );
                     }
                 }); // SETTINGS END
@@ -359,8 +348,7 @@ public class GuiCustomizeWorldScreenRTG extends GuiScreen implements FormatHelpe
 
         if (this.confirmDismissed) {
             this.confirmDismissed = false;
-        }
-        else if (this.confirmMode == 0) {
+        } else if (this.confirmMode == 0) {
             this.list.mouseReleased(mouseX, mouseY, state);
         }
     }
@@ -441,7 +429,7 @@ public class GuiCustomizeWorldScreenRTG extends GuiScreen implements FormatHelpe
         PAGE2(Category.RIVERS, Category.RTGLAKES, Category.VANILLASURFACELAKES, Category.VANILLAUNDERGROUNDLAKES, Category.VANILLASPOUTS),
         PAGE3(Category.VILLAGES, Category.MINESHAFTS, Category.DUNGEONS, Category.TEMPLES, Category.MONUMENTS, Category.MANSIONS, Category.STRONGHOLDS),
         PAGE4(Category.DIRT, Category.GRAVEL, Category.GRANITE, Category.DIORITE, Category.ANDESITE,
-            Category.COAL, Category.IRON, Category.GOLD, Category.REDSTONE, Category.DIAMOND, Category.LAPIS);
+                Category.COAL, Category.IRON, Category.GOLD, Category.REDSTONE, Category.DIAMOND, Category.LAPIS);
 
         public final List<Category> CATEGORIES = new ArrayList<>();
 
@@ -773,8 +761,7 @@ public class GuiCustomizeWorldScreenRTG extends GuiScreen implements FormatHelpe
                 // generator settings Factory has an option for which there is not an enum value.
                 try {
                     setting[0] = Setting.valueOf(entry.getKey());
-                }
-                catch (IllegalArgumentException ignored) {
+                } catch (IllegalArgumentException ignored) {
                     Logger.error("GuiCustomizeWorldScreenRTG$Setting#parseSettings: Illegal argument. No enum exists for the setting: " + entry.getKey());
                     setting[0] = null;
                 }

@@ -1,9 +1,9 @@
 package rtg.world.biome.realistic.vampirism;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.world.biome.Biome;
 import rtg.api.world.biome.RealisticBiomeBase;
+
+import javax.annotation.Nonnull;
 
 
 public abstract class RealisticBiomeVAMPBase extends RealisticBiomeBase {

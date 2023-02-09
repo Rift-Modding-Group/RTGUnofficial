@@ -6,13 +6,12 @@ package rtg.api.world.deco.helper;
  * @author Zeno410
  */
 
-import java.util.Random;
-
 import net.minecraft.util.math.ChunkPos;
-
 import rtg.api.world.RTGWorld;
 import rtg.api.world.biome.IRealisticBiome;
 import rtg.api.world.deco.DecoBase;
+
+import java.util.Random;
 
 
 // TODO: [1.12] This class can be removed and it's usage defered to DecoHelperRandomSplit with 2 Decos with different WeightedRandom values.
@@ -47,8 +46,7 @@ public class DecoHelperThisOrThat extends DecoBase {
 
                 if (rand.nextInt(this.chance) == 0) {
                     this.decoThis.generate(biome, rtgWorld, rand, chunkPos, river, hasVillage);
-                }
-                else {
+                } else {
                     this.decoThat.generate(biome, rtgWorld, rand, chunkPos, river, hasVillage);
                 }
 
@@ -58,8 +56,7 @@ public class DecoHelperThisOrThat extends DecoBase {
 
                 if (rand.nextInt(this.chance) != 0) {
                     this.decoThis.generate(biome, rtgWorld, rand, chunkPos, river, hasVillage);
-                }
-                else {
+                } else {
                     this.decoThat.generate(biome, rtgWorld, rand, chunkPos, river, hasVillage);
                 }
 

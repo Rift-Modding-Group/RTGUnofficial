@@ -69,7 +69,7 @@ public class DecoBoulder extends DecoBase {
                     // If we're in a village, check to make sure the boulder has extra room to grow to avoid corrupting the village.
                     if (!hasVillage || BlockUtil.checkAreaMaterials(MatchType.ALL_IGNORE_REPLACEABLE, rtgWorld.world(), pos.up(y), 2)) {
                         new WorldGenBlob(boulderBlock, 0, validGroundBlocks, this.water)
-                            .generate(rtgWorld.world(), rand, pos.up(y));
+                                .generate(rtgWorld.world(), rand, pos.up(y));
                     }
                 }
             }

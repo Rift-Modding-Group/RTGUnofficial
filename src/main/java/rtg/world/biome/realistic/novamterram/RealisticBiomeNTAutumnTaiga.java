@@ -4,7 +4,6 @@ import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
-
 import rtg.api.util.BlockUtil;
 
 
@@ -34,12 +33,12 @@ public class RealisticBiomeNTAutumnTaiga extends RealisticBiomeNTBaseForest {
 
         super.initDecos();
         fallenTrees(
-            new IBlockState[]{
-                BlockUtil.getStateLog(BlockPlanks.EnumType.OAK),
-                BlockUtil.getStateLog(BlockPlanks.EnumType.SPRUCE),
-                BlockUtil.getStateLog(BlockPlanks.EnumType.DARK_OAK)
-            },
-            new int[]{1, 2, 2}
+                new IBlockState[]{
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.OAK),
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.SPRUCE),
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.DARK_OAK)
+                },
+                new int[]{1, 2, 2}
         );
     }
 }

@@ -1,13 +1,10 @@
 package rtg.world.biome.realistic.abyssalcraft;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
@@ -19,10 +16,14 @@ import rtg.api.world.terrain.heighteffect.HeightVariation;
 import rtg.api.world.terrain.heighteffect.JitterEffect;
 import rtg.api.world.terrain.heighteffect.MountainsWithPassesEffect;
 
+import java.util.Random;
+
 
 public class RealisticBiomeACDarklandsMountains extends RealisticBiomeBase {
 
-    public RealisticBiomeACDarklandsMountains(final Biome biome) { super(biome); }
+    public RealisticBiomeACDarklandsMountains(final Biome biome) {
+        super(biome);
+    }
 
     @Override
     public void initConfig() {
@@ -33,7 +34,8 @@ public class RealisticBiomeACDarklandsMountains extends RealisticBiomeBase {
     }
 
     @Override
-    public void initDecos() { }
+    public void initDecos() {
+    }
 
     @Override
     public TerrainBase initTerrain() {
@@ -41,13 +43,19 @@ public class RealisticBiomeACDarklandsMountains extends RealisticBiomeBase {
         return new TerrainACDarklandsMountains(120f, 100f);
     }
 
+    @Override
+    public SurfaceBase initSurface() {
+
+        return new SurfaceACDarklandsMountains(getConfig(), baseBiome().topBlock, baseBiome().fillerBlock, 0.2f);
+    }
+
     public static class TerrainACDarklandsMountains extends TerrainBase {
 
+        protected HeightEffect height;
         private float width;
         private float strength;
         private float spikeWidth = 40;
         private float spikeHeight = 60;
-        protected HeightEffect height;
 
         public TerrainACDarklandsMountains(float mountainWidth, float mountainStrength) {
 
@@ -83,12 +91,6 @@ public class RealisticBiomeACDarklandsMountains extends RealisticBiomeBase {
         }
     }
 
-    @Override
-    public SurfaceBase initSurface() {
-
-        return new SurfaceACDarklandsMountains(getConfig(), baseBiome().topBlock, baseBiome().fillerBlock, 0.2f);
-    }
-
     public static class SurfaceACDarklandsMountains extends SurfaceBase {
 
         private float min;
@@ -120,8 +122,7 @@ public class RealisticBiomeACDarklandsMountains extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0) {
@@ -141,42 +142,33 @@ public class RealisticBiomeACDarklandsMountains extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (cliff == 3) {
+                        } else if (cliff == 3) {
                             primer.setBlockState(x, k, z, hcStone());
-                        }
-                        else if (k < 63) {
+                        } else if (k < 63) {
                             if (k < 62) {
                                 primer.setBlockState(x, k, z, fillerBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, Blocks.GRASS.getDefaultState());
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
                         if (cliff == 1 || cliff == 2) {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (cliff == 3) {
+                        } else if (cliff == 3) {
                             primer.setBlockState(x, k, z, hcStone());
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, Blocks.DIRT.getDefaultState());
                         }
                     }

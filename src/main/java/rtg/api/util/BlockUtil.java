@@ -1,30 +1,7 @@
 package rtg.api.util;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
 import com.google.common.base.Optional;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockColored;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockLeaves;
-import net.minecraft.block.BlockNewLeaf;
-import net.minecraft.block.BlockNewLog;
-import net.minecraft.block.BlockOldLeaf;
-import net.minecraft.block.BlockOldLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockSand;
-import net.minecraft.block.BlockSapling;
-import net.minecraft.block.BlockSponge;
-import net.minecraft.block.BlockStone;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateBase;
@@ -36,8 +13,16 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
-
 import org.apache.commons.lang3.StringUtils;
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 /**
@@ -505,7 +490,7 @@ public final class BlockUtil {
      * Functionally equivelent to {@link #getSaplingFromLeaves(IBlockState)} but provides
      * a fallback if the passed leaf blockstate is not a vanilla leaf block.
      *
-     * @param leaves a block state
+     * @param leaves   a block state
      * @param fallback a fallback blockstate
      * @return a matching sapling blockstate if the passed leaf block has the correct IProperty and value, or the fallback blockstate.
      * @since 1.0.0
@@ -516,7 +501,7 @@ public final class BlockUtil {
     }
 
     /**
-     *  Gets an IBlockState of a sapling that matches the passed leaf blockstate
+     * Gets an IBlockState of a sapling that matches the passed leaf blockstate
      *
      * @param leaves a block state
      * @return a matching sapling blockstate if the passed leaf block has the correct IProperty and value, or null otherwise.
@@ -524,24 +509,34 @@ public final class BlockUtil {
      */
     @Nullable
     public static IBlockState getSaplingFromLeaves(IBlockState leaves) {
-        if (!(leaves.getBlock() instanceof BlockLeaves)) { return null; }
+        if (!(leaves.getBlock() instanceof BlockLeaves)) {
+            return null;
+        }
         BlockPlanks.EnumType type = (BlockPlanks.EnumType) leaves.getProperties().get(BlockOldLeaf.VARIANT);
-        if (type == null) { type = (BlockPlanks.EnumType) leaves.getProperties().get(BlockNewLeaf.VARIANT); }
+        if (type == null) {
+            type = (BlockPlanks.EnumType) leaves.getProperties().get(BlockNewLeaf.VARIANT);
+        }
         if (type != null) {
             switch (type) {
-                case OAK     : return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.OAK);
-                case SPRUCE  : return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.SPRUCE);
-                case BIRCH   : return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.BIRCH);
-                case JUNGLE  : return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.JUNGLE);
-                case ACACIA  : return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.ACACIA);
-                case DARK_OAK: return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.DARK_OAK);
+                case OAK:
+                    return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.OAK);
+                case SPRUCE:
+                    return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.SPRUCE);
+                case BIRCH:
+                    return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.BIRCH);
+                case JUNGLE:
+                    return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.JUNGLE);
+                case ACACIA:
+                    return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.ACACIA);
+                case DARK_OAK:
+                    return Blocks.SAPLING.getDefaultState().withProperty(BlockSapling.TYPE, BlockPlanks.EnumType.DARK_OAK);
             }
         }
         return null;
     }
 
     /**
-     *  Attempts to get a type value for a state of a vanilla sapling.
+     * Attempts to get a type value for a state of a vanilla sapling.
      *
      * @param sapling any IBlockState
      * @return the {@link BlockPlanks.EnumType} for sapling state TYPE value if the input
@@ -550,10 +545,14 @@ public final class BlockUtil {
      */
     @Nullable
     public static BlockPlanks.EnumType getTypeFromSapling(IBlockState sapling) {
-        if (!(sapling.getBlock() instanceof BlockSapling)) { return null; }
+        if (!(sapling.getBlock() instanceof BlockSapling)) {
+            return null;
+        }
         BlockPlanks.EnumType ret = null;
-        try { ret = sapling.getValue(BlockSapling.TYPE); }
-        catch (IllegalArgumentException ignore) {}
+        try {
+            ret = sapling.getValue(BlockSapling.TYPE);
+        } catch (IllegalArgumentException ignore) {
+        }
         return ret;
     }
 
@@ -712,7 +711,7 @@ public final class BlockUtil {
                 for (EnumFacing direction : EnumFacing.HORIZONTALS) {
                     final IBlockState bs = world.getBlockState(origin.offset(direction));
                     if ((ignoreReplaceable && !bs.getMaterial().isReplaceable()) ||
-                        (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
+                            (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
                         return false;
                     }
                 }
@@ -778,7 +777,7 @@ public final class BlockUtil {
                 for (EnumFacing direction : EnumFacing.HORIZONTALS) {
                     final Material material = world.getBlockState(origin.offset(direction)).getMaterial();
                     if ((ignoreReplaceable && !material.isReplaceable()) ||
-                        (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
+                            (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
                         return false;
                     }
                 }
@@ -841,9 +840,9 @@ public final class BlockUtil {
     public static boolean checkVerticalBlocks(final MatchType matchType, final World world, final BlockPos origin, final int distance, final Collection<Block> validBlocks) {
 
         final int
-            ox = origin.getX(),
-            oy = origin.getY(),
-            oz = origin.getZ();
+                ox = origin.getX(),
+                oy = origin.getY(),
+                oz = origin.getZ();
         final int dis = Math.abs(distance);
         // distance is: positive = check above, negative = check below
         final boolean invert = distance < 0;
@@ -857,7 +856,7 @@ public final class BlockUtil {
                 for (int i = dis; i > 0; i--) {
                     final IBlockState bs = world.getBlockState(mpos.setPos(ox, oy + (invert ? -i : i), oz));
                     if ((ignoreReplaceable && !bs.getMaterial().isReplaceable()) ||
-                        (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
+                            (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
                         return false;
                     }//negated for faster short-circuit
                 }
@@ -917,9 +916,9 @@ public final class BlockUtil {
     public static boolean checkVerticalMaterials(final MatchType matchType, final World world, final BlockPos origin, final int distance, final Collection<Material> validMaterials) {
 
         final int
-            ox = origin.getX(),
-            oy = origin.getY(),
-            oz = origin.getZ();
+                ox = origin.getX(),
+                oy = origin.getY(),
+                oz = origin.getZ();
         final int dis = Math.abs(distance);
         // distance is: positive = check above, negative = check below
         final boolean invert = distance < 0;
@@ -933,7 +932,7 @@ public final class BlockUtil {
                 for (int i = dis; i > 0; i--) {
                     final Material material = world.getBlockState(mpos.setPos(ox, oy + (invert ? -i : i), oz)).getMaterial();
                     if ((ignoreReplaceable && !material.isReplaceable()) ||
-                        (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
+                            (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
                         return false;
                     }//negated for faster short-circuit
                 }
@@ -995,9 +994,9 @@ public final class BlockUtil {
     public static boolean checkAreaBlocks(final MatchType matchType, final World world, final BlockPos origin, final int checkRadius, final Collection<Block> validBlocks) {
 
         final int
-            ox = origin.getX(),
-            oy = origin.getY(),
-            oz = origin.getZ();
+                ox = origin.getX(),
+                oy = origin.getY(),
+                oz = origin.getZ();
         final boolean ignoreReplaceable = matchType == MatchType.ALL_IGNORE_REPLACEABLE;
         MutableBlockPos mpos = new MutableBlockPos();
         int x, z, i = 1;
@@ -1013,28 +1012,28 @@ public final class BlockUtil {
                     for (; x > ox - i; ) {
                         bs = world.getBlockState(mpos.setPos(--x, oy, z));
                         if ((ignoreReplaceable && !bs.getMaterial().isReplaceable()) ||
-                            (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
+                                (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
                             return false;
                         }
                     }
                     for (; z > oz - i; ) {
                         bs = world.getBlockState(mpos.setPos(x, oy, --z));
                         if ((ignoreReplaceable && !bs.getMaterial().isReplaceable()) ||
-                            (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
+                                (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
                             return false;
                         }
                     }
                     for (; x < ox + i; ) {
                         bs = world.getBlockState(mpos.setPos(++x, oy, z));
                         if ((ignoreReplaceable && !bs.getMaterial().isReplaceable()) ||
-                            (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
+                                (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
                             return false;
                         }
                     }
                     for (; z < oz + i; ) {
                         bs = world.getBlockState(mpos.setPos(x, oy, ++z));
                         if ((ignoreReplaceable && !bs.getMaterial().isReplaceable()) ||
-                            (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
+                                (validBlocks.isEmpty()) ? !isBlockAir(bs) : !validBlocks.contains(bs.getBlock())) {
                             return false;
                         }
                     }
@@ -1137,9 +1136,9 @@ public final class BlockUtil {
     public static boolean checkAreaMaterials(final MatchType matchType, final World world, final BlockPos origin, final int checkRadius, final Collection<Material> validMaterials) {
 
         final int
-            ox = origin.getX(),
-            oy = origin.getY(),
-            oz = origin.getZ();
+                ox = origin.getX(),
+                oy = origin.getY(),
+                oz = origin.getZ();
         final boolean ignoreReplaceable = matchType == MatchType.ALL_IGNORE_REPLACEABLE;
         MutableBlockPos mpos = new MutableBlockPos();
         int x, z, i = 1;
@@ -1155,28 +1154,28 @@ public final class BlockUtil {
                     for (; x > ox - i; ) {
                         material = world.getBlockState(mpos.setPos(--x, oy, z)).getMaterial();
                         if ((ignoreReplaceable && !material.isReplaceable()) ||
-                            (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
+                                (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
                             return false;
                         }
                     }
                     for (; z > oz - i; ) {
                         material = world.getBlockState(mpos.setPos(x, oy, --z)).getMaterial();
                         if ((ignoreReplaceable && !material.isReplaceable()) ||
-                            (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
+                                (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
                             return false;
                         }
                     }
                     for (; x < ox + i; ) {
                         material = world.getBlockState(mpos.setPos(++x, oy, z)).getMaterial();
                         if ((ignoreReplaceable && !material.isReplaceable()) ||
-                            (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
+                                (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
                             return false;
                         }
                     }
                     for (; z < oz + i; ) {
                         material = world.getBlockState(mpos.setPos(x, oy, ++z)).getMaterial();
                         if ((ignoreReplaceable && !material.isReplaceable()) ||
-                            (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
+                                (validMaterials.isEmpty()) ? !isMaterialAir(material) : !validMaterials.contains(material)) {
                             return false;
                         }
                     }
@@ -1288,9 +1287,9 @@ public final class BlockUtil {
     public static boolean checkVolumeBlocks(final MatchType matchType, final World world, final BlockPos origin, final int checkRadius, final int checkHeight, final Collection<Block> validBlocks) {
 
         final int
-            ox = origin.getX(),
-            oy = origin.getY(),
-            oz = origin.getZ();
+                ox = origin.getX(),
+                oy = origin.getY(),
+                oz = origin.getZ();
         final int height = Math.abs(checkHeight);
         final boolean invert = checkHeight < 0;
         final MutableBlockPos mpos = new MutableBlockPos();
@@ -1340,9 +1339,9 @@ public final class BlockUtil {
     public static boolean checkVolumeMaterials(final MatchType matchType, final World world, final BlockPos origin, final int checkRadius, final int checkHeight, final Collection<Material> validMaterials) {
 
         final int
-            ox = origin.getX(),
-            oy = origin.getY(),
-            oz = origin.getZ();
+                ox = origin.getX(),
+                oy = origin.getY(),
+                oz = origin.getZ();
         final int height = Math.abs(checkHeight);
         final boolean invert = checkHeight < 0;
         final MutableBlockPos mpos = new MutableBlockPos();
@@ -1415,9 +1414,9 @@ public final class BlockUtil {
          */
         public static Collection<Material> getMaterials() {
             return Collections.unmodifiableCollection(
-                Arrays.stream(values())
-                    .map(EnumMaterial::getMaterial)
-                    .collect(Collectors.toSet())
+                    Arrays.stream(values())
+                            .map(EnumMaterial::getMaterial)
+                            .collect(Collectors.toSet())
             );
         }
 
@@ -1431,10 +1430,10 @@ public final class BlockUtil {
         @Nullable
         public static Material getByName(final String name) {
             return Arrays.stream(values())
-                .filter(material -> material.name().equals(name.toUpperCase(Locale.ENGLISH)))
-                .findFirst()
-                .map(EnumMaterial::getMaterial)
-                .orElse(null);
+                    .filter(material -> material.name().equals(name.toUpperCase(Locale.ENGLISH)))
+                    .findFirst()
+                    .map(EnumMaterial::getMaterial)
+                    .orElse(null);
         }
 
         /**
@@ -1447,9 +1446,9 @@ public final class BlockUtil {
         @Nullable
         public static EnumMaterial getByMaterial(final Material material) {
             return Arrays.stream(values())
-                .filter(value -> value.getMaterial() == material)
-                .findFirst()
-                .orElse(null);
+                    .filter(value -> value.getMaterial() == material)
+                    .findFirst()
+                    .orElse(null);
         }
 
         /**
@@ -1460,10 +1459,10 @@ public final class BlockUtil {
          */
         public static Collection<Material> getReplaceable() {
             return Collections.unmodifiableCollection(
-                Arrays.stream(values())
-                    .filter(EnumMaterial::isReplaceable)
-                    .map(EnumMaterial::getMaterial)
-                    .collect(Collectors.toList())
+                    Arrays.stream(values())
+                            .filter(EnumMaterial::isReplaceable)
+                            .map(EnumMaterial::getMaterial)
+                            .collect(Collectors.toList())
             );
         }
 

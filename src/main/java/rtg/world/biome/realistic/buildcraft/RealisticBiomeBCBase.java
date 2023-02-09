@@ -1,9 +1,9 @@
 package rtg.world.biome.realistic.buildcraft;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.world.biome.Biome;
 import rtg.api.world.biome.RealisticBiomeBase;
+
+import javax.annotation.Nonnull;
 
 
 public abstract class RealisticBiomeBCBase extends RealisticBiomeBase {
@@ -26,5 +26,6 @@ public abstract class RealisticBiomeBCBase extends RealisticBiomeBase {
     }
 
     @Override
-    public void initDecos() { }
+    public void initDecos() {
+    }
 }

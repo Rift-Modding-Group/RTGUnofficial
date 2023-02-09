@@ -4,7 +4,6 @@ import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
-
 import rtg.api.util.BlockUtil;
 
 
@@ -28,11 +27,11 @@ public class RealisticBiomeNTLushDesert extends RealisticBiomeNTBaseDesert {
 
         super.initDecos();
         fallenTrees(
-            new IBlockState[]{
-                BlockUtil.getStateLog(BlockPlanks.EnumType.JUNGLE),
-                BlockUtil.getStateLog(BlockPlanks.EnumType.JUNGLE)
-            },
-            new int[]{2, 2}
+                new IBlockState[]{
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.JUNGLE),
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.JUNGLE)
+                },
+                new int[]{2, 2}
         );
     }
 

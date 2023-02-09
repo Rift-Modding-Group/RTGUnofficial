@@ -45,7 +45,7 @@ public class DecoDoubleGrass extends DecoBase {
             for (int i = 0; i < loopCount; i++) {
                 final BlockPos pos = getOffsetPos(chunkPos).add(rand.nextInt(16), rand.nextInt(this.maxY), rand.nextInt(16));
                 new WorldGenDoublePlantRTG(BlockDoublePlant.EnumPlantType.GRASS)
-                    .generate(rtgWorld.world(), rand, pos);
+                        .generate(rtgWorld.world(), rand, pos);
             }
         }
     }

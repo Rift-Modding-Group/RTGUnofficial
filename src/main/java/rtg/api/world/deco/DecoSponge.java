@@ -49,12 +49,12 @@ public class DecoSponge extends DecoBase {
         this.water = true;
 
         this.validGroundBlocks = new ArrayList<Block>(Arrays.asList(
-            Blocks.GRASS,
-            Blocks.DIRT,
-            Blocks.STONE,
-            Blocks.GRAVEL,
-            Blocks.CLAY,
-            Blocks.SAND
+                Blocks.GRASS,
+                Blocks.DIRT,
+                Blocks.STONE,
+                Blocks.GRAVEL,
+                Blocks.CLAY,
+                Blocks.SAND
         ));
 
         this.addDecoTypes(DecoType.SPONGE);
@@ -84,7 +84,7 @@ public class DecoSponge extends DecoBase {
 
             if (y >= this.minY && y <= this.maxY && rand.nextInt(this.chance) == 0) {
                 new WorldGenSponge(spongeBlock, 0, rand, validGroundBlocks)
-                    .generate(rtgWorld.world(), rand, pos.up(y));
+                        .generate(rtgWorld.world(), rand, pos.up(y));
             }
         }
     }

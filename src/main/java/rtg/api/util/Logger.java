@@ -18,8 +18,8 @@ public final class Logger {
     }
 
     /**
-     *  This should be used during high intensity situations, such as debugging during chunk
-     *  generation when there could be thousands of debugging message per sec.
+     * This should be used during high intensity situations, such as debugging during chunk
+     * generation when there could be thousands of debugging message per sec.
      */
     public static void rtgDebug(String format, Object... data) {
 

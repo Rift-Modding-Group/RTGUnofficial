@@ -21,7 +21,7 @@ public class DecoCollectionExtremeHillsPlus extends DecoCollectionBase {
         super(config);
 
         this.addDeco(nigraDecos(85, 14, 20, 10, 14)) // Lower, taller trees.
-            .addDeco(nigraDecos(95, 10, 14, 8, 10)); // Higher, shorter trees.
+                .addDeco(nigraDecos(95, 10, 14, 8, 10)); // Higher, shorter trees.
     }
 
     protected DecoTree nigraTrees(IBlockState log, IBlockState leaves, int maxY, int minTrunkSize, int maxTrunkSize, int minCrownSize, int maxCrownSize) {
@@ -52,8 +52,8 @@ public class DecoCollectionExtremeHillsPlus extends DecoCollectionBase {
 
     protected DecoHelper5050 nigraDecos(int maxY, int minTrunkSize, int maxTrunkSize, int minCrownSize, int maxCrownSize) {
         return new DecoHelper5050(
-            nigraTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize),
-            nigraTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize)
+                nigraTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize),
+                nigraTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize)
         );
     }
 }

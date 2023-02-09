@@ -82,7 +82,7 @@ public class DecoFallenTree extends DecoBase {
                         }
                     }
                     new WorldGenLog(this.logBlock, this.leavesBlock, finalSize)
-                        .generate(rtgWorld.world(), rand, pos);
+                            .generate(rtgWorld.world(), rand, pos);
                 }
             }
         }
@@ -219,6 +219,11 @@ public class DecoFallenTree extends DecoBase {
         return this;
     }
 
+    private int adjustChanceFromMultiplier(int chanceIn, float multiplier) {
+        int chanceOut = (multiplier != 0f) ? ((int) Math.floor(chanceIn / multiplier)) : chanceIn;
+        return (chanceOut == 0) ? 1 : chanceOut;
+    }
+
     public enum LogCondition {
         ALWAYS_GENERATE,
         RANDOM_CHANCE
@@ -277,10 +282,5 @@ public class DecoFallenTree extends DecoBase {
             this.noiseAddend = noiseAddend;
             return this;
         }
-    }
-
-    private int adjustChanceFromMultiplier(int chanceIn, float multiplier) {
-        int chanceOut = (multiplier != 0f) ? ((int) Math.floor(chanceIn / multiplier)) : chanceIn;
-        return (chanceOut == 0) ? 1 : chanceOut;
     }
 }

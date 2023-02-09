@@ -11,7 +11,10 @@ import rtg.api.config.BiomeConfig;
 import rtg.api.util.BlockUtil;
 import rtg.api.world.RTGWorld;
 import rtg.api.world.biome.RealisticBiomeBase;
-import rtg.api.world.deco.*;
+import rtg.api.world.deco.DecoFallenTree;
+import rtg.api.world.deco.DecoPumpkin;
+import rtg.api.world.deco.DecoShrub;
+import rtg.api.world.deco.DecoTree;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTG;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGPinusPonderosa;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTGSalixMyrtilloides;
@@ -151,8 +154,7 @@ public class RealisticBiomeVanillaSwamplandM extends RealisticBiomeBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (cliff && k > 64) {
@@ -160,21 +162,17 @@ public class RealisticBiomeVanillaSwamplandM extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (depth < 10) {
+                        } else if (depth < 10) {
                             primer.setBlockState(x, k, z, hcStone());
                         }
-                    }
-                    else {
+                    } else {
                         if (depth == 0 && k > 61) {
                             primer.setBlockState(x, k, z, topBlock);
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }

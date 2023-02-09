@@ -125,8 +125,7 @@ public class RealisticBiomeVanillaMegaTaiga extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0) {
@@ -145,36 +144,27 @@ public class RealisticBiomeVanillaMegaTaiga extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else if (cliff == 3) {
+                        } else if (cliff == 3) {
                             primer.setBlockState(x, k, z, Blocks.SNOW.getDefaultState());
-                        }
-                        else if (simplex.noise2f(i / 50f, j / 50f) + p * 0.6f > 0.24f) {
+                        } else if (simplex.noise2f(i / 50f, j / 50f) + p * 0.6f > 0.24f) {
                             primer.setBlockState(x, k, z, BlockUtil.getStateDirt(DirtType.PODZOL));
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, Blocks.GRASS.getDefaultState());
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
                         if (cliff == 1) {
                             primer.setBlockState(x, k, z, hcStone());
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else if (cliff == 3) {
+                        } else if (cliff == 3) {
                             primer.setBlockState(x, k, z, Blocks.SNOW.getDefaultState());
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, Blocks.DIRT.getDefaultState());
                         }
                     }

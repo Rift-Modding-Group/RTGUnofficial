@@ -32,13 +32,13 @@ public class RealisticBiomeTRAVCliffs extends RealisticBiomeTRAVBase {
         private float lakeWidth;
         private float terrainHeight;
 
-	/*
-     * width = 230f
-	 * strength = 120f
-	 * lake = 50f;
-	 *
-	 * 230f, 120f, 50f
-	 */
+        /*
+         * width = 230f
+         * strength = 120f
+         * lake = 50f;
+         *
+         * 230f, 120f, 50f
+         */
 
         public TerrainBOPOvergrownCliffs(float mountainWidth, float mountainStrength, float depthLake) {
 

@@ -3,7 +3,6 @@ package rtg.world.biome.realistic.novamterram;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
-
 import rtg.api.util.BlockUtil;
 
 
@@ -27,11 +26,11 @@ public class RealisticBiomeNTBlossomForestHills extends RealisticBiomeNTBaseHill
 
         super.initDecos();
         fallenTrees(
-            new IBlockState[]{
-                BlockUtil.getStateLog(BlockPlanks.EnumType.BIRCH),
-                BlockUtil.getStateLog(BlockPlanks.EnumType.OAK)
-            },
-            new int[]{4, 2}
+                new IBlockState[]{
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.BIRCH),
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.OAK)
+                },
+                new int[]{4, 2}
         );
     }
 }

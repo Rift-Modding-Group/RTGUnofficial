@@ -1,7 +1,5 @@
 package rtg.api.world.gen.feature.tree.rtg;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -9,6 +7,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
+
+import java.util.Random;
 
 
 /**
@@ -77,8 +77,7 @@ public class TreeRTGPinusMonticola extends TreeRTG {
 
                 if (l1 - y < i1) {
                     l3 = 0;
-                }
-                else {
+                } else {
                     l3 = k1;
                 }
 
@@ -87,8 +86,7 @@ public class TreeRTGPinusMonticola extends TreeRTG {
                         if (l1 >= 0 && l1 < 256) {
                             BlockPos pos2 = new BlockPos(new BlockPos(i2, l1, j2));
                             flag = this.isReplaceable(world, pos2);
-                        }
-                        else {
+                        } else {
                             flag = false;
                         }
                     }
@@ -97,8 +95,7 @@ public class TreeRTGPinusMonticola extends TreeRTG {
 
             if (!flag) {
                 return false;
-            }
-            else {
+            } else {
                 BlockPos pos3 = new BlockPos(x, y - 1, z);
                 IBlockState block1 = world.getBlockState(pos3);
 
@@ -122,7 +119,7 @@ public class TreeRTGPinusMonticola extends TreeRTG {
                                 BlockPos pos5 = new BlockPos(l2, k2, j3);
 
                                 if ((Math.abs(i3) != l3 || Math.abs(k3) != l3 || l3 <= 0)
-                                    && world.getBlockState(pos5).getBlock().canBeReplacedByLeaves(world.getBlockState(pos5), world, pos5)) {
+                                        && world.getBlockState(pos5).getBlock().canBeReplacedByLeaves(world.getBlockState(pos5), world, pos5)) {
                                     if (!this.noLeaves) {
                                         this.placeLeavesBlock(world, new BlockPos(l2, k2, j3), this.leavesBlock, this.generateFlag);
                                     }
@@ -138,8 +135,7 @@ public class TreeRTGPinusMonticola extends TreeRTG {
                             if (i2 > k1) {
                                 i2 = k1;
                             }
-                        }
-                        else {
+                        } else {
                             ++l3;
                         }
                     }
@@ -155,13 +151,11 @@ public class TreeRTGPinusMonticola extends TreeRTG {
                     }
 
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             }
-        }
-        else {
+        } else {
             return false;
         }
     }

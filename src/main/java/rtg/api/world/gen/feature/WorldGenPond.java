@@ -41,8 +41,7 @@ public class WorldGenPond extends WorldGenerator {
 
         if (y <= 4) {
             return false;
-        }
-        else {
+        } else {
             y -= 4;
             boolean[] aboolean = new boolean[2048];
             int l = rand.nextInt(4) + 4;
@@ -199,8 +198,7 @@ public class WorldGenPond extends WorldGenerator {
 
                                 if (biomegenbase.topBlock == Blocks.MYCELIUM.getDefaultState()) {
                                     world.setBlockState(new BlockPos(x + i1, height, z + j2), Blocks.MYCELIUM.getDefaultState(), 2);
-                                }
-                                else {
+                                } else {
                                     world.setBlockState(new BlockPos(x + i1, height, z + j2), Blocks.GRASS.getDefaultState(), 2);
                                 }
                             }
@@ -237,8 +235,7 @@ public class WorldGenPond extends WorldGenerator {
                             if (aboolean[(i1 * 16 + j2) * 8 + j1]) {
                                 world.setBlockState(new BlockPos(x + i1, y + j1, z + j2), fill, 2);
                             }
-                        }
-                        else {
+                        } else {
                             // air
                             if (willBePond[i1 * 16 + j2]) {
                                 world.setBlockState(new BlockPos(x + i1, y + j1, z + j2), Blocks.AIR.getDefaultState(), 2);
@@ -257,8 +254,7 @@ public class WorldGenPond extends WorldGenerator {
 
                             if (biomegenbase.topBlock == Blocks.MYCELIUM.getDefaultState()) {
                                 world.setBlockState(new BlockPos(x + i1, y + j1 - 1, z + j2), Blocks.MYCELIUM.getDefaultState(), 2);
-                            }
-                            else {
+                            } else {
                                 world.setBlockState(new BlockPos(x + i1, y + j1 - 1, z + j2), biomegenbase.topBlock, 2);
                             }
                         }
@@ -305,8 +301,7 @@ public class WorldGenPond extends WorldGenerator {
 
                             if (biomegenbase.topBlock == Blocks.MYCELIUM.getDefaultState()) {
                                 world.setBlockState(new BlockPos(x + i1, shoreHeight, z + j2), Blocks.MYCELIUM.getDefaultState(), 2);
-                            }
-                            else {
+                            } else {
                                 world.setBlockState(new BlockPos(x + i1, shoreHeight, z + j2), biomegenbase.topBlock, 2);
                             }
                         }

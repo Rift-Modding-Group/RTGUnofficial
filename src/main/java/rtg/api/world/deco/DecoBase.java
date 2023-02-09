@@ -39,8 +39,8 @@ public abstract class DecoBase {
     public static void tweakTreeLeaves(DecoTree deco, boolean checkDecay, boolean decayable) {
         if (deco.getLeavesBlock().getBlock() instanceof BlockLeaves) {
             IBlockState leaves = deco.getLeavesBlock()
-                .withProperty(BlockLeaves.CHECK_DECAY, checkDecay)
-                .withProperty(BlockLeaves.DECAYABLE, decayable);
+                    .withProperty(BlockLeaves.CHECK_DECAY, checkDecay)
+                    .withProperty(BlockLeaves.DECAYABLE, decayable);
             deco.setLeavesBlock(leaves);
         }
     }
@@ -48,10 +48,18 @@ public abstract class DecoBase {
     public static void tweakShrubLeaves(DecoShrub deco, boolean checkDecay, boolean decayable) {
         if (deco.getLeavesBlock().getBlock() instanceof BlockLeaves) {
             IBlockState leaves = deco.getLeavesBlock()
-                .withProperty(BlockLeaves.CHECK_DECAY, checkDecay)
-                .withProperty(BlockLeaves.DECAYABLE, decayable);
+                    .withProperty(BlockLeaves.CHECK_DECAY, checkDecay)
+                    .withProperty(BlockLeaves.DECAYABLE, decayable);
             deco.setLeavesBlock(leaves);
         }
+    }
+
+    static BlockPos getOffsetPos(final ChunkPos pos) {
+        return new BlockPos(pos.x * 16 + 8, 0, pos.z * 16 + 8);
+    }
+
+    public static int getRangedRandom(Random rand, int min, int max) {
+        return min + rand.nextInt(max - min + 1);
     }
 
     @Deprecated //TODO: [1.12] See: DecoTree override
@@ -160,13 +168,5 @@ public abstract class DecoBase {
         VINE,
         WHEAT,
         WORLDGEN
-    }
-
-    static BlockPos getOffsetPos(final ChunkPos pos) {
-        return new BlockPos(pos.x * 16 + 8, 0, pos.z * 16 + 8);
-    }
-
-    public static int getRangedRandom(Random rand, int min, int max) {
-        return min + rand.nextInt(max - min + 1);
     }
 }

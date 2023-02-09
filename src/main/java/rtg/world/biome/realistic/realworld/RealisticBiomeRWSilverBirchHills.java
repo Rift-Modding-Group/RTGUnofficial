@@ -1,7 +1,5 @@
 package rtg.world.biome.realistic.realworld;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,6 +11,8 @@ import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 import rtg.api.world.terrain.heighteffect.BumpyHillsEffect;
 import rtg.api.world.terrain.heighteffect.JitterEffect;
+
+import java.util.Random;
 
 
 public class RealisticBiomeRWSilverBirchHills extends RealisticBiomeRWBase {
@@ -84,8 +84,7 @@ public class RealisticBiomeRWSilverBirchHills extends RealisticBiomeRWBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (cliff) {
@@ -93,21 +92,17 @@ public class RealisticBiomeRWSilverBirchHills extends RealisticBiomeRWBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (depth < 10) {
+                        } else if (depth < 10) {
                             primer.setBlockState(x, k, z, hcStone());
                         }
-                    }
-                    else {
+                    } else {
                         if (depth == 0 && k > 61) {
                             primer.setBlockState(x, k, z, topBlock);
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }

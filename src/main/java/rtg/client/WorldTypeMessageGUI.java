@@ -8,8 +8,7 @@ import org.lwjgl.opengl.GL11;
 import rtg.api.RTGAPI;
 
 
-public final class WorldTypeMessageGUI extends GuiScreen
-{
+public final class WorldTypeMessageGUI extends GuiScreen {
     private static final ResourceLocation LOGO_LOCATION = new ResourceLocation(RTGAPI.RTG_MOD_ID, "textures/gui/rtg-logo-worldtype.png");
     private static final String LANG_KEY = "gui.createWorld.worldtype";
 

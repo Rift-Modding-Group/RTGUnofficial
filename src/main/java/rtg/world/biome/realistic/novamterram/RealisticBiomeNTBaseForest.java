@@ -1,7 +1,6 @@
 package rtg.world.biome.realistic.novamterram;
 
 import net.minecraft.world.biome.Biome;
-
 import rtg.api.world.RTGWorld;
 import rtg.api.world.terrain.TerrainBase;
 

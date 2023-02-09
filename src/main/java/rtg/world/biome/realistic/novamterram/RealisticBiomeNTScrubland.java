@@ -3,7 +3,6 @@ package rtg.world.biome.realistic.novamterram;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
-
 import rtg.api.util.BlockUtil;
 
 
@@ -27,11 +26,11 @@ public class RealisticBiomeNTScrubland extends RealisticBiomeNTBaseForest {
 
         super.initDecos();
         fallenTrees(
-            new IBlockState[]{
-                BlockUtil.getStateLog(BlockPlanks.EnumType.ACACIA),
-                BlockUtil.getStateLog(BlockPlanks.EnumType.ACACIA)
-            },
-            new int[]{2, 2}
+                new IBlockState[]{
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.ACACIA),
+                        BlockUtil.getStateLog(BlockPlanks.EnumType.ACACIA)
+                },
+                new int[]{2, 2}
         );
     }
 }

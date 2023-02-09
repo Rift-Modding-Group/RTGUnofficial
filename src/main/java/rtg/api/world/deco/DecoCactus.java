@@ -55,7 +55,7 @@ public class DecoCactus extends DecoBase {
                 final int y = rtgWorld.world().getHeight(pos).getY();
                 if (y <= this.maxY && rand.nextInt(this.chance) == 0) {
                     new WorldGenCacti(this.sandOnly, 0, this.soilBlock)
-                        .generate(rtgWorld.world(), rand, pos.up(y));
+                            .generate(rtgWorld.world(), rand, pos.up(y));
                 }
             }
         }

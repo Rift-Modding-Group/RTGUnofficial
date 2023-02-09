@@ -1,7 +1,5 @@
 package rtg.api.world.surface;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -9,6 +7,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import rtg.api.config.BiomeConfig;
 import rtg.api.world.RTGWorld;
+
+import java.util.Random;
 
 
 public class SurfaceGeneric extends SurfaceBase {
@@ -28,14 +28,12 @@ public class SurfaceGeneric extends SurfaceBase {
 
             if (b == Blocks.AIR) {
                 depth = -1;
-            }
-            else if (b == Blocks.STONE) {
+            } else if (b == Blocks.STONE) {
                 depth++;
 
                 if (depth == 0 && k > 61) {
                     primer.setBlockState(x, k, z, topBlock);
-                }
-                else if (depth < 4) {
+                } else if (depth < 4) {
                     primer.setBlockState(x, k, z, fillerBlock);
                 }
             }

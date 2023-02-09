@@ -1,11 +1,11 @@
 package rtg.api.world.deco.collection;
 
-import java.util.ArrayList;
-
 import net.minecraft.block.state.IBlockState;
 import rtg.api.config.BiomeConfig;
 import rtg.api.world.deco.DecoBase;
 import rtg.api.world.gen.feature.tree.rtg.TreeRTG;
+
+import java.util.ArrayList;
 
 
 /**

@@ -1,16 +1,12 @@
 package rtg.world.biome.realistic.biomesoplenty;
 
-import java.util.Random;
-
 import biomesoplenty.api.biome.BOPBiomes;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.BlockUtil;
 import rtg.api.world.RTGWorld;
@@ -27,21 +23,16 @@ import rtg.api.world.gen.feature.tree.rtg.TreeRTGPinusPonderosa;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 
-import static net.minecraft.block.BlockFlower.EnumFlowerType.ALLIUM;
-import static net.minecraft.block.BlockFlower.EnumFlowerType.BLUE_ORCHID;
-import static net.minecraft.block.BlockFlower.EnumFlowerType.DANDELION;
-import static net.minecraft.block.BlockFlower.EnumFlowerType.HOUSTONIA;
-import static net.minecraft.block.BlockFlower.EnumFlowerType.ORANGE_TULIP;
-import static net.minecraft.block.BlockFlower.EnumFlowerType.OXEYE_DAISY;
-import static net.minecraft.block.BlockFlower.EnumFlowerType.PINK_TULIP;
-import static net.minecraft.block.BlockFlower.EnumFlowerType.POPPY;
-import static net.minecraft.block.BlockFlower.EnumFlowerType.RED_TULIP;
-import static net.minecraft.block.BlockFlower.EnumFlowerType.WHITE_TULIP;
+import java.util.Random;
+
+import static net.minecraft.block.BlockFlower.EnumFlowerType.*;
 
 
 public class RealisticBiomeBOPWoodland extends RealisticBiomeBase {
 
-    public RealisticBiomeBOPWoodland(final Biome biome) { super(biome); }
+    public RealisticBiomeBOPWoodland(final Biome biome) {
+        super(biome);
+    }
 
     @Override
     public Biome preferredBeach() {
@@ -109,8 +100,7 @@ public class RealisticBiomeBOPWoodland extends RealisticBiomeBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (cliff) {
@@ -118,21 +108,17 @@ public class RealisticBiomeBOPWoodland extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (depth < 10) {
+                        } else if (depth < 10) {
                             primer.setBlockState(x, k, z, hcStone());
                         }
-                    }
-                    else {
+                    } else {
                         if (depth == 0 && k > 61) {
                             primer.setBlockState(x, k, z, topBlock);
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }
@@ -157,19 +143,19 @@ public class RealisticBiomeBOPWoodland extends RealisticBiomeBase {
             super(config);
 
             this
-                .addDeco(tallTrees(tallMin, tallMax)) // Tall trees first.
-                .addDeco(shortTrees(short1Min, short1Max)) // Short trees next.
-                .addDeco(logs(), config.ALLOW_LOGS.get()) // Add some fallen trees of the oak and spruce variety (50/50 distribution).
-                .addDeco(shrubsOak()) // Shrubs to fill in the blanks.
-                .addDeco(shrubsSpruce()) // Fewer spruce shrubs than oak.
-                .addDeco(flowers()) // Only 1-block tall flowers so we can see the trees better.
+                    .addDeco(tallTrees(tallMin, tallMax)) // Tall trees first.
+                    .addDeco(shortTrees(short1Min, short1Max)) // Short trees next.
+                    .addDeco(logs(), config.ALLOW_LOGS.get()) // Add some fallen trees of the oak and spruce variety (50/50 distribution).
+                    .addDeco(shrubsOak()) // Shrubs to fill in the blanks.
+                    .addDeco(shrubsSpruce()) // Fewer spruce shrubs than oak.
+                    .addDeco(flowers()) // Only 1-block tall flowers so we can see the trees better.
             ;
         }
 
         private DecoHelper5050 tallTrees(float noiseMin, float noiseMax) {
             return new DecoHelper5050(
-                tallPineTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), noiseMin, noiseMax),
-                tallPineTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), noiseMin, noiseMax)
+                    tallPineTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), noiseMin, noiseMax),
+                    tallPineTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), noiseMin, noiseMax)
             );
         }
 
@@ -186,44 +172,44 @@ public class RealisticBiomeBOPWoodland extends RealisticBiomeBase {
             this.addTree(pinusPonderosa);
 
             return new DecoTree(pinusPonderosa)
-                .setStrengthFactorForLoops(6f)
-                .setTreeType(DecoTree.TreeType.RTG_TREE)
-                .setDistribution(forestDistribution)
-                .setTreeCondition(DecoTree.TreeCondition.NOISE_BETWEEN_AND_RANDOM_CHANCE)
-                .setTreeConditionNoise(noiseMin)
-                .setTreeConditionNoise2(noiseMax)
-                .setTreeConditionChance(1)
-                .setMaxY(85);
+                    .setStrengthFactorForLoops(6f)
+                    .setTreeType(DecoTree.TreeType.RTG_TREE)
+                    .setDistribution(forestDistribution)
+                    .setTreeCondition(DecoTree.TreeCondition.NOISE_BETWEEN_AND_RANDOM_CHANCE)
+                    .setTreeConditionNoise(noiseMin)
+                    .setTreeConditionNoise2(noiseMax)
+                    .setTreeConditionChance(1)
+                    .setMaxY(85);
         }
 
         private DecoHelper5050 shortTrees(float noiseMin, float noiseMax) {
             return new DecoHelper5050(
-                shortPineTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), noiseMin, noiseMax),
-                shortPineTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), noiseMin, noiseMax)
+                    shortPineTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), noiseMin, noiseMax),
+                    shortPineTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), noiseMin, noiseMax)
             );
         }
 
         private DecoTree shortPineTrees(IBlockState log, IBlockState leaves, float noiseMin, float noiseMax) {
 
             TreeRTG piceaSitchensis = new TreeRTGPiceaSitchensis()
-                .setLogBlock(log)
-                .setLeavesBlock(leaves)
-                .setMinTrunkSize(4)
-                .setMaxTrunkSize(9)
-                .setMinCrownSize(6)
-                .setMaxCrownSize(13);
+                    .setLogBlock(log)
+                    .setLeavesBlock(leaves)
+                    .setMinTrunkSize(4)
+                    .setMaxTrunkSize(9)
+                    .setMinCrownSize(6)
+                    .setMaxCrownSize(13);
 
             this.addTree(piceaSitchensis);
 
             return new DecoTree(piceaSitchensis)
-                .setStrengthFactorForLoops(6f)
-                .setTreeType(DecoTree.TreeType.RTG_TREE)
-                .setDistribution(forestDistribution)
-                .setTreeCondition(DecoTree.TreeCondition.NOISE_BETWEEN_AND_RANDOM_CHANCE)
-                .setTreeConditionNoise(noiseMin)
-                .setTreeConditionNoise2(noiseMax)
-                .setTreeConditionChance(1)
-                .setMaxY(85);
+                    .setStrengthFactorForLoops(6f)
+                    .setTreeType(DecoTree.TreeType.RTG_TREE)
+                    .setDistribution(forestDistribution)
+                    .setTreeCondition(DecoTree.TreeCondition.NOISE_BETWEEN_AND_RANDOM_CHANCE)
+                    .setTreeConditionNoise(noiseMin)
+                    .setTreeConditionNoise2(noiseMax)
+                    .setTreeConditionChance(1)
+                    .setMaxY(85);
         }
 
         private DecoHelper5050 logs() {
@@ -232,47 +218,47 @@ public class RealisticBiomeBOPWoodland extends RealisticBiomeBase {
 
         private DecoFallenTree oakLogs() {
             return new DecoFallenTree()
-                .setLogCondition(DecoFallenTree.LogCondition.RANDOM_CHANCE)
-                .setLogConditionChance(10)
-                .setMaxY(80)
-                .setLogBlock(Blocks.LOG.getDefaultState())
-                .setLeavesBlock(Blocks.LEAVES.getDefaultState())
-                .setMinSize(3)
-                .setMaxSize(6);
+                    .setLogCondition(DecoFallenTree.LogCondition.RANDOM_CHANCE)
+                    .setLogConditionChance(10)
+                    .setMaxY(80)
+                    .setLogBlock(Blocks.LOG.getDefaultState())
+                    .setLeavesBlock(Blocks.LEAVES.getDefaultState())
+                    .setMinSize(3)
+                    .setMaxSize(6);
         }
 
         private DecoFallenTree spruceLogs() {
             return new DecoFallenTree()
-                .setLogCondition(DecoFallenTree.LogCondition.RANDOM_CHANCE)
-                .setLogConditionChance(24)
-                .setMaxY(80)
-                .setLogBlock(BlockUtil.getStateLog(EnumType.SPRUCE))
-                .setLeavesBlock(BlockUtil.getStateLeaf(EnumType.SPRUCE))
-                .setMinSize(3)
-                .setMaxSize(6);
+                    .setLogCondition(DecoFallenTree.LogCondition.RANDOM_CHANCE)
+                    .setLogConditionChance(24)
+                    .setMaxY(80)
+                    .setLogBlock(BlockUtil.getStateLog(EnumType.SPRUCE))
+                    .setLeavesBlock(BlockUtil.getStateLeaf(EnumType.SPRUCE))
+                    .setMinSize(3)
+                    .setMaxSize(6);
         }
 
         private DecoShrub shrubsOak() {
             return new DecoShrub()
-                .setMaxY(140)
-                .setLoopMultiplier(4f)
-                .setChance(3);
+                    .setMaxY(140)
+                    .setLoopMultiplier(4f)
+                    .setChance(3);
         }
 
         private DecoShrub shrubsSpruce() {
             return new DecoShrub()
-                .setLogBlock(BlockUtil.getStateLog(EnumType.SPRUCE))
-                .setLeavesBlock(BlockUtil.getStateLeaf(EnumType.SPRUCE))
-                .setMaxY(140)
-                .setLoopMultiplier(4f)
-                .setChance(9);
+                    .setLogBlock(BlockUtil.getStateLog(EnumType.SPRUCE))
+                    .setLeavesBlock(BlockUtil.getStateLeaf(EnumType.SPRUCE))
+                    .setMaxY(140)
+                    .setLoopMultiplier(4f)
+                    .setChance(9);
         }
 
         private DecoFlowersRTG flowers() {
             return new DecoFlowersRTG()
-                .addFlowers(POPPY, BLUE_ORCHID, ALLIUM, HOUSTONIA, RED_TULIP, ORANGE_TULIP, WHITE_TULIP, PINK_TULIP, OXEYE_DAISY, DANDELION)
-                .setMaxY(128)
-                .setStrengthFactor(6f);
+                    .addFlowers(POPPY, BLUE_ORCHID, ALLIUM, HOUSTONIA, RED_TULIP, ORANGE_TULIP, WHITE_TULIP, PINK_TULIP, OXEYE_DAISY, DANDELION)
+                    .setMaxY(128)
+                    .setStrengthFactor(6f);
         }
     }
 }

@@ -1,12 +1,11 @@
 package rtg.api.world.deco.helper;
 
-import java.util.Random;
-
 import net.minecraft.util.math.ChunkPos;
-
 import rtg.api.world.RTGWorld;
 import rtg.api.world.biome.IRealisticBiome;
 import rtg.api.world.deco.DecoBase;
+
+import java.util.Random;
 
 
 /**

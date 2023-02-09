@@ -88,10 +88,10 @@ public class DecoCollectionJungle extends DecoCollectionBase {
 
         // Flowers.
         DecoFlowersRTG decoFlowersRTG = new DecoFlowersRTG()
-            .addFlowers(EnumFlowerType.ORANGE_TULIP) // Only orange tulips fit in with the colour scheme.
-            .setChance(4)
-            .setMaxY(120)
-            .setStrengthFactor(2f);
+                .addFlowers(EnumFlowerType.ORANGE_TULIP) // Only orange tulips fit in with the colour scheme.
+                .setChance(4)
+                .setMaxY(120)
+                .setStrengthFactor(2f);
         this.addDeco(decoFlowersRTG);
 
         // Tall cacti on red sand - matches the colour scheme nicely.

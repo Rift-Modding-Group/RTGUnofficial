@@ -12,7 +12,10 @@ import rtg.api.world.RTGWorld;
 import rtg.api.world.biome.IRealisticBiome;
 import rtg.world.gen.ChunkLandscape;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 
@@ -20,21 +23,21 @@ public final class BiomeAnalyzer {
     //Default anvil storage uses a single byte for biome data but with JustEnoughIDs, the biome ID field is expanded
     //to an integer.
     private static final int
-            NO_BIOME   = -1,
+            NO_BIOME = -1,
             MAX_ANVIL_BIOMES = 256,
-            //biome flag constants
-            RIVER_BIOME = 1,
+    //biome flag constants
+    RIVER_BIOME = 1,
             OCEAN_BIOME = 2,
             SWAMP_BIOME = 4,
             BEACH_BIOME = 8,
-            LAND_BIOME  = 16;
+            LAND_BIOME = 16;
     //biomeId -> bitField for biomes [ RIVER_BIOME | OCEAN_BIOME | SWAMP_BIOME | BEACH_BIOME | LAND_BIOME ]
     private final List<Integer>
             biomes = new SparseList<>(),
             preferredBeach = new SparseList<>();
     //hardcode these because they are world-persistent
-    private IRealisticBiome
-            scenicLakeBiome       = RTGAPI.getRTGBiome(Biomes.RIVER),
+    private final IRealisticBiome
+            scenicLakeBiome = RTGAPI.getRTGBiome(Biomes.RIVER),
             scenicFrozenLakeBiome = RTGAPI.getRTGBiome(Biomes.FROZEN_RIVER);
     private SmoothingSearchStatus
             beachSearch,
@@ -67,12 +70,12 @@ public final class BiomeAnalyzer {
 
     private void initBiomes() {
         final Map<Type, Integer> cases = new HashMap<Type, Integer>() {{
-            put(Type.OCEAN, OCEAN_BIOME);
             put(Type.RIVER, RIVER_BIOME);
+            put(Type.OCEAN, OCEAN_BIOME);
             put(Type.SWAMP, SWAMP_BIOME);
             put(Type.BEACH, BEACH_BIOME);
         }};
-        ForgeRegistries.BIOMES.getValuesCollection().forEach(biome -> {
+        for (Biome biome : ForgeRegistries.BIOMES.getValuesCollection()) {
             final int id = Biome.getIdForBiome(biome);
             Integer biomeFlags = biomes.get(id);
             biomeFlags = (biomeFlags == null ? 0 : biomeFlags);
@@ -87,7 +90,7 @@ public final class BiomeAnalyzer {
                 biomeFlags |= LAND_BIOME;
             }
             biomes.set(id, biomeFlags);
-        });
+        }
     }
 
     private void setupBeachesForBiomes() {
@@ -108,8 +111,8 @@ public final class BiomeAnalyzer {
     public void newRepair(final Biome[] genLayerBiomes, final int[] biomeNeighborhood, final ChunkLandscape landscape) {
 
         final IRealisticBiome[] jitteredBiomes = landscape.biome;
-        final float[]           noise          = landscape.noise;
-        final float[]           riverStrength  = landscape.river;
+        final float[] noise = landscape.noise;
+        final float[] riverStrength = landscape.river;
 
         IRealisticBiome realisticBiome;
         int realisticBiomeId;
@@ -125,15 +128,13 @@ public final class BiomeAnalyzer {
             if (noise[i] > 61.5) {
                 // replace
                 jitteredBiomes[i] = realisticBiome;
-            }
-            else {
+            } else {
                 // check for river
                 final int biomeFlags = biomes.get(realisticBiomeId);
                 if (canBeRiver && (biomeFlags & OCEAN_BIOME) == 0 && (biomeFlags & SWAMP_BIOME) == 0) {
                     // make river
                     jitteredBiomes[i] = realisticBiome.getRiverBiome();
-                }
-                else {
+                } else {
                     // replace
                     jitteredBiomes[i] = realisticBiome;
                 }
@@ -250,8 +251,7 @@ public final class BiomeAnalyzer {
                     int riverReplacement = jitteredBiomes[i].getRiverBiome().baseBiomeId(); // make river
                     if (riverReplacement == Biome.getIdForBiome(Biomes.FROZEN_RIVER)) {
                         jitteredBiomes[i] = scenicFrozenLakeBiome;
-                    }
-                    else {
+                    } else {
                         jitteredBiomes[i] = scenicLakeBiome;
                     }
                 }
@@ -299,14 +299,14 @@ public final class BiomeAnalyzer {
         private final int lowerRightFinding = 4;
         private final int[] quadrantBiome = new int[4];
         private final float[] quadrantBiomeWeighting = new float[4];
+        private final List<Boolean> desired;
+        private final int[] findings = new int[3 * 3];
+        // weightings is part of a system to generate some variability in repaired chunks weighting is
+        // based on how long the search went on (so quasipsuedorandom, based on direction plus distance
+        private final float[] weightings = new float[3 * 3];
         public List<Integer> biomes = new SparseList<>();
         private boolean absent = false;
         private boolean notHunted;
-        private int[] findings = new int[3 * 3];
-        // weightings is part of a system to generate some variability in repaired chunks weighting is
-        // based on how long the search went on (so quasipsuedorandom, based on direction plus distance
-        private float[] weightings = new float[3 * 3];
-        private final List<Boolean> desired;
         private int arraySize;
         private int[] pattern;
         private int biomeCount;
@@ -350,7 +350,7 @@ public final class BiomeAnalyzer {
             for (int i = 0; i < pattern.length; i++) {
                 int biome = biomeNeighborhood[pattern[i] + offset];
                 Boolean d = desired.get(biome);
-                d = (d == null ? false : d);
+                d = (d != null && d);
                 if (d && desired.get(biome)) {
                     findings[location] = biome;
                     weightings[location] = (float) Math.sqrt(pattern.length) - (float) Math.sqrt(i) + 2f;

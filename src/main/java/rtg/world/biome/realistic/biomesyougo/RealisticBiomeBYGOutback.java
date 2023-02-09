@@ -12,11 +12,7 @@ import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
-import rtg.api.world.terrain.heighteffect.GroundEffect;
-import rtg.api.world.terrain.heighteffect.HeightEffect;
-import rtg.api.world.terrain.heighteffect.HeightVariation;
-import rtg.api.world.terrain.heighteffect.RaiseEffect;
-import rtg.api.world.terrain.heighteffect.VariableRuggednessEffect;
+import rtg.api.world.terrain.heighteffect.*;
 
 import java.util.Random;
 
@@ -142,8 +138,7 @@ public class RealisticBiomeBYGOutback extends RealisticBiomeBYGBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (cliff) {
@@ -151,33 +146,27 @@ public class RealisticBiomeBYGOutback extends RealisticBiomeBYGBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (depth < 10) {
+                        } else if (depth < 10) {
                             primer.setBlockState(x, k, z, hcStone());
                         }
-                    }
-                    else {
+                    } else {
                         if (depth == 0 && k > 61) {
                             if (simplex.noise2f(i / floMixWidth, j / floMixWidth) + simplex.noise2f(i / floSmallWidth, j / floSmallWidth)
                                     * floSmallStrength > floMixHeight) {
                                 primer.setBlockState(x, k, z, blockMixTop);
 
                                 mix = true;
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             if (mix) {
                                 primer.setBlockState(x, k, z, blockMixFiller);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, fillerBlock);
                             }
                         }

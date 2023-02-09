@@ -1,18 +1,15 @@
 package rtg.world.biome.realistic.biomesyougo;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.world.biome.Biome;
-import rtg.api.util.BlockUtil;
-import rtg.api.util.Logger;
 import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.deco.DecoBase;
 import rtg.api.world.deco.DecoFallenTree;
 import rtg.api.world.deco.helper.DecoHelperRandomSplit;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.surface.SurfaceGeneric;
+
+import javax.annotation.Nonnull;
 
 
 public abstract class RealisticBiomeBYGBase extends RealisticBiomeBase {

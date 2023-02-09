@@ -1,13 +1,10 @@
 package rtg.world.biome.realistic.biomesoplenty;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
@@ -15,13 +12,18 @@ import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 
+import java.util.Random;
+
 
 public class RealisticBiomeBOPOriginBeach extends RealisticBiomeBase {
 
-    public RealisticBiomeBOPOriginBeach(final Biome biome) { super(biome); }
+    public RealisticBiomeBOPOriginBeach(final Biome biome) {
+        super(biome);
+    }
 
     @Override
-    public void initDecos() {}
+    public void initDecos() {
+    }
 
     @Override
     public void initConfig() {
@@ -80,8 +82,7 @@ public class RealisticBiomeBOPOriginBeach extends RealisticBiomeBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (cliff) {
@@ -89,35 +90,28 @@ public class RealisticBiomeBOPOriginBeach extends RealisticBiomeBase {
                             if (depth < 6) {
                                 primer.setBlockState(x, k, z, cliffBlock1.getBlock().getDefaultState());
                             }
-                        }
-                        else {
+                        } else {
                             if (depth > -1 && depth < 2) {
                                 primer.setBlockState(x, k, z, rand.nextInt(3) == 0 ? cliffBlock2 : cliffBlock1);
-                            }
-                            else if (depth < 10) {
+                            } else if (depth < 10) {
                                 primer.setBlockState(x, k, z, cliffBlock1);
                             }
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
                         if (depth == 0 && k > 61) {
                             if (simplex.noise2f(i / 12f, j / 12f) > -0.3f + ((k - 61f) / 15f)) {
                                 dirt = true;
                                 primer.setBlockState(x, k, z, topBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, Blocks.SAND.getDefaultState());
                             }
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             if (dirt) {
                                 primer.setBlockState(x, k, z, fillerBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, Blocks.SAND.getDefaultState());
                             }
-                        }
-                        else if (!dirt) {
+                        } else if (!dirt) {
                             primer.setBlockState(x, k, z, Blocks.SANDSTONE.getDefaultState());
                         }
                     }

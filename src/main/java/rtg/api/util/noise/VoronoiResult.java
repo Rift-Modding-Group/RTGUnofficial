@@ -49,8 +49,7 @@ public class VoronoiResult {
                 this.shortestDistance = distance;
                 this.closestX = point.getX();
                 this.closestZ = point.getY();
-            }
-            else if (distance < this.nextDistance) {
+            } else if (distance < this.nextDistance) {
                 this.nextDistance = distance;
             }
         }

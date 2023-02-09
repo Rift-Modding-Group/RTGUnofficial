@@ -1,10 +1,6 @@
 package rtg.api.world.gen.feature.tree.rtg;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
-import net.minecraft.block.BlockLog;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockSand;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -81,15 +77,15 @@ public abstract class TreeRTG extends WorldGenAbstractTree {
         ));
 
         this.canGrowIntoMaterials = new ArrayList<>(Arrays.asList(
-            Material.AIR,
-            Material.WOOD,
-            Material.LEAVES,
-            Material.GRASS,
-            Material.GROUND,
-            Material.PLANTS,
-            Material.VINE,
-            Material.WATER,
-            Material.SNOW
+                Material.AIR,
+                Material.WOOD,
+                Material.LEAVES,
+                Material.GRASS,
+                Material.GROUND,
+                Material.PLANTS,
+                Material.VINE,
+                Material.WATER,
+                Material.SNOW
         ));
 
         this.allowBarkCoveredLogs = RTGConfig.barkCoveredLogs();
@@ -214,8 +210,7 @@ public abstract class TreeRTG extends WorldGenAbstractTree {
 
         try {
             trunkLog = defaultLog.withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.NONE);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             trunkLog = defaultLog;
         }
 

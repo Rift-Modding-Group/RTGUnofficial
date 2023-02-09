@@ -21,11 +21,11 @@ public class DecoCollectionExtremeHillsCommon extends DecoCollectionBase {
         super(config);
 
         this.addDeco(logDecos(), config.ALLOW_LOGS.get()) // Logs.
-            .addDeco(shrubDecos()) // Shrubs.
-            .addDeco(boulders()) // Boulders.
-            .addDeco(flowers()) // Flowers.
-            .addDeco(mushrooms()) // Mushrooms.
-            .addDeco(pumpkins()); // Pumpkins.
+                .addDeco(shrubDecos()) // Shrubs.
+                .addDeco(boulders()) // Boulders.
+                .addDeco(flowers()) // Flowers.
+                .addDeco(mushrooms()) // Mushrooms.
+                .addDeco(pumpkins()); // Pumpkins.
     }
 
     private DecoFallenTree logs(IBlockState log, IBlockState leaves) {
@@ -46,8 +46,8 @@ public class DecoCollectionExtremeHillsCommon extends DecoCollectionBase {
 
     private DecoHelper5050 logDecos() {
         return new DecoHelper5050(
-            logs(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState()),
-            logs(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE))
+                logs(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState()),
+                logs(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE))
         );
     }
 
@@ -63,8 +63,8 @@ public class DecoCollectionExtremeHillsCommon extends DecoCollectionBase {
 
     private DecoHelper5050 shrubDecos() {
         return new DecoHelper5050(
-            shrubs(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState()),
-            shrubs(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE))
+                shrubs(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState()),
+                shrubs(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE))
         );
     }
 

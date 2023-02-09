@@ -2,7 +2,6 @@ package rtg.world.gen;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -40,8 +39,10 @@ import rtg.world.biome.BiomeAnalyzer;
 import rtg.world.gen.structure.WoodlandMansionRTG;
 
 import javax.annotation.Nullable;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 
@@ -62,13 +63,13 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
     private final int sampleSize = 8;
     private final int sampleArraySize = sampleSize * 2 + 5;
     private final int[] biomeData = new int[sampleArraySize * sampleArraySize];
-    private List<Float> weightedBiomes = new SparseList<Float>() {{
-            for (int i = 0; i < 256; i++) {
-                set(i, 0F);
-            }
-    }};
     private final float[][] weightings = new float[sampleArraySize * sampleArraySize][256];
     private final MesaBiomeCombiner mesaCombiner = new MesaBiomeCombiner();
+    private List<Float> weightedBiomes = new SparseList<Float>() {{
+        for (int i = 0; i < 256; i++) {
+            set(i, 0F);
+        }
+    }};
     private BiomeAnalyzer analyzer = new BiomeAnalyzer();
     private int[] xyinverted = analyzer.xyinverted();
     private boolean mapFeaturesEnabled;
@@ -196,12 +197,10 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
                     if (y > height) {
                         if (y < this.settings.seaLevel) {
                             primer.setBlockState(x, y, z, Blocks.WATER.getDefaultState());
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, y, z, Blocks.AIR.getDefaultState());
                         }
-                    }
-                    else {
+                    } else {
                         primer.setBlockState(x, y, z, Blocks.STONE.getDefaultState());
                     }
                 }
@@ -234,8 +233,7 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
                             primer.setBlockState(x, bl, z, Blocks.BEDROCK.getDefaultState());
                         }
                     }
-                }
-                else {
+                } else {
                     primer.setBlockState(x, 0, z, Blocks.BEDROCK.getDefaultState());
                 }
             }
@@ -285,9 +283,9 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
         // water lakes.
         if (settings.useWaterLakes && settings.waterLakeChance > 0 && !hasVillage) {
 
-            final long     nextchance    = rand.nextLong();
-            final int      surfacechance = settings.getSurfaceWaterLakeChance(biome.waterLakeMult());
-            final BlockPos pos           = offsetpos.add(rand.nextInt(16), 0, rand.nextInt(16));
+            final long nextchance = rand.nextLong();
+            final int surfacechance = settings.getSurfaceWaterLakeChance(biome.waterLakeMult());
+            final BlockPos pos = offsetpos.add(rand.nextInt(16), 0, rand.nextInt(16));
 
             // possibly reduced chance to generate anywhere, including on surface
             if (surfacechance > 0 && nextchance % surfacechance == 0) {
@@ -306,9 +304,9 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
         // lava lakes.
         if (settings.useLavaLakes && settings.lavaLakeChance > 0 && !hasVillage) {
 
-            final long     nextchance    = rand.nextLong();
-            final int      surfacechance = settings.getSurfaceLavaLakeChance(biome.lavaLakeMult());
-            final BlockPos pos           = offsetpos.add(rand.nextInt(16), 0, rand.nextInt(16));
+            final long nextchance = rand.nextLong();
+            final int surfacechance = settings.getSurfaceLavaLakeChance(biome.lavaLakeMult());
+            final BlockPos pos = offsetpos.add(rand.nextInt(16), 0, rand.nextInt(16));
 
             // possibly reduced chance to generate anywhere, including on surface
             if (surfacechance > 0 && nextchance % surfacechance == 0) {
@@ -337,16 +335,13 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
         if (RTG.decorationsDisable() || biome.getConfig().DISABLE_RTG_DECORATIONS.get()) {
             if (river > 0.9f) {
                 biome.getRiverBiome().baseBiome().decorate(this.world, this.rand, blockPos);
-            }
-            else {
+            } else {
                 biome.baseBiome().decorate(this.world, this.rand, blockPos);
             }
-        }
-        else {
+        } else {
             if (river > 0.9f) {
                 biome.getRiverBiome().rDecorate(this.rtgWorld, this.rand, chunkPos, river, hasVillage);
-            }
-            else {
+            } else {
                 biome.rDecorate(this.rtgWorld, this.rand, chunkPos, river, hasVillage);
             }
         }
@@ -571,7 +566,7 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
                         .range(0, weightedBiomes.size())
                         .forEachOrdered(i -> {
                             Float weight = weightedBiomes.get(i);
-                            if (weight != null ) {
+                            if (weight != null) {
                                 weightedBiomes.set(i, weight / finalTotalWeight);
                             }
                         });

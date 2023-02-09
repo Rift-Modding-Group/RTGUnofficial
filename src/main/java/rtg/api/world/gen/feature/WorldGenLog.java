@@ -1,18 +1,15 @@
 package rtg.api.world.gen.feature;
 
-import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import rtg.api.util.BlockUtil;
 import rtg.api.util.BlockUtil.MatchType;
-import rtg.api.util.Logger;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -45,8 +42,8 @@ public class WorldGenLog extends WorldGenerator {
     public boolean generate(@Nonnull World world, @Nonnull Random rand, @Nonnull BlockPos pos) {
 
         int x = pos.getX(),
-            y = pos.getY(),
-            z = pos.getZ();
+                y = pos.getY(),
+                z = pos.getZ();
 
         IBlockState g = world.getBlockState(new BlockPos(x, y - 1, z));
         if (g.getMaterial() != Material.GROUND && g.getMaterial() != Material.GRASS && g.getMaterial() != Material.SAND && g.getMaterial() != Material.ROCK) {
@@ -111,8 +108,7 @@ public class WorldGenLog extends WorldGenerator {
             // We'd rather generate nothing than something ugly.
             try {
                 aBlock.add(logBlock.withProperty(BlockLog.LOG_AXIS, (dir == 0 ? BlockLog.EnumAxis.X : BlockLog.EnumAxis.Z)));
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 //aBlock.add(logBlock);
                 //Logger.error(e.getMessage());
                 return false;
@@ -159,8 +155,7 @@ public class WorldGenLog extends WorldGenerator {
             if ((b.getMaterial() == Material.AIR || b.getMaterial() == Material.VINE || b.getMaterial() == Material.PLANTS) && rand.nextInt(3) == 0) {
                 world.setBlockState(new BlockPos(x, y, z + 1), leavesBlock, 2);
             }
-        }
-        else {
+        } else {
             b = world.getBlockState(new BlockPos(x - 1, y, z));
             if ((b.getMaterial() == Material.AIR || b.getMaterial() == Material.VINE || b.getMaterial() == Material.PLANTS) && rand.nextInt(3) == 0) {
                 world.setBlockState(new BlockPos(x - 1, y, z), leavesBlock, 2);

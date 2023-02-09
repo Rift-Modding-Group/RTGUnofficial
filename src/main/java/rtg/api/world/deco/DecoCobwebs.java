@@ -53,7 +53,7 @@ public class DecoCobwebs extends DecoBase {
             for (int i = 0; i < this.strengthFactor; ++i) {
                 if (rand.nextInt(this.chance) == 0) {
                     new WorldGenBlock(WEB, AIR, this.adjacentBlock, this.minAdjacents)
-                        .generate(rtgWorld.world(), rand, getOffsetPos(chunkPos).add(rand.nextInt(16), getRangedRandom(rand, this.minY, this.maxY), rand.nextInt(16)));
+                            .generate(rtgWorld.world(), rand, getOffsetPos(chunkPos).add(rand.nextInt(16), getRangedRandom(rand, this.minY, this.maxY), rand.nextInt(16)));
                 }
             }
         }

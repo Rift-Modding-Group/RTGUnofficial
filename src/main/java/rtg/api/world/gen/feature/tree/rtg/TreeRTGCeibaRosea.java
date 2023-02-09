@@ -140,8 +140,7 @@ public class TreeRTGCeibaRosea extends TreeRTG {
 
             if (isTrunk) {
                 this.placeLogBlock(world, new BlockPos((int) x, (int) y, (int) z), this.trunkLog, this.generateFlag, treeData);
-            }
-            else {
+            } else {
                 this.placeLogBlock(world, new BlockPos((int) x, (int) y, (int) z), this.logBlock, this.generateFlag, treeData);
             }
 

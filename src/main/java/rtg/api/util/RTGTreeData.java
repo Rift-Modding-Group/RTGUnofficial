@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 
 /**
  * Created by WhichOnesPink on 28/07/2019.
- *
+ * <p>
  * Please don't refactor or optimize anything in this class. Thanks, Pink.
  */
 public class RTGTreeData {
@@ -38,8 +38,7 @@ public class RTGTreeData {
             maxXLog = (pos.getX() > maxXLog) ? pos.getX() : maxXLog;
             minZLog = (pos.getZ() < minZLog) ? pos.getZ() : minZLog;
             maxZLog = (pos.getZ() > maxZLog) ? pos.getZ() : maxZLog;
-        }
-        else {
+        } else {
             minXLog = pos.getX();
             maxXLog = pos.getX();
             minZLog = pos.getZ();
@@ -58,8 +57,7 @@ public class RTGTreeData {
             maxXLeaves = (pos.getX() > maxXLeaves) ? pos.getX() : maxXLeaves;
             minZLeaves = (pos.getZ() < minZLeaves) ? pos.getZ() : minZLeaves;
             maxZLeaves = (pos.getZ() > maxZLeaves) ? pos.getZ() : maxZLeaves;
-        }
-        else {
+        } else {
             minXLeaves = pos.getX();
             maxXLeaves = pos.getX();
             minZLeaves = pos.getZ();
@@ -75,29 +73,25 @@ public class RTGTreeData {
 
         if (logRangeX > 16) {
             Logger.error("Log X range = {} to {} ({} blocks)", minXLog, maxXLog, logRangeX);
-        }
-        else {
+        } else {
             //Logger.info("Log X range = {} to {} ({} blocks)", minXLog, maxXLog, logRangeX);
         }
 
         if (logRangeZ > 16) {
             Logger.error("Log Z range = {} to {} ({} blocks)", minZLog, maxZLog, logRangeZ);
-        }
-        else {
+        } else {
             //Logger.info("Log Z range = {} to {} ({} blocks)", minZLog, maxZLog, logRangeZ);
         }
 
         if (leavesRangeX > 16) {
             Logger.error("Leaves X range = {} to {} ({} blocks)", minXLeaves, maxXLeaves, leavesRangeX);
-        }
-        else {
+        } else {
             //Logger.info("Leaves X range = {} to {} ({} blocks)", minXLeaves, maxXLeaves, leavesRangeX);
         }
 
         if (leavesRangeZ > 16) {
             Logger.error("Leaves Z range = {} to {} ({} blocks)", minZLeaves, maxZLeaves, leavesRangeZ);
-        }
-        else {
+        } else {
             //Logger.info("Leaves Z range = {} to {} ({} blocks)", minZLeaves, maxZLeaves, leavesRangeZ);
         }
     }

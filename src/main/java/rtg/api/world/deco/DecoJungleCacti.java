@@ -45,7 +45,7 @@ public class DecoJungleCacti extends DecoBase {
             for (int i = 0; i < this.strengthFactor; i++) {
                 final BlockPos pos = getOffsetPos(chunkPos).add(rand.nextInt(16), rand.nextInt(maxY), rand.nextInt(16));
                 new WorldGenJungleCacti(this.sandOnly, rand.nextInt(this.extraHeight))
-                    .generate(rtgWorld.world(), rand, pos);
+                        .generate(rtgWorld.world(), rand, pos);
             }
         }
     }

@@ -1,15 +1,14 @@
 package rtg.api.world.gen.feature;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
 import rtg.RTGConfig;
+
+import java.util.Random;
 
 
 public class WorldGenShrubRTG extends WorldGenerator {
@@ -45,11 +44,9 @@ public class WorldGenShrubRTG extends WorldGenerator {
 
             if (i == 0 && varSize > 4) {
                 buildLeaves(world, x + rX, y, z + rZ, 3);
-            }
-            else if (i == 1 && varSize > 2) {
+            } else if (i == 1 && varSize > 2) {
                 buildLeaves(world, x + rX, y, z + rZ, 2);
-            }
-            else {
+            } else {
                 buildLeaves(world, x + rX, y + rY, z + rZ, 1);
             }
         }
@@ -70,9 +67,9 @@ public class WorldGenShrubRTG extends WorldGenerator {
                 if (!RTGConfig.shrubsBelowSurface()) {
 
                     if (b1.getMaterial() != Material.AIR &&
-                        b1.getMaterial() != Material.VINE &&
-                        b1.getMaterial() != Material.PLANTS &&
-                        b1 != Blocks.SNOW_LAYER.getDefaultState()) {
+                            b1.getMaterial() != Material.VINE &&
+                            b1.getMaterial() != Material.PLANTS &&
+                            b1 != Blocks.SNOW_LAYER.getDefaultState()) {
                         return;
                     }
                 }

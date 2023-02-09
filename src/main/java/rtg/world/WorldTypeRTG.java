@@ -7,7 +7,6 @@ import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.ChunkGeneratorOverworld;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.storage.WorldInfo;
-
 import rtg.RTG;
 import rtg.api.RTGAPI;
 import rtg.api.util.Logger;
@@ -36,8 +35,7 @@ public final class WorldTypeRTG extends WorldType {
     }
 
     @Override
-    public BiomeProvider getBiomeProvider(World world)
-    {
+    public BiomeProvider getBiomeProvider(World world) {
         if (!world.isRemote) {
             final DimensionType type = world.provider.getDimensionType();
             if (RTGAPI.isAllowedDimensionType(type)) {
@@ -51,8 +49,7 @@ public final class WorldTypeRTG extends WorldType {
     }
 
     @Override
-    public IChunkGenerator getChunkGenerator(World world, String generatorOptions)
-    {
+    public IChunkGenerator getChunkGenerator(World world, String generatorOptions) {
         if (!world.isRemote) {
             final DimensionType type = world.provider.getDimensionType();
             if (RTGAPI.isAllowedDimensionType(type)) {
@@ -81,7 +78,8 @@ public final class WorldTypeRTG extends WorldType {
         return "gui.createWorld.worldtypename";
     }
 
-    @Override // Client-only; we make a proxied call here (no going back to SideOnly) so the dedicated server doesn't flip out with ClassNotFoundException
+    @Override
+    // Client-only; we make a proxied call here (no going back to SideOnly) so the dedicated server doesn't flip out with ClassNotFoundException
     public void onCustomizeButton(net.minecraft.client.Minecraft mc, net.minecraft.client.gui.GuiCreateWorld guiCreateWorld) {
         RTG.getProxy().displayCustomizeWorldScreen(guiCreateWorld);
     }

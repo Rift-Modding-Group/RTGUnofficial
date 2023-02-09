@@ -1,8 +1,5 @@
 package rtg.api.world.gen.feature.tree.rtg;
 
-import java.util.List;
-import java.util.Random;
-
 import com.google.common.collect.Lists;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
@@ -11,6 +8,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -140,16 +140,14 @@ public class TreeRTGQuercusRobur extends TreeRTG {
 
         if ((float) p_76490_1_ < (float) this.heightLimit * 0.3F) {
             return -1.0F;
-        }
-        else {
+        } else {
             float f = (float) this.heightLimit / 2.0F;
             float f1 = f - (float) p_76490_1_;
             float f2 = MathHelper.sqrt(f * f - f1 * f1);
 
             if (f1 == 0.0F) {
                 f2 = f;
-            }
-            else if (Math.abs(f1) >= f) {
+            } else if (Math.abs(f1) >= f) {
                 return 0.0F;
             }
 
@@ -208,8 +206,7 @@ public class TreeRTGQuercusRobur extends TreeRTG {
         if (k > 0) {
             if (i == k) {
                 blocklog$enumaxis = BlockLog.EnumAxis.X;
-            }
-            else if (j == k) {
+            } else if (j == k) {
                 blocklog$enumaxis = BlockLog.EnumAxis.Z;
             }
         }
@@ -282,8 +279,7 @@ public class TreeRTGQuercusRobur extends TreeRTG {
 
         if (i == 0) {
             return -1;
-        }
-        else {
+        } else {
             for (int j = 0; j <= i; ++j) {
                 BlockPos blockpos1 = posOne.add((double) (0.5F + (float) j * f), (double) (0.5F + (float) j * f1), (double) (0.5F + (float) j * f2));
 
@@ -328,8 +324,7 @@ public class TreeRTGQuercusRobur extends TreeRTG {
         if (!this.validTreeLocation()) {
             this.world = null; //Fix vanilla Mem leak, holds latest world
             return false;
-        }
-        else {
+        } else {
             this.generateLeafNodeList();
             this.generateLeaves();
             this.generateTrunk();
@@ -352,18 +347,15 @@ public class TreeRTGQuercusRobur extends TreeRTG {
         if (!isSoil) {
             //Logger.debug("Invalid tree location! Ground block is not soil.");
             return false;
-        }
-        else {
+        } else {
             int i = this.checkBlockLine(this.basePos, this.basePos.up(this.heightLimit - 1));
 
             if (i == -1) {
                 return true;
-            }
-            else if (i < 6) {
+            } else if (i < 6) {
                 //Logger.debug("Invalid tree location! checkBlockLine() == false");
                 return false;
-            }
-            else {
+            } else {
                 this.heightLimit = i;
                 return true;
             }
@@ -374,9 +366,9 @@ public class TreeRTGQuercusRobur extends TreeRTG {
 
         IBlockState state = world.getBlockState(pos);
         return state.getBlock().isAir(state, world, pos)
-            || state.getBlock().isLeaves(state, world, pos)
-            || state.getBlock() == Blocks.SAPLING
-            || state.getBlock().isWood(world, pos);
+                || state.getBlock().isLeaves(state, world, pos)
+                || state.getBlock() == Blocks.SAPLING
+                || state.getBlock().isWood(world, pos);
     }
 
     static class FoliageCoordinates extends BlockPos {

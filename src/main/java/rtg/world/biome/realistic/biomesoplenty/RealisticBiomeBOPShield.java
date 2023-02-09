@@ -1,17 +1,13 @@
 package rtg.world.biome.realistic.biomesoplenty;
 
-import java.util.Random;
-
 import biomesoplenty.api.biome.BOPBiomes;
 import biomesoplenty.api.block.BOPBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.BlockUtil;
 import rtg.api.util.noise.ISimplexData2D;
@@ -25,6 +21,8 @@ import rtg.api.world.deco.helper.DecoHelper5050;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 
+import java.util.Random;
+
 import static rtg.api.world.deco.DecoFallenTree.LogCondition.RANDOM_CHANCE;
 
 
@@ -33,7 +31,9 @@ public class RealisticBiomeBOPShield extends RealisticBiomeBase {
     private double lakeWaterLevel = 0.04;// the lakeStrength below which things should be below water
     private double lakeDepressionLevel = 0.3;// the lakeStrength below which land should start to be lowered
 
-    public RealisticBiomeBOPShield(final Biome biome) { super(biome); }
+    public RealisticBiomeBOPShield(final Biome biome) {
+        super(biome);
+    }
 
     @Override
     public Biome preferredBeach() {
@@ -98,8 +98,7 @@ public class RealisticBiomeBOPShield extends RealisticBiomeBase {
             // less on the bottom and more on the sides
             irregularity = irregularity * (1 + r);
             return (biomeHeight * (r)) + ((57f + irregularity) * 1.0f) * (1f - r);
-        }
-        else {
+        } else {
             return biomeHeight;
         }
     }
@@ -180,7 +179,7 @@ public class RealisticBiomeBOPShield extends RealisticBiomeBase {
         private float mixHeight;
 
         public SurfaceBOPShield(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff, float stoneCliff,
-                               float stoneHeight, float stoneStrength, float clayCliff, IBlockState mix, float mixSize) {
+                                float stoneHeight, float stoneStrength, float clayCliff, IBlockState mix, float mixSize) {
 
             super(config, top, fill);
             min = minCliff;
@@ -208,8 +207,7 @@ public class RealisticBiomeBOPShield extends RealisticBiomeBase {
                 b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (depth == 0) {
@@ -226,39 +224,30 @@ public class RealisticBiomeBOPShield extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else if (k < 63) {
+                        } else if (k < 63) {
                             if (k < 62) {
                                 primer.setBlockState(x, k, z, fillerBlock);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else if (simplex.noise2f(i / 12f, j / 12f) > mixHeight) {
+                        } else if (simplex.noise2f(i / 12f, j / 12f) > mixHeight) {
                             primer.setBlockState(x, k, z, mixBlock);
                             m = true;
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, topBlock);
                         }
-                    }
-                    else if (depth < 6) {
+                    } else if (depth < 6) {
                         if (cliff == 1) {
                             primer.setBlockState(x, k, z, hcStone());
-                        }
-                        else if (cliff == 2) {
+                        } else if (cliff == 2) {
                             primer.setBlockState(x, k, z, getShadowStoneBlock());
-                        }
-                        else {
+                        } else {
                             primer.setBlockState(x, k, z, fillerBlock);
                         }
                     }

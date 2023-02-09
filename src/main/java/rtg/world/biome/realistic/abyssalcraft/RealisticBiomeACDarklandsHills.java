@@ -1,13 +1,10 @@
 package rtg.world.biome.realistic.abyssalcraft;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-
 import rtg.api.config.BiomeConfig;
 import rtg.api.util.noise.SimplexNoise;
 import rtg.api.world.RTGWorld;
@@ -15,10 +12,14 @@ import rtg.api.world.biome.RealisticBiomeBase;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
 
+import java.util.Random;
+
 
 public class RealisticBiomeACDarklandsHills extends RealisticBiomeBase {
 
-    public RealisticBiomeACDarklandsHills(final Biome biome) { super(biome); }
+    public RealisticBiomeACDarklandsHills(final Biome biome) {
+        super(biome);
+    }
 
     @Override
     public void initConfig() {
@@ -31,12 +32,19 @@ public class RealisticBiomeACDarklandsHills extends RealisticBiomeBase {
     }
 
     @Override
-    public void initDecos() {}
+    public void initDecos() {
+    }
 
     @Override
     public TerrainBase initTerrain() {
 
         return new TerrainACDarklandsHighland(10f, 120f, 10f, 200f);
+    }
+
+    @Override
+    public SurfaceBase initSurface() {
+
+        return new SurfaceACDarklandsHighland(getConfig(), baseBiome().topBlock, baseBiome().fillerBlock, baseBiome().topBlock, baseBiome().fillerBlock, 60f, -0.14f, 14f, 0.25f);
     }
 
     public static class TerrainACDarklandsHighland extends TerrainBase {
@@ -58,12 +66,6 @@ public class RealisticBiomeACDarklandsHills extends RealisticBiomeBase {
 
             return terrainHighland(x, y, rtgWorld, river, start, width, height, base);
         }
-    }
-
-    @Override
-    public SurfaceBase initSurface() {
-
-        return new SurfaceACDarklandsHighland(getConfig(), baseBiome().topBlock, baseBiome().fillerBlock, baseBiome().topBlock, baseBiome().fillerBlock, 60f, -0.14f, 14f, 0.25f);
     }
 
     public static class SurfaceACDarklandsHighland extends SurfaceBase {
@@ -102,8 +104,7 @@ public class RealisticBiomeACDarklandsHills extends RealisticBiomeBase {
                 Block b = primer.getBlockState(x, k, z).getBlock();
                 if (b == Blocks.AIR) {
                     depth = -1;
-                }
-                else if (b == Blocks.STONE) {
+                } else if (b == Blocks.STONE) {
                     depth++;
 
                     if (cliff) {
@@ -111,31 +112,25 @@ public class RealisticBiomeACDarklandsHills extends RealisticBiomeBase {
                             if (rand.nextInt(3) == 0) {
 
                                 primer.setBlockState(x, k, z, hcCobble());
-                            }
-                            else {
+                            } else {
 
                                 primer.setBlockState(x, k, z, hcStone());
                             }
-                        }
-                        else if (depth < 10) {
+                        } else if (depth < 10) {
                             primer.setBlockState(x, k, z, hcStone());
                         }
-                    }
-                    else {
+                    } else {
                         if (depth == 0 && k > 61) {
                             if (simplex.noise2f(i / width, j / width) + simplex.noise2f(i / smallW, j / smallW) * smallS > height) {
                                 primer.setBlockState(x, k, z, mixBlockTop);
                                 mix = true;
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, topBlock);
                             }
-                        }
-                        else if (depth < 4) {
+                        } else if (depth < 4) {
                             if (mix) {
                                 primer.setBlockState(x, k, z, mixBlockFill);
-                            }
-                            else {
+                            } else {
                                 primer.setBlockState(x, k, z, fillerBlock);
                             }
                         }

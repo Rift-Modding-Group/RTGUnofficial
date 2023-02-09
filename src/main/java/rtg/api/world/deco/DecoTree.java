@@ -166,8 +166,8 @@ public class DecoTree extends DecoBase {
         //              it to a feature taking place at some other arbitrary place in the chunk. This seems nonsensical and makes needless
         //              calls to the noise generator. This should be replaced by a random amount.
         float noise = rtgWorld.simplexInstance(0)
-            .noise2f(offsetPos.getX() / this.distribution.getNoiseDivisor(), offsetPos.getZ() / this.distribution.getNoiseDivisor())
-            * this.distribution.getNoiseFactor() + this.distribution.getNoiseAddend();
+                .noise2f(offsetPos.getX() / this.distribution.getNoiseDivisor(), offsetPos.getZ() / this.distribution.getNoiseDivisor())
+                * this.distribution.getNoiseFactor() + this.distribution.getNoiseAddend();
         int loopCount = (this.strengthFactorForLoops > 0f) ? (int) this.strengthFactorForLoops : this.loops;
         loopCount = (this.strengthNoiseFactorForLoops) ? (int) noise : loopCount;
         loopCount = (this.strengthNoiseFactorXForLoops) ? (int) (noise * this.strengthFactorForLoops) : loopCount;
@@ -200,7 +200,9 @@ public class DecoTree extends DecoBase {
         if (event.getResult() != Event.Result.DENY) {
 
             loopCount = event.getModifiedAmount();
-            if (loopCount < 1) { return; }
+            if (loopCount < 1) {
+                return;
+            }
 
             // TODO: [1.12] This should be done in #setLeavesBlock.
             DecoBase.tweakTreeLeaves(this, false, true);
@@ -214,7 +216,7 @@ public class DecoTree extends DecoBase {
                     // If we're in a village, check to make sure the tree has extra room to grow to avoid corrupting the village.
                     if (hasVillage) {
                         if (BlockUtil.checkVerticalBlocks(MatchType.ALL, rtgWorld.world(), pos, -1, Blocks.FARMLAND) ||
-                            !BlockUtil.checkAreaBlocks(MatchType.ALL_IGNORE_REPLACEABLE, rtgWorld.world(), pos, 2)) {
+                                !BlockUtil.checkAreaBlocks(MatchType.ALL_IGNORE_REPLACEABLE, rtgWorld.world(), pos, 2)) {
                             return;
                         }
                     }
@@ -246,8 +248,7 @@ public class DecoTree extends DecoBase {
                     }
                 }
             }
-        }
-        else if (RTGConfig.enableDebugging()) {
+        } else if (RTGConfig.enableDebugging()) {
             Logger.debug("Tree generation was cancelled @ ChunkPos{}", chunkPos);
         }
     }
@@ -271,7 +272,7 @@ public class DecoTree extends DecoBase {
 
             case NOISE_BETWEEN_AND_RANDOM_CHANCE:
                 noiseGreaterThanMin = noise >= this.treeConditionNoise;
-                noiseLessThanMax =- noise <= this.treeConditionNoise2;
+                noiseLessThanMax = -noise <= this.treeConditionNoise2;
                 randomResult = rand.nextInt(this.treeConditionChance) == 0;
                 return (noiseGreaterThanMin && noiseLessThanMax && randomResult);
 
@@ -550,6 +551,10 @@ public class DecoTree extends DecoBase {
         return this;
     }
 
+    private int applyConfigMultipliers(final int loopCount, final IRealisticBiome biome) {
+        return (int) (loopCount * Math.min(RTGConfig.treeDensityMultiplier() * biome.getConfig().TREE_DENSITY_MULTIPLIER.get(), MAX_TREE_DENSITY));
+    }
+
     public enum TreeType {
         RTG_TREE,
         WORLDGEN
@@ -620,9 +625,5 @@ public class DecoTree extends DecoBase {
             this.noiseAddend = noiseAddend;
             return this;
         }
-    }
-
-    private int applyConfigMultipliers(final int loopCount, final IRealisticBiome biome) {
-        return (int)(loopCount * Math.min(RTGConfig.treeDensityMultiplier() * biome.getConfig().TREE_DENSITY_MULTIPLIER.get(), MAX_TREE_DENSITY));
     }
 }

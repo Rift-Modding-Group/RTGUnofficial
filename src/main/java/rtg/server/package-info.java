@@ -2,6 +2,6 @@
 @MethodsReturnNonnullByDefault
 package rtg.server;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import mcp.MethodsReturnNonnullByDefault;
+
+import javax.annotation.ParametersAreNonnullByDefault;

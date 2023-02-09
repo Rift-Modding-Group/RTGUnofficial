@@ -65,7 +65,7 @@ public class DecoPumpkin extends DecoBase {
                 if (rand.nextInt(this.chance) == 0) {
                     final BlockPos pos = getOffsetPos(chunkPos).add(rand.nextInt(16), rand.nextInt(this.maxY), rand.nextInt(16));
                     new WorldGenPumpkin()
-                        .generate(rtgWorld.world(), rand, pos);
+                            .generate(rtgWorld.world(), rand, pos);
                 }
             }
         }

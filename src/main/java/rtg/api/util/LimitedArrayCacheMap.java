@@ -33,11 +33,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.Immutable;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.Spliterators;
+import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -211,7 +207,7 @@ public final class LimitedArrayCacheMap<K, V> implements Map<K, V>, Serializable
 
         for (int i = 0; i < this.getCapacity(); i++) {
             if (this.entries[i] == null && other.entries[i] != null ||
-                this.entries[i] != null && !this.entries[i].equals(other.entries[i])) {
+                    this.entries[i] != null && !this.entries[i].equals(other.entries[i])) {
                 return false;
             }
         }
@@ -238,8 +234,7 @@ public final class LimitedArrayCacheMap<K, V> implements Map<K, V>, Serializable
         for (Entry<K, V> e : this.entrySet()) {
             if (first) {
                 s.append("{");
-            }
-            else {
+            } else {
                 s.append(",{");
             }
             s.append(e.toString());

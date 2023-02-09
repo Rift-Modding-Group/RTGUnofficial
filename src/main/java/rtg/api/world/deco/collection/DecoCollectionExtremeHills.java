@@ -51,8 +51,8 @@ public class DecoCollectionExtremeHills extends DecoCollectionBase {
 
     protected DecoHelper5050 nigraDecos(int maxY, int minTrunkSize, int maxTrunkSize, int minCrownSize, int maxCrownSize) {
         return new DecoHelper5050(
-            nigraTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize),
-            nigraTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize)
+                nigraTrees(Blocks.LOG.getDefaultState(), Blocks.LEAVES.getDefaultState(), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize),
+                nigraTrees(BlockUtil.getStateLog(EnumType.SPRUCE), BlockUtil.getStateLeaf(EnumType.SPRUCE), maxY, minTrunkSize, maxTrunkSize, minCrownSize, maxCrownSize)
         );
     }
 }

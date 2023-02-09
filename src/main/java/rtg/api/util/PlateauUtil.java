@@ -1,24 +1,18 @@
 package rtg.api.util;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import com.google.common.collect.Maps;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeMesa;
-
 import rtg.api.RTGAPI;
 import rtg.api.config.BiomeConfig;
 import rtg.api.world.RTGWorld;
 import rtg.api.world.biome.IRealisticBiome;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -39,73 +33,73 @@ public final class PlateauUtil {
 
     static {
         PLATEAU_BIOMES = Collections.unmodifiableCollection(Arrays.asList(
-            Biomes.MESA,
-            Biomes.MUTATED_MESA,
-            Biomes.MESA_ROCK,
-            Biomes.MUTATED_MESA_ROCK,
-            Biomes.MESA_CLEAR_ROCK,
-            Biomes.MUTATED_MESA_CLEAR_ROCK,
-            Biomes.SAVANNA_PLATEAU,
-            Biomes.MUTATED_SAVANNA_ROCK
+                Biomes.MESA,
+                Biomes.MUTATED_MESA,
+                Biomes.MESA_ROCK,
+                Biomes.MUTATED_MESA_ROCK,
+                Biomes.MESA_CLEAR_ROCK,
+                Biomes.MUTATED_MESA_CLEAR_ROCK,
+                Biomes.SAVANNA_PLATEAU,
+                Biomes.MUTATED_SAVANNA_ROCK
         ));
 
         MESA_PLATEAU_BLOCKS = Collections.unmodifiableCollection(Arrays.asList(
-            "minecraft:stained_hardened_clay[color=yellow]",
-            "minecraft:stained_hardened_clay[color=yellow]",
-            "minecraft:stained_hardened_clay[color=yellow]",
-            "minecraft:hardened_clay",
-            "minecraft:hardened_clay",
-            "minecraft:stained_hardened_clay[color=orange]",
-            "minecraft:stained_hardened_clay[color=red]",
-            "minecraft:stained_hardened_clay[color=red]",
-            "minecraft:hardened_clay",
-            "minecraft:stained_hardened_clay[color=silver]",
-            "minecraft:stained_hardened_clay[color=white]",
-            "minecraft:hardened_clay",
-            "minecraft:hardened_clay",
-            "minecraft:hardened_clay",
-            "minecraft:stained_hardened_clay[color=orange]",
-            "minecraft:hardened_clay",
-            "minecraft:hardened_clay",
-            "minecraft:hardened_clay",
-            "minecraft:stained_hardened_clay[color=orange]",
-            "minecraft:stained_hardened_clay[color=silver]",
-            "minecraft:stained_hardened_clay[color=white]",
-            "minecraft:stained_hardened_clay[color=brown]",
-            "minecraft:stained_hardened_clay[color=brown]",
-            "minecraft:stained_hardened_clay[color=brown]",
-            "minecraft:hardened_clay",
-            "minecraft:stained_hardened_clay[color=orange]",
-            "minecraft:hardened_clay",
-            "minecraft:stained_hardened_clay[color=orange]",
-            "minecraft:hardened_clay",
-            "minecraft:stained_hardened_clay[color=orange]",
-            "minecraft:hardened_clay",
-            "minecraft:hardened_clay",
-            "minecraft:hardened_clay"
+                "minecraft:stained_hardened_clay[color=yellow]",
+                "minecraft:stained_hardened_clay[color=yellow]",
+                "minecraft:stained_hardened_clay[color=yellow]",
+                "minecraft:hardened_clay",
+                "minecraft:hardened_clay",
+                "minecraft:stained_hardened_clay[color=orange]",
+                "minecraft:stained_hardened_clay[color=red]",
+                "minecraft:stained_hardened_clay[color=red]",
+                "minecraft:hardened_clay",
+                "minecraft:stained_hardened_clay[color=silver]",
+                "minecraft:stained_hardened_clay[color=white]",
+                "minecraft:hardened_clay",
+                "minecraft:hardened_clay",
+                "minecraft:hardened_clay",
+                "minecraft:stained_hardened_clay[color=orange]",
+                "minecraft:hardened_clay",
+                "minecraft:hardened_clay",
+                "minecraft:hardened_clay",
+                "minecraft:stained_hardened_clay[color=orange]",
+                "minecraft:stained_hardened_clay[color=silver]",
+                "minecraft:stained_hardened_clay[color=white]",
+                "minecraft:stained_hardened_clay[color=brown]",
+                "minecraft:stained_hardened_clay[color=brown]",
+                "minecraft:stained_hardened_clay[color=brown]",
+                "minecraft:hardened_clay",
+                "minecraft:stained_hardened_clay[color=orange]",
+                "minecraft:hardened_clay",
+                "minecraft:stained_hardened_clay[color=orange]",
+                "minecraft:hardened_clay",
+                "minecraft:stained_hardened_clay[color=orange]",
+                "minecraft:hardened_clay",
+                "minecraft:hardened_clay",
+                "minecraft:hardened_clay"
         ));
         SAVANNA_PLATEAU_BLOCKS = Collections.unmodifiableCollection(Arrays.asList(
-            "minecraft:stained_hardened_clay[color=white]",
-            "minecraft:stained_hardened_clay[color=white]",
-            "minecraft:stained_hardened_clay[color=white]",
-            "minecraft:stained_hardened_clay[color=white]",
-            "minecraft:stained_hardened_clay[color=silver]",
-            "minecraft:stained_hardened_clay[color=silver]",
-            "minecraft:stained_hardened_clay[color=brown]",
-            "minecraft:stained_hardened_clay[color=brown]",
-            "minecraft:stained_hardened_clay[color=silver]",
-            "minecraft:stained_hardened_clay[color=white]",
-            "minecraft:stained_hardened_clay[color=silver]",
-            "minecraft:stained_hardened_clay[color=brown]",
-            "minecraft:stained_hardened_clay[color=brown]",
-            "minecraft:stained_hardened_clay[color=silver]",
-            "minecraft:stained_hardened_clay[color=brown]",
-            "minecraft:stained_hardened_clay[color=silver]",
-            "minecraft:stained_hardened_clay[color=white]",
-            "minecraft:stained_hardened_clay[color=white]",
-            "minecraft:stained_hardened_clay[color=silver]",
-            "minecraft:stained_hardened_clay[color=brown]",
-            "minecraft:stained_hardened_clay[color=brown]"
+                "minecraft:stained_hardened_clay[color=white]",
+                "minecraft:stained_hardened_clay[color=white]",
+                "minecraft:stained_hardened_clay[color=white]",
+                "minecraft:stained_hardened_clay[color=white]",
+                "minecraft:stained_hardened_clay[color=silver]",
+                "minecraft:stained_hardened_clay[color=silver]",
+                "minecraft:stained_hardened_clay[color=brown]",
+                "minecraft:stained_hardened_clay[color=brown]",
+                "minecraft:stained_hardened_clay[color=silver]",
+                "minecraft:stained_hardened_clay[color=white]",
+                "minecraft:stained_hardened_clay[color=silver]",
+                "minecraft:stained_hardened_clay[color=brown]",
+                "minecraft:stained_hardened_clay[color=brown]",
+                "minecraft:stained_hardened_clay[color=silver]",
+                "minecraft:stained_hardened_clay[color=brown]",
+                "minecraft:stained_hardened_clay[color=silver]",
+                "minecraft:stained_hardened_clay[color=white]",
+                "minecraft:stained_hardened_clay[color=white]",
+                "minecraft:stained_hardened_clay[color=silver]",
+                "minecraft:stained_hardened_clay[color=brown]",
+                "minecraft:stained_hardened_clay[color=brown]"
         ));
     }
 
@@ -123,24 +117,26 @@ public final class PlateauUtil {
     private static Collection<String> getConfigBlocks(IRealisticBiome rtgBiome) {
         BiomeConfig config = rtgBiome.getConfig();
         return (config.hasProperty(config.PLATEAU_GRADIENT_BLOCK_LIST) && config.PLATEAU_GRADIENT_BLOCK_LIST.getValues().length > 0)
-            ? config.PLATEAU_GRADIENT_BLOCK_LIST.getAsCollection()
-            : (rtgBiome.baseBiome() instanceof BiomeMesa) ? MESA_PLATEAU_BLOCKS : SAVANNA_PLATEAU_BLOCKS;
+                ? config.PLATEAU_GRADIENT_BLOCK_LIST.getAsCollection()
+                : (rtgBiome.baseBiome() instanceof BiomeMesa) ? MESA_PLATEAU_BLOCKS : SAVANNA_PLATEAU_BLOCKS;
     }
 
     public static void init() {
         PLATEAU_BIOMES.stream()
-            .map(b -> RTGAPI.RTG_BIOMES.get(Biome.getIdForBiome(b)))
-            .filter(Objects::nonNull)
-            .forEach(rtgBiome -> {
-                final IRealisticBiome realisticBiome = rtgBiome.getValue();
-                Collection<String> blocks = getConfigBlocks(realisticBiome);
-                List<IBlockState> bands = blocks.stream()
-                    .map(BlockUtil::getBlockStateFromCfgString)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
-                if (bands.isEmpty()) { bands.add(DEFAULT_PLATEAU_BLOCK); }
-                BIOME_PLATEAU_BANDS.put(realisticBiome, bands);
-            });
+                .map(b -> RTGAPI.RTG_BIOMES.get(Biome.getIdForBiome(b)))
+                .filter(Objects::nonNull)
+                .forEach(rtgBiome -> {
+                    final IRealisticBiome realisticBiome = rtgBiome.getValue();
+                    Collection<String> blocks = getConfigBlocks(realisticBiome);
+                    List<IBlockState> bands = blocks.stream()
+                            .map(BlockUtil::getBlockStateFromCfgString)
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.toList());
+                    if (bands.isEmpty()) {
+                        bands.add(DEFAULT_PLATEAU_BLOCK);
+                    }
+                    BIOME_PLATEAU_BANDS.put(realisticBiome, bands);
+                });
     }
 
     public static IBlockState getPlateauBand(final RTGWorld rtgWorld, final IRealisticBiome rBiome, final int x, final int y, final int z) {
