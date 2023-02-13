@@ -64,11 +64,6 @@ public final class WorldTypeRTG extends WorldType {
     }
 
     @Override
-    public float getCloudHeight() {
-        return 256F;
-    }
-
-    @Override
     public boolean isCustomizable() {
         return true;
     }
