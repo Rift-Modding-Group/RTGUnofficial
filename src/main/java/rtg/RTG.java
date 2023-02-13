@@ -69,6 +69,8 @@ public final class RTG {
 
         WorldTypeRTG.init();
         ModCompat.init();
+
+        BiomeInit.preInit();// initialise river and beach biomes
     }
 
     @Mod.EventHandler
@@ -78,8 +80,6 @@ public final class RTG {
 
     @Mod.EventHandler
     public void initPost(FMLPostInitializationEvent event) {
-        BiomeInit.preInit();// initialise river and beach biomes
-
         BiomeInit.init();// initialise all biomes supported internally
         ModCompat.doBiomeCheck();
         PlateauUtil.init();

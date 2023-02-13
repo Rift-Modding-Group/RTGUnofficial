@@ -65,16 +65,16 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
     private final int[] biomeData = new int[sampleArraySize * sampleArraySize];
     private final float[][] weightings = new float[sampleArraySize * sampleArraySize][256];
     private final MesaBiomeCombiner mesaCombiner = new MesaBiomeCombiner();
-    private List<Float> weightedBiomes = new SparseList<Float>() {{
+    private final List<Float> weightedBiomes = new SparseList<Float>() {{
         for (int i = 0; i < 256; i++) {
             set(i, 0F);
         }
     }};
-    private BiomeAnalyzer analyzer = new BiomeAnalyzer();
-    private int[] xyinverted = analyzer.xyinverted();
-    private boolean mapFeaturesEnabled;
-    private Random rand;
-    private Biome[] baseBiomesList;
+    private final BiomeAnalyzer analyzer = new BiomeAnalyzer();
+    private final int[] xyinverted = analyzer.xyinverted();
+    private final boolean mapFeaturesEnabled;
+    private final Random rand;
+    private final Biome[] baseBiomesList;
 
     public ChunkGeneratorRTG(RTGWorld rtgWorld) {
 
@@ -121,7 +121,7 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
 
         //get standard biome Data
         for (int i = 0; i < 256; i++) {
-            this.baseBiomesList[i] = landscape.biome[i].baseBiome();
+            this.baseBiomesList[i] = landscape.biome.get(i).baseBiome();
         }
 
         ISimplexData2D jitterData = SimplexData2D.newDisk();
@@ -134,8 +134,8 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
                 this.rtgWorld.simplexInstance(0).multiEval2D(x, z, jitterData);
                 int pX = (int) Math.round(x + jitterData.getDeltaX() * RTGConfig.surfaceBlendRadius());
                 int pZ = (int) Math.round(z + jitterData.getDeltaY() * RTGConfig.surfaceBlendRadius());
-                actualbiome = landscape.biome[(x & 15) * 16 + (z & 15)];
-                jitterbiome = landscape.biome[(pX & 15) * 16 + (pZ & 15)];
+                actualbiome = landscape.biome.get((x & 15) * 16 + (z & 15));
+                jitterbiome = landscape.biome.get((pX & 15) * 16 + (pZ & 15));
                 jitteredBiomes[i * 16 + j] = (actualbiome.getConfig().SURFACE_BLEED_IN.get() && jitterbiome.getConfig().SURFACE_BLEED_OUT.get()) ? jitterbiome : actualbiome;
             }
         }
@@ -523,10 +523,10 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
     private synchronized ChunkLandscape generateLandscape(BiomeProvider biomeProvider, BlockPos blockPos) {
         final ChunkLandscape landscape = new ChunkLandscape();
         getNewerNoise(biomeProvider, blockPos.getX(), blockPos.getZ(), landscape);
-        Biome[] biomes = new Biome[256];
+        SparseList<Biome> biomes = new SparseList<>();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
-                biomes[x * 16 + z] = biomeProvider.getBiome(blockPos.add(x, 0, z));
+                biomes.set(x * 16 + z, biomeProvider.getBiome(blockPos.add(x, 0, z)));
             }
         }
         analyzer.newRepair(biomes, this.biomeData, landscape);
@@ -562,14 +562,12 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
 
                 // normalize biome weights
                 final float finalTotalWeight = totalWeight;
-                IntStream
-                        .range(0, weightedBiomes.size())
-                        .forEachOrdered(i -> {
-                            Float weight = weightedBiomes.get(i);
-                            if (weight != null) {
-                                weightedBiomes.set(i, weight / finalTotalWeight);
-                            }
-                        });
+                for (int i1 = 0; i1 < weightedBiomes.size(); i1++) {
+                    Float weight = weightedBiomes.get(i1);
+                    if (weight != null) {
+                        weightedBiomes.set(i1, weight / finalTotalWeight);
+                    }
+                }
 
                 // combine mesa biomes
                 mesaCombiner.adjust(weightedBiomes);
@@ -579,23 +577,16 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
                 float river = TerrainBase.getRiverStrength(mpos.setPos(worldX + x, 0, worldZ + z), rtgWorld);
                 landscape.river[x * 16 + z] = -river;
 
-                final int
-                        finalX = x,
-                        finalZ = z;
-                IntStream
-                        .range(0, weightedBiomes.size())
-                        .forEachOrdered(i -> {
-                            Float v = weightedBiomes.get(i);
-                            if (v != null) {
-                                if (v > 0F) {
-                                    landscape.noise[finalX * 16 + finalZ] += RTGAPI
-                                            .getRTGBiome(i)
-                                            .rNoise(this.rtgWorld, worldX + finalX, worldZ + finalZ, v, river + 1F) * v;
-                                    v = 0F;
-                                }
-                                weightedBiomes.set(i, v);
-                            }
-                        });
+                for (int i = 0; i < weightedBiomes.size(); i++) {
+                    Float v = weightedBiomes.get(i);
+                    if (v != null) {
+                        if (v > 0F) {
+                            landscape.noise[x * 16 + z] += RTGAPI.getRTGBiome(i).rNoise(this.rtgWorld, worldX + x, worldZ + z, v, river + 1F) * v;
+                            v = 0F;
+                        }
+                        weightedBiomes.set(i, v);
+                    }
+                }
             }
         }
 
@@ -603,7 +594,7 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 BlockPos pos = new BlockPos(worldX + (x - 7) * 8 + 4, 0, worldZ + (z - 7) * 8 + 4);
-                landscape.biome[x * 16 + z] = RTGAPI.getRTGBiome(biomeProvider.getBiome(pos));
+                landscape.biome.set(x * 16 + z, RTGAPI.getRTGBiome(biomeProvider.getBiome(pos)));
             }
         }
     }

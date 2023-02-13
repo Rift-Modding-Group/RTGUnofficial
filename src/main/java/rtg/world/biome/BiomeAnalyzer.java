@@ -7,42 +7,35 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import rtg.api.RTGAPI;
 import rtg.api.util.CircularSearchCreator;
+import rtg.api.util.Logger;
 import rtg.api.util.storage.SparseList;
 import rtg.api.world.RTGWorld;
 import rtg.api.world.biome.IRealisticBiome;
 import rtg.world.gen.ChunkLandscape;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
+import java.util.*;
 
 
 public final class BiomeAnalyzer {
     //Default anvil storage uses a single byte for biome data but with JustEnoughIDs, the biome ID field is expanded
     //to an integer.
-    private static final int
-            NO_BIOME = -1,
-            MAX_ANVIL_BIOMES = 256,
+    private static final int NO_BIOME = -1;
+    private static final int MAX_ANVIL_BIOMES = 256;
     //biome flag constants
-    RIVER_BIOME = 1,
-            OCEAN_BIOME = 2,
-            SWAMP_BIOME = 4,
-            BEACH_BIOME = 8,
-            LAND_BIOME = 16;
-    //biomeId -> bitField for biomes [ RIVER_BIOME | OCEAN_BIOME | SWAMP_BIOME | BEACH_BIOME | LAND_BIOME ]
-    private final List<Integer>
-            biomes = new SparseList<>(),
-            preferredBeach = new SparseList<>();
+    private static final int RIVER_FLAG = 1;
+    private static final int OCEAN_FLAG = 2;
+    private static final int SWAMP_FLAG = 4;
+    private static final int BEACH_FLAG = 8;
+    private static final int LAND_FLAG = 16;
+    //biomeID -> bitField for biomes [ RIVER_BIOME | OCEAN_BIOME | SWAMP_BIOME | BEACH_BIOME | LAND_BIOME ]
+    private final List<Integer> biomeIDs = new SparseList<>();
+    private final List<Integer> preferredBeach = new SparseList<>();
     //hardcode these because they are world-persistent
-    private final IRealisticBiome
-            scenicLakeBiome = RTGAPI.getRTGBiome(Biomes.RIVER),
-            scenicFrozenLakeBiome = RTGAPI.getRTGBiome(Biomes.FROZEN_RIVER);
-    private SmoothingSearchStatus
-            beachSearch,
-            landSearch,
-            oceanSearch;
+    private final IRealisticBiome scenicLakeBiome = RTGAPI.getRTGBiome(Biomes.RIVER);
+    private final IRealisticBiome scenicFrozenLakeBiome = RTGAPI.getRTGBiome(Biomes.FROZEN_RIVER);
+    private SmoothingSearchStatus beachSearch;
+    private SmoothingSearchStatus landSearch;
+    private SmoothingSearchStatus oceanSearch;
 
     public BiomeAnalyzer() {
         initBiomes();
@@ -69,74 +62,77 @@ public final class BiomeAnalyzer {
     }
 
     private void initBiomes() {
-        final Map<Type, Integer> cases = new HashMap<Type, Integer>() {{
-            put(Type.RIVER, RIVER_BIOME);
-            put(Type.OCEAN, OCEAN_BIOME);
-            put(Type.SWAMP, SWAMP_BIOME);
-            put(Type.BEACH, BEACH_BIOME);
-        }};
+
+        Logger.rtgDebug("Initialising biomes.");
+
         for (Biome biome : ForgeRegistries.BIOMES.getValuesCollection()) {
-            final int id = Biome.getIdForBiome(biome);
-            Integer biomeFlags = biomes.get(id);
+
+            int id = Biome.getIdForBiome(biome);
+            Integer biomeFlags = biomeIDs.get(id);
             biomeFlags = (biomeFlags == null ? 0 : biomeFlags);
-            for (final Map.Entry<Type, Integer> esac : cases.entrySet()) {
-                if (BiomeDictionary.hasType(biome, esac.getKey())) {
-                    biomeFlags |= esac.getValue();
-                    break;
-                }
+
+            if (BiomeDictionary.hasType(biome, Type.RIVER)) {
+                biomeFlags |= RIVER_FLAG;
+                Logger.rtgDebug("Assigning " + biome.getRegistryName() + " to river flag.");
+            } else if (BiomeDictionary.hasType(biome, Type.OCEAN)) {
+                biomeFlags |= OCEAN_FLAG;
+                Logger.rtgDebug("Assigning " + biome.getRegistryName() + " to ocean flag.");
+            } else if (BiomeDictionary.hasType(biome, Type.SWAMP)) {
+                biomeFlags |= SWAMP_FLAG;
+                Logger.rtgDebug("Assigning " + biome.getRegistryName() + " to swamp flag.");
+            } else if (BiomeDictionary.hasType(biome, Type.BEACH)) {
+                biomeFlags |= BEACH_FLAG;
+                Logger.rtgDebug("Assigning " + biome.getRegistryName() + " to beach flag.");
+            } else {
+                biomeFlags |= LAND_FLAG;
+                Logger.rtgDebug("Assigning " + biome.getRegistryName() + " to land flag.");
             }
-            //If no flags set, default to LAND_BIOME
-            if (biomeFlags == 0) {
-                biomeFlags |= LAND_BIOME;
-            }
-            biomes.set(id, biomeFlags);
+
+            biomeIDs.set(id, biomeFlags);
         }
     }
 
     private void setupBeachesForBiomes() {
-        ForgeRegistries
-                .BIOMES
-                .getValuesCollection()
-                .forEach(biome -> {
-                    if (biome != null) {
-                        final int id = Biome.getIdForBiome(biome);
-                        final Map.Entry<Biome, IRealisticBiome> realisticBiome = RTGAPI.RTG_BIOMES.get(id);
-                        if (realisticBiome != null) {
-                            preferredBeach.set(id, realisticBiome.getValue().getBeachBiome().baseBiomeId());
-                        }
-                    }
-                });
+        for (Biome biome : ForgeRegistries.BIOMES.getValuesCollection()) {
+            if (biome != null) {
+                final int id = Biome.getIdForBiome(biome);
+                final Map.Entry<Biome, IRealisticBiome> realisticBiome = RTGAPI.RTG_BIOMES.get(id);
+                if (realisticBiome != null) {
+                    preferredBeach.set(id, realisticBiome.getValue().getBeachBiome().baseBiomeId());
+                }
+            }
+        }
     }
 
-    public void newRepair(final Biome[] genLayerBiomes, final int[] biomeNeighborhood, final ChunkLandscape landscape) {
+    public void newRepair(final SparseList<Biome> genLayerBiomes, final int[] biomeNeighborhood, final ChunkLandscape landscape) {
 
-        final IRealisticBiome[] jitteredBiomes = landscape.biome;
+        final List<IRealisticBiome> jitteredBiomes = landscape.biome;
         final float[] noise = landscape.noise;
         final float[] riverStrength = landscape.river;
 
         IRealisticBiome realisticBiome;
         int realisticBiomeId;
 
-        // currently just stuffs the genLayer into the jitter;
-        for (int i = 0; i < MAX_ANVIL_BIOMES; i++) {
+        // currently, just stuffs the genLayer into the jitter;
+        for (int i = 0; i < genLayerBiomes.size(); i++) {
 
-            realisticBiome = RTGAPI.getRTGBiome(genLayerBiomes[i]);
+            realisticBiome = RTGAPI.getRTGBiome(genLayerBiomes.get(i));
             realisticBiomeId = realisticBiome.baseBiomeId();
 
             boolean canBeRiver = riverStrength[i] > 0.7;
 
             if (noise[i] > 61.5) {
                 // replace
-                jitteredBiomes[i] = realisticBiome;
+                jitteredBiomes.set(i, realisticBiome);
             } else {
                 // check for river
-                final int biomeFlags = biomes.get(realisticBiomeId);
-                if (canBeRiver && (biomeFlags & OCEAN_BIOME) == 0 && (biomeFlags & SWAMP_BIOME) == 0) {
+                final int biomeFlags = biomeIDs.get(realisticBiomeId);
+                if (canBeRiver && (biomeFlags & OCEAN_FLAG) == 0 && (biomeFlags & SWAMP_FLAG) == 0) {
                     // make river
-                    jitteredBiomes[i] = realisticBiome.getRiverBiome();
+                    jitteredBiomes.set(i, realisticBiome.getRiverBiome());
                 } else {
                     // replace
-                    jitteredBiomes[i] = realisticBiome;
+                    jitteredBiomes.set(i, realisticBiome);
                 }
             }
         }
@@ -145,7 +141,7 @@ public final class BiomeAnalyzer {
         beachSearch.setNotHunted();
         beachSearch.setAbsent();
         float beachTop = 64.5f;
-        for (int i = 0; i < MAX_ANVIL_BIOMES; i++) {
+        for (int i = 0; i < genLayerBiomes.size(); i++) {
             if (beachSearch.isAbsent()) {
                 break; //no point
             }
@@ -153,28 +149,28 @@ public final class BiomeAnalyzer {
             if (noise[i] < beachBottom || noise[i] > riverAdjusted(beachTop, riverStrength[i])) {
                 continue;// this block isn't beach level
             }
-            int biomeID = Biome.getIdForBiome(jitteredBiomes[i].baseBiome());
-            if ((biomes.get(biomeID) & SWAMP_BIOME) != 0) {
+            int biomeID = Biome.getIdForBiome(jitteredBiomes.get(i).baseBiome());
+            if ((biomeIDs.get(biomeID) & SWAMP_FLAG) != 0) {
                 continue;// swamps are acceptable at beach level
             }
             if (beachSearch.isNotHunted()) {
                 beachSearch.hunt(biomeNeighborhood);
                 landSearch.hunt(biomeNeighborhood);
             }
-            int foundBiome = beachSearch.biomes.get(i);
+            int foundBiome = beachSearch.biomeIDs.get(i);
             if (foundBiome != NO_BIOME) {
-                int nearestLandBiome = landSearch.biomes.get(i);
+                int nearestLandBiome = landSearch.biomeIDs.get(i);
                 if (nearestLandBiome > -1) {
                     foundBiome = preferredBeach.get(nearestLandBiome);
                 }
-                jitteredBiomes[i] = RTGAPI.getRTGBiome(foundBiome);
+                jitteredBiomes.set(i, RTGAPI.getRTGBiome(foundBiome));
             }
         }
 
         // put land higher up;
         landSearch.setAbsent();
         landSearch.setNotHunted();
-        for (int i = 0; i < MAX_ANVIL_BIOMES; i++) {
+        for (int i = 0; i < genLayerBiomes.size(); i++) {
             if (landSearch.isAbsent() && beachSearch.isAbsent()) {
                 break; //no point
             }
@@ -182,77 +178,77 @@ public final class BiomeAnalyzer {
             if (noise[i] < riverAdjusted(beachTop, riverStrength[i])) {
                 continue;
             }
-            int biomeID = Biome.getIdForBiome(jitteredBiomes[i].baseBiome());
-            final int biomeFlags = biomes.get(biomeID);
+            int biomeID = Biome.getIdForBiome(jitteredBiomes.get(i).baseBiome());
+            final int biomeFlags = biomeIDs.get(biomeID);
             // already land
-            if ((biomeFlags & LAND_BIOME) != 0) {
+            if ((biomeFlags & LAND_FLAG) != 0) {
                 continue;
             }
             // swamps are acceptable above water
-            if ((biomeFlags & SWAMP_BIOME) != 0) {
+            if ((biomeFlags & SWAMP_FLAG) != 0) {
                 continue;
             }
             if (landSearch.isNotHunted()) {
                 landSearch.hunt(biomeNeighborhood);
             }
-            int foundBiome = landSearch.biomes.get(i);
+            int foundBiome = landSearch.biomeIDs.get(i);
 
             if (foundBiome == NO_BIOME) {
                 // no land found; try for a beach
                 if (beachSearch.isNotHunted()) {
                     beachSearch.hunt(biomeNeighborhood);
                 }
-                foundBiome = beachSearch.biomes.get(i);
+                foundBiome = beachSearch.biomeIDs.get(i);
             }
 
             if (foundBiome != NO_BIOME) {
-                jitteredBiomes[i] = RTGAPI.getRTGBiome(foundBiome);
+                jitteredBiomes.set(i, RTGAPI.getRTGBiome(foundBiome));
             }
         }
 
         // put ocean below sea level
         oceanSearch.setAbsent();
         oceanSearch.setNotHunted();
-        for (int i = 0; i < MAX_ANVIL_BIOMES; i++) {
+        for (int i = 0; i < genLayerBiomes.size(); i++) {
             if (oceanSearch.isAbsent()) {
                 break; //no point
             }
             float oceanTop = 61.5f;
             if (noise[i] > oceanTop) {
-                continue;// too hight
+                continue;// too height
             }
-            int biomeID = Biome.getIdForBiome(jitteredBiomes[i].baseBiome());
-            final int biomeFlags = biomes.get(biomeID);
-            if ((biomeFlags & OCEAN_BIOME) != 0) {
+            int biomeID = Biome.getIdForBiome(jitteredBiomes.get(i).baseBiome());
+            final int biomeFlags = biomeIDs.get(biomeID);
+            if ((biomeFlags & OCEAN_FLAG) != 0) {
                 continue;// obviously ocean is OK
             }
-            if ((biomeFlags & SWAMP_BIOME) != 0) {
+            if ((biomeFlags & SWAMP_FLAG) != 0) {
                 continue;// swamps are acceptable
             }
-            if ((biomeFlags & RIVER_BIOME) != 0) {
+            if ((biomeFlags & RIVER_FLAG) != 0) {
                 continue;// rivers stay rivers
             }
             if (oceanSearch.isNotHunted()) {
                 oceanSearch.hunt(biomeNeighborhood);
             }
-            int foundBiome = oceanSearch.biomes.get(i);
+            int foundBiome = oceanSearch.biomeIDs.get(i);
 
             if (foundBiome != NO_BIOME) {
-                jitteredBiomes[i] = RTGAPI.getRTGBiome(foundBiome);
+                jitteredBiomes.set(i, RTGAPI.getRTGBiome(foundBiome));
             }
         }
         // convert remainder below sea level to lake biome
-        for (int i = 0; i < MAX_ANVIL_BIOMES; i++) {
-            int biomeID = Biome.getIdForBiome(jitteredBiomes[i].baseBiome());
-            final int biomeFlags = biomes.get(biomeID);
-            if (noise[i] <= 61.5 && (biomeFlags & RIVER_BIOME) == 0) {
+        for (int i = 0; i < genLayerBiomes.size(); i++) {
+            int biomeID = Biome.getIdForBiome(jitteredBiomes.get(i).baseBiome());
+            final int biomeFlags = biomeIDs.get(biomeID);
+            if (noise[i] <= 61.5 && (biomeFlags & RIVER_FLAG) == 0) {
                 // check for river
-                if ((biomeFlags & OCEAN_BIOME) == 0 && (biomeFlags & SWAMP_BIOME) == 0 && (biomeFlags & BEACH_BIOME) == 0) {
-                    int riverReplacement = jitteredBiomes[i].getRiverBiome().baseBiomeId(); // make river
-                    if (riverReplacement == Biome.getIdForBiome(Biomes.FROZEN_RIVER)) {
-                        jitteredBiomes[i] = scenicFrozenLakeBiome;
+                if ((biomeFlags & OCEAN_FLAG) == 0 && (biomeFlags & SWAMP_FLAG) == 0 && (biomeFlags & BEACH_FLAG) == 0) {
+                    int riverReplacementID = jitteredBiomes.get(i).getRiverBiome().baseBiomeId(); // make river
+                    if (riverReplacementID == Biome.getIdForBiome(Biomes.FROZEN_RIVER)) {
+                        jitteredBiomes.set(i, scenicFrozenLakeBiome);
                     } else {
-                        jitteredBiomes[i] = scenicLakeBiome;
+                        jitteredBiomes.set(i, scenicLakeBiome);
                     }
                 }
             }
@@ -261,22 +257,18 @@ public final class BiomeAnalyzer {
 
     private List<Boolean> filterForFlag(final int flag) {
         final List<Boolean> result = new SparseList<>();
-        IntStream
-                .range(0, biomes.size())
-                .forEachOrdered(i -> {
-                    Integer biomeId = biomes.get(i);
-                    if (biomeId != null) {
-                        result.set(biomeId, (biomeId & flag) != 0);
-                    }
-                });
+        for (Integer biomeId : biomeIDs) {
+            if (biomeId != null) {
+                result.set(biomeId, (biomeId & flag) != 0);
+            }
+        }
         return result;
     }
 
     private void setSearches() {
-        beachSearch = new SmoothingSearchStatus(filterForFlag(BEACH_BIOME));
-        landSearch = new SmoothingSearchStatus(filterForFlag(LAND_BIOME));
-        oceanSearch = new SmoothingSearchStatus(filterForFlag(OCEAN_BIOME));
-
+        beachSearch = new SmoothingSearchStatus(filterForFlag(BEACH_FLAG));
+        landSearch = new SmoothingSearchStatus(filterForFlag(LAND_FLAG));
+        oceanSearch = new SmoothingSearchStatus(filterForFlag(OCEAN_FLAG));
     }
 
     private float riverAdjusted(float top, float river) {
@@ -301,10 +293,10 @@ public final class BiomeAnalyzer {
         private final float[] quadrantBiomeWeighting = new float[4];
         private final List<Boolean> desired;
         private final int[] findings = new int[3 * 3];
-        // weightings is part of a system to generate some variability in repaired chunks weighting is
-        // based on how long the search went on (so quasipsuedorandom, based on direction plus distance
+        // weightings are part of a system to generate some variability in repaired chunks weighting is
+        // based on how long the search went on (so quasi-pseudo-random, based on direction plus distance)
         private final float[] weightings = new float[3 * 3];
-        public List<Integer> biomes = new SparseList<>();
+        public List<Integer> biomeIDs = new SparseList<>();
         private boolean absent = false;
         private boolean notHunted;
         private int arraySize;
@@ -360,7 +352,7 @@ public final class BiomeAnalyzer {
         }
 
         private void smoothBiomes() {
-            // more sophisticated version offsets into findings and biomes upperleft
+            // more sophisticated version offsets into findings and biomes upper left
             smoothQuadrant(biomeIndex(0, 0), upperLeftFinding);
             smoothQuadrant(biomeIndex(8, 0), upperRightFinding);
             smoothQuadrant(biomeIndex(0, 8), lowerLeftFinding);
@@ -374,10 +366,10 @@ public final class BiomeAnalyzer {
             int lowerRight = findings[lowerRightFinding + findingsOffset];
             // check for uniformity
             if ((upperLeft == upperRight) && (upperLeft == lowerLeft) && (upperLeft == lowerRight)) {
-                // everythings the same; uniform fill;
+                // everything's the same; uniform fill;
                 for (int x = 0; x < 8; x++) {
                     for (int z = 0; z < 8; z++) {
-                        biomes.set(biomeIndex(x, z) + biomesOffset, upperLeft);
+                        biomeIDs.set(biomeIndex(x, z) + biomesOffset, upperLeft);
                     }
                 }
                 return;
@@ -401,7 +393,7 @@ public final class BiomeAnalyzer {
                     addWeight(upperRight, weightings[upperRightFinding + findingsOffset] * x * (7 - z));
                     addWeight(lowerLeft, weightings[lowerLeftFinding + findingsOffset] * (7 - x) * z);
                     addWeight(lowerRight, weightings[lowerRightFinding + findingsOffset] * x * z);
-                    biomes.set(biomeIndex(x, z) + biomesOffset, preferredBiome());
+                    biomeIDs.set(biomeIndex(x, z) + biomesOffset, preferredBiome());
                 }
             }
         }
