@@ -22,6 +22,8 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.terraingen.InitMapGenEvent.EventType;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
+import net.minecraftforge.fml.common.Loader;
+import org.dimdev.jeid.INewChunk;
 import rtg.RTG;
 import rtg.RTGConfig;
 import rtg.api.RTGAPI;
@@ -39,11 +41,7 @@ import rtg.world.biome.BiomeAnalyzer;
 import rtg.world.gen.structure.WoodlandMansionRTG;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.stream.IntStream;
+import java.util.*;
 
 
 public class ChunkGeneratorRTG implements IChunkGenerator {
@@ -173,13 +171,23 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
         // store in the in process pile
         Chunk chunk = new Chunk(this.world, primer, cx, cz);
 
-        byte[] abyte1 = chunk.getBiomeArray();
-        for (int i = 0; i < abyte1.length; ++i) {
+        int[] intBiomeArray = new int[256];
+        Arrays.fill(intBiomeArray, -1);
+
+        byte[] byteBiomeArray = new byte[256];
+
+        for (int i = 0; i < intBiomeArray.length; ++i) {
             // Biomes are y-first and terrain x-first
-            byte b = (byte) Biome.getIdForBiome(this.baseBiomesList[this.xyinverted[i]]);
-            abyte1[i] = b;
+            intBiomeArray[i] = Biome.getIdForBiome(this.baseBiomesList[this.xyinverted[i]]);
+            byteBiomeArray[i] = (byte) intBiomeArray[i];
         }
-        chunk.setBiomeArray(abyte1);
+
+        if (Loader.isModLoaded("jeid")) {
+            //noinspection ConstantConditions
+            ((INewChunk) chunk).setIntBiomeArray(intBiomeArray);
+        } else {
+            chunk.setBiomeArray(byteBiomeArray);
+        }
 
         chunk.generateSkylightMap();
 

@@ -20,7 +20,6 @@ public final class BiomeAnalyzer {
     //Default anvil storage uses a single byte for biome data but with JustEnoughIDs, the biome ID field is expanded
     //to an integer.
     private static final int NO_BIOME = -1;
-    private static final int MAX_ANVIL_BIOMES = 256;
     //biome flag constants
     private static final int RIVER_FLAG = 1;
     private static final int OCEAN_FLAG = 2;
@@ -44,7 +43,7 @@ public final class BiomeAnalyzer {
     }
 
     public int[] xyinverted() {
-        int[] result = new int[MAX_ANVIL_BIOMES];
+        int[] result = new int[256];
 
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
@@ -52,7 +51,7 @@ public final class BiomeAnalyzer {
             }
         }
 
-        for (int i = 0; i < MAX_ANVIL_BIOMES; i++) {
+        for (int i = 0; i < 256; i++) {
             if (result[result[i]] != i) {
                 throw new RuntimeException("" + i + " " + result[i] + " " + result[result[i]]);
             }

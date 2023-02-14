@@ -16,7 +16,7 @@ buildscript {
 apply plugin: "net.minecraftforge.gradle.forge"
 
 group = 'org.teamrtg'
-version = '1.12.2-6.1.0.1'
+version = '1.12.2-1.0.1'
 archivesBaseName = 'RTGU'
 
 minecraft {
@@ -41,7 +41,16 @@ minecraft {
     serverJvmArgs.addAll(args)
 }
 
+repositories {
+    mavenCentral()
+
+    maven {
+        url "https://www.cursemaven.com"
+    }
+}
+
 dependencies {
+    compileOnly "curse.maven:jeid-296289:3581715"
     compileOnly "com.github.glitchfiend.biomesoplenty:BiomesOPlenty:1.12.2-7.0.1.2441:deobf"
 }
 
