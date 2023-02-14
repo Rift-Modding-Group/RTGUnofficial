@@ -14,7 +14,6 @@ public class SpikeEverywhereEffect extends HeightEffect {
     // not going to bother to set up a creator shell to make sure everything is set
     // set defaults to absurd values to crash if they're not set
     // a trio of parameters frequently used together
-    ;
     public float wavelength = 0;
     public float minimumSimplex = Integer.MAX_VALUE;// normal range is -1 to 1;
     //usually numbers above 0 are often preferred to avoid dead basins

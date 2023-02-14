@@ -49,7 +49,7 @@ public class TreeRTGPiceaPungens extends TreeRTG {
         int y = pos.getY();
         int z = pos.getZ();
 
-        int small = (int) Math.ceil((double) (this.crownSize / 2));
+        int small = (int) Math.ceil(this.crownSize / 2);
         int large = small;
 
         int i, j, k;

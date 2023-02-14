@@ -25,9 +25,9 @@ public class RealisticBiomeSBGhostlyForest extends RealisticBiomeSBBase {
 
     public static class TerrainBOPOminousWoods extends TerrainBase {
 
-        private float minHeight;
-        private float maxHeight;
-        private float hillStrength;
+        private final float minHeight;
+        private final float maxHeight;
+        private final float hillStrength;
 
         public TerrainBOPOminousWoods(float minHeight, float maxHeight, float hillStrength) {
 

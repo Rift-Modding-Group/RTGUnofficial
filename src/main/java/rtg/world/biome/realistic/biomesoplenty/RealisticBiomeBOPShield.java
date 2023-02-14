@@ -28,8 +28,8 @@ import static rtg.api.world.deco.DecoFallenTree.LogCondition.RANDOM_CHANCE;
 
 public class RealisticBiomeBOPShield extends RealisticBiomeBase {
 
-    private double lakeWaterLevel = 0.04;// the lakeStrength below which things should be below water
-    private double lakeDepressionLevel = 0.3;// the lakeStrength below which land should start to be lowered
+    private final double lakeWaterLevel = 0.04;// the lakeStrength below which things should be below water
+    private final double lakeDepressionLevel = 0.3;// the lakeStrength below which land should start to be lowered
 
     public RealisticBiomeBOPShield(final Biome biome) {
         super(biome);
@@ -168,15 +168,15 @@ public class RealisticBiomeBOPShield extends RealisticBiomeBase {
 
     public static class SurfaceBOPShield extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;
         private float sStrength = 65f;
         private float cCliff = 1.5f;
 
-        private IBlockState mixBlock;
-        private float mixHeight;
+        private final IBlockState mixBlock;
+        private final float mixHeight;
 
         public SurfaceBOPShield(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff, float stoneCliff,
                                 float stoneHeight, float stoneStrength, float clayCliff, IBlockState mix, float mixSize) {

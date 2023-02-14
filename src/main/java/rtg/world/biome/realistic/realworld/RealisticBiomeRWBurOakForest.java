@@ -48,11 +48,11 @@ public class RealisticBiomeRWBurOakForest extends RealisticBiomeRWBase {
 
     public static class TerrainRWBurOakForest extends TerrainBase {
 
-        private float baseHeight = 76f;
-        private float peakyHillWavelength = 40f;
-        private float peakyHillStrength = 20f;
-        private float smoothHillWavelength = 20f;
-        private float smoothHillStrength = 10f;
+        private final float baseHeight = 76f;
+        private final float peakyHillWavelength = 40f;
+        private final float peakyHillStrength = 20f;
+        private final float smoothHillWavelength = 20f;
+        private final float smoothHillStrength = 10f;
 
         public TerrainRWBurOakForest() {
 
@@ -72,12 +72,12 @@ public class RealisticBiomeRWBurOakForest extends RealisticBiomeRWBase {
     public static class SurfaceRWBurOakForest extends SurfaceBase {
 
 
-        private IBlockState blockMixTop;
-        private IBlockState blockMixFiller;
-        private float floMixWidth;
-        private float floMixHeight;
-        private float floSmallWidth;
-        private float floSmallStrength;
+        private final IBlockState blockMixTop;
+        private final IBlockState blockMixFiller;
+        private final float floMixWidth;
+        private final float floMixHeight;
+        private final float floSmallWidth;
+        private final float floSmallStrength;
 
         public SurfaceRWBurOakForest(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFiller,
                                      float mixWidth, float mixHeight, float smallWidth, float smallStrength) {

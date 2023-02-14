@@ -20,8 +20,8 @@ public class WorldGenLog extends WorldGenerator {
 
     private IBlockState logBlock;
     private IBlockState leavesBlock;
-    private int logLength;
-    private boolean generateLeaves;
+    private final int logLength;
+    private final boolean generateLeaves;
 
     /**
      * @param logBlock

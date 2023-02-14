@@ -41,7 +41,7 @@ public class RealisticBiomeDLForestVilespine extends RealisticBiomeDLBase {
 
     public static class TerrainVanillaForest extends TerrainBase {
 
-        private float hillStrength = 10f;// this needs to be linked to the
+        private final float hillStrength = 10f;// this needs to be linked to the
 
         public TerrainVanillaForest() {
 
@@ -62,17 +62,17 @@ public class RealisticBiomeDLForestVilespine extends RealisticBiomeDLBase {
 
     public static class SurfaceVanillaForest extends SurfaceDLBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;
         private float sStrength = 65f;
         private float cCliff = 1.5f;
 
-        private IBlockState mixBlock;
-        private float mixHeight;
-        private IBlockState mix2Block;
-        private float mix2Height;
+        private final IBlockState mixBlock;
+        private final float mixHeight;
+        private final IBlockState mix2Block;
+        private final float mix2Height;
 
         public SurfaceVanillaForest(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff, float stoneCliff,
                                     float stoneHeight, float stoneStrength, float clayCliff, IBlockState mix, float mixHeight, IBlockState mix2, float mix2Height) {

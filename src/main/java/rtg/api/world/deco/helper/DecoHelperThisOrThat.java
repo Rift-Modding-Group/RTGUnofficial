@@ -19,8 +19,8 @@ public class DecoHelperThisOrThat extends DecoBase {
 
     private int chance;
     private ChanceType chanceType;
-    private DecoBase decoThis;
-    private DecoBase decoThat;
+    private final DecoBase decoThis;
+    private final DecoBase decoThat;
 
     public DecoHelperThisOrThat(int chance, ChanceType chanceType, DecoBase decoThis, DecoBase decoThat) {
 

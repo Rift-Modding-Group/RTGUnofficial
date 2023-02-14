@@ -68,9 +68,9 @@ public class RealisticBiomeVanillaOcean extends RealisticBiomeBase {
 
     public static class SurfaceVanillaOcean extends SurfaceBase {
 
-        private IBlockState mixBlock;
-        private float width;
-        private float height;
+        private final IBlockState mixBlock;
+        private final float width;
+        private final float height;
         private float mixCheck;
 
         public SurfaceVanillaOcean(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mix, float mixWidth, float mixHeight) {

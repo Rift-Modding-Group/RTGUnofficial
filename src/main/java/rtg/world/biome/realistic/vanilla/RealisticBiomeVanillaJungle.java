@@ -77,15 +77,15 @@ public class RealisticBiomeVanillaJungle extends RealisticBiomeBase {
 
     public static class SurfaceVanillaJungle extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;
         private float sStrength = 65f;
         private float cCliff = 1.5f;
 
-        private IBlockState mixBlock;
-        private float mixHeight;
+        private final IBlockState mixBlock;
+        private final float mixHeight;
 
         public SurfaceVanillaJungle(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff, float stoneCliff,
                                     float stoneHeight, float stoneStrength, float clayCliff, IBlockState mix, float mixSize) {

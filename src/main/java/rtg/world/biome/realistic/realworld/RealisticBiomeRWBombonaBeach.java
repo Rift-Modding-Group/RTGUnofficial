@@ -53,9 +53,9 @@ public class RealisticBiomeRWBombonaBeach extends RealisticBiomeRWBase {
 
     public static class SurfaceRWBombonaBeach extends SurfaceBase {
 
-        private IBlockState cliffBlock1;
-        private IBlockState cliffBlock2;
-        private int cliffType;
+        private final IBlockState cliffBlock1;
+        private final IBlockState cliffBlock2;
+        private final int cliffType;
 
         public SurfaceRWBombonaBeach(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState cliff1, IBlockState cliff2, int cliff) {
 

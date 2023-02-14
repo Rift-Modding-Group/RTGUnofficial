@@ -40,10 +40,10 @@ public class RealisticBiomeZOESnowRocksPlateau extends RealisticBiomeZOEBase {
 
     public static class TerrainVanillaSavannaPlateau extends TerrainBase {
 
-        private boolean booRiver;
-        private float[] height;
-        private int heightLength;
-        private float strength;
+        private final boolean booRiver;
+        private final float[] height;
+        private final int heightLength;
+        private final float strength;
         private float smooth;
         private float cWidth;
         private float cHeigth;
@@ -93,7 +93,7 @@ public class RealisticBiomeZOESnowRocksPlateau extends RealisticBiomeZOEBase {
     public class SurfaceVanillaSavannaPlateau extends SurfaceBase {
 
         private int grassRaise = 0;
-        private IBlockState mixBlock;
+        private final IBlockState mixBlock;
 
         public SurfaceVanillaSavannaPlateau(BiomeConfig config, IBlockState top, IBlockState fill, int grassHeight) {
 

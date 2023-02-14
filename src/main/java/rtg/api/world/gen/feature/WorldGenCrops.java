@@ -16,11 +16,11 @@ import java.util.Random;
 
 public class WorldGenCrops extends WorldGenerator {
 
-    private Block farmType;
-    private int farmSize;
-    private int farmDensity;
-    private int farmHeight;
-    private boolean farmWater;
+    private final Block farmType;
+    private final int farmSize;
+    private final int farmDensity;
+    private final int farmHeight;
+    private final boolean farmWater;
 
 
     /*

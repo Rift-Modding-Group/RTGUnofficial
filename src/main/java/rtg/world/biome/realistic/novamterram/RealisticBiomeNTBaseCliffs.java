@@ -56,11 +56,11 @@ public abstract class RealisticBiomeNTBaseCliffs extends RealisticBiomeNTBase {
 
     public static class TerrainBOPOvergrownCliffs extends TerrainBase {
 
-        private float width;
-        private float strength;
-        private float lakeDepth;
-        private float lakeWidth;
-        private float terrainHeight;
+        private final float width;
+        private final float strength;
+        private final float lakeDepth;
+        private final float lakeWidth;
+        private final float terrainHeight;
 
         /*
          * width = 230f
@@ -93,7 +93,7 @@ public abstract class RealisticBiomeNTBaseCliffs extends RealisticBiomeNTBase {
 
     public static class SurfaceBOPOvergrownCliffs extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 3.5f;
         private float sHeight = 60f;

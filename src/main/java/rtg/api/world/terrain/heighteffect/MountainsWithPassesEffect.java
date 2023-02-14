@@ -19,7 +19,7 @@ public class MountainsWithPassesEffect extends HeightEffect {
     // octaves are standardized so they don't need to be set
     public int hillOctave = 0;//
     public int spikeOctave = 2;//
-    private float adjustedBottom = TerrainBase.blendedHillHeight(0, .2f);
+    private final float adjustedBottom = TerrainBase.blendedHillHeight(0, .2f);
 
     @Override
     public final float added(RTGWorld rtgWorld, float x, float y) {

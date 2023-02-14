@@ -24,9 +24,9 @@ public class RealisticBiomeZOEMoorlands extends RealisticBiomeZOEBase {
 
     public static class TerrainBOPWoodland extends TerrainBase {
 
-        private float start;
-        private float height;
-        private float width;
+        private final float start;
+        private final float height;
+        private final float width;
 
         public TerrainBOPWoodland(float hillStart, float landHeight, float baseHeight, float hillWidth) {
 

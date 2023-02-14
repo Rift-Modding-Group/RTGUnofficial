@@ -41,7 +41,7 @@ public class RealisticBiomeFLORIRoseLand extends RealisticBiomeFLORIBase {
 
     public static class TerrainFLORIRoseLand extends TerrainBase {
 
-        private GroundEffect groundEffect = new GroundEffect(6f);
+        private final GroundEffect groundEffect = new GroundEffect(6f);
 
         public TerrainFLORIRoseLand() {
 

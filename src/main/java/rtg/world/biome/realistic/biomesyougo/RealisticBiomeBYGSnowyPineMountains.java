@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class RealisticBiomeBYGSnowyPineMountains extends RealisticBiomeBYGBase {
 
-    private static IBlockState bygMixBlock = BlockUtil.getBlockStateFromCfgString("byg:peatgrass", Blocks.GRASS.getDefaultState());
+    private static final IBlockState bygMixBlock = BlockUtil.getBlockStateFromCfgString("byg:peatgrass", Blocks.GRASS.getDefaultState());
 
     public RealisticBiomeBYGSnowyPineMountains(Biome biome) {
 
@@ -63,10 +63,10 @@ public class RealisticBiomeBYGSnowyPineMountains extends RealisticBiomeBYGBase {
         private final HeightEffect heightIncrease;
         private final HeightEffect multiplier;
         private final HeightEffect groundEffect;
-        private float height;
-        private float width;
-        private float ridgeWidth = 300f;
-        private float valleyFloor = -0.2f;
+        private final float height;
+        private final float width;
+        private final float ridgeWidth = 300f;
+        private final float valleyFloor = -0.2f;
 
         public RidgedExtremeHills(float landHeight, float baseHeight, float hillWidth) {
             height = landHeight;
@@ -144,9 +144,9 @@ public class RealisticBiomeBYGSnowyPineMountains extends RealisticBiomeBYGBase {
 
     public static class TerrainVanillaExtremeHills extends TerrainBase {
 
-        private float start;
-        private float height;
-        private float width;
+        private final float start;
+        private final float height;
+        private final float width;
 
         public TerrainVanillaExtremeHills(float hillStart, float landHeight, float baseHeight, float hillWidth) {
 
@@ -164,12 +164,12 @@ public class RealisticBiomeBYGSnowyPineMountains extends RealisticBiomeBYGBase {
 
     public static class SurfaceVanillaExtremeHills extends SurfaceBase {
 
-        private IBlockState mixBlockTop;
-        private IBlockState mixBlockFill;
-        private float width;
-        private float height;
-        private float smallW;
-        private float smallS;
+        private final IBlockState mixBlockTop;
+        private final IBlockState mixBlockFill;
+        private final float width;
+        private final float height;
+        private final float smallW;
+        private final float smallS;
 
         public SurfaceVanillaExtremeHills(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFill, float mixWidth,
                                           float mixHeight, float smallWidth, float smallStrength) {

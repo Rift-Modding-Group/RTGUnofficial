@@ -77,7 +77,7 @@ public class RealisticBiomeVanillaMesa extends RealisticBiomeBase {
 
     public static class TerrainVanillaMesa extends TerrainBase {
 
-        private GroundEffect groundEffect = new GroundEffect(4f);
+        private final GroundEffect groundEffect = new GroundEffect(4f);
 
         public TerrainVanillaMesa() {
 
@@ -93,8 +93,8 @@ public class RealisticBiomeVanillaMesa extends RealisticBiomeBase {
     public class SurfaceVanillaMesa extends SurfaceBase {
 
         private int grassRaise = 0;
-        private IBlockState mixBlock;
-        private IBlockState mix2Block;
+        private final IBlockState mixBlock;
+        private final IBlockState mix2Block;
 
         public SurfaceVanillaMesa(BiomeConfig config, IBlockState top, IBlockState fill, int grassHeight) {
 

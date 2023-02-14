@@ -19,9 +19,9 @@ public class MapGenRavineRTG extends MapGenRavine {
         // Vanilla chance = 50. HIGHER values = FEWER ravines.
         if (this.rand.nextInt(this.ravineChance) == 0) {
 
-            double x = (double) (chunkX * 16 + this.rand.nextInt(16));
-            double y = (double) (this.rand.nextInt(this.rand.nextInt(40) + 8) + 20);
-            double z = (double) (chunkZ * 16 + this.rand.nextInt(16));
+            double x = chunkX * 16 + this.rand.nextInt(16);
+            double y = this.rand.nextInt(this.rand.nextInt(40) + 8) + 20;
+            double z = chunkZ * 16 + this.rand.nextInt(16);
 
             for (int i = 0; i < 1; ++i) {
                 float f = this.rand.nextFloat() * ((float) Math.PI * 2F);

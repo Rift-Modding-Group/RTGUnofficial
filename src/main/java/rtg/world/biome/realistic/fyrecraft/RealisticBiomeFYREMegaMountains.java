@@ -29,11 +29,11 @@ public class RealisticBiomeFYREMegaMountains extends RealisticBiomeFYREBase {
 
     public static class TerrainBOPMountainPeaks extends TerrainBase {
 
-        private float width;
-        private float strength;
-        private float terrainHeight;
-        private float spikeWidth = 30;
-        private float spikeHeight = 50;
+        private final float width;
+        private final float strength;
+        private final float terrainHeight;
+        private final float spikeWidth = 30;
+        private final float spikeHeight = 50;
         private HeightEffect heightEffect;
 
         public TerrainBOPMountainPeaks(float mountainWidth, float mountainStrength) {

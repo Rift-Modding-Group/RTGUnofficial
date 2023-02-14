@@ -49,10 +49,10 @@ public class RealisticBiomeBOPMoor extends RealisticBiomeBase {
 
     public static class TerrainBOPMoor extends TerrainBase {
 
-        private float minHeight;
-        private float maxHeight;
-        private float hillStrength;
-        private float lift;
+        private final float minHeight;
+        private final float maxHeight;
+        private final float hillStrength;
+        private final float lift;
 
         // 63f, 80f, 30f
 

@@ -67,8 +67,8 @@ public class RealisticBiomeVanillaIcePlainsSpikes extends RealisticBiomeBase {
 
     public static class SurfaceVanillaIcePlainsSpikes extends SurfaceBase {
 
-        private IBlockState cliffBlock1;
-        private IBlockState cliffBlock2;
+        private final IBlockState cliffBlock1;
+        private final IBlockState cliffBlock2;
 
         public SurfaceVanillaIcePlainsSpikes(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState cliff1, IBlockState cliff2) {
 

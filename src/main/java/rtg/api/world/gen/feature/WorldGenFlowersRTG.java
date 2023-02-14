@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class WorldGenFlowersRTG extends WorldGenerator {
 
-    private Collection<EnumFlowerType> flowers;
+    private final Collection<EnumFlowerType> flowers;
 
     public WorldGenFlowersRTG(Collection<EnumFlowerType> flowers) {
         this.flowers = Collections.unmodifiableCollection(flowers);

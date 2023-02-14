@@ -64,7 +64,7 @@ public class RealisticBiomeVanillaSavanna extends RealisticBiomeBase {
 
     public static class TerrainVanillaSavanna extends TerrainBase {
 
-        private GroundEffect groundEffect = new GroundEffect(4f);
+        private final GroundEffect groundEffect = new GroundEffect(4f);
 
         public TerrainVanillaSavanna() {
 
@@ -79,9 +79,9 @@ public class RealisticBiomeVanillaSavanna extends RealisticBiomeBase {
 
     public static class SurfaceVanillaSavanna extends SurfaceBase {
 
-        private IBlockState mixBlock;
-        private float width;
-        private float height;
+        private final IBlockState mixBlock;
+        private final float width;
+        private final float height;
 
         public SurfaceVanillaSavanna(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mix, float mixWidth, float mixHeight) {
 

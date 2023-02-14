@@ -72,7 +72,7 @@ public class RealisticBiomeVanillaJungleEdge extends RealisticBiomeBase {
 
     public static class TerrainVanillaJungleEdge extends TerrainBase {
 
-        private GroundEffect groundEffect = new GroundEffect(4f);
+        private final GroundEffect groundEffect = new GroundEffect(4f);
 
         public TerrainVanillaJungleEdge() {
 

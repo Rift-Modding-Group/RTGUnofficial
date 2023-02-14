@@ -54,7 +54,7 @@ public class RealisticBiomeCWGummySwamp extends RealisticBiomeCWBase {
 
     public static class TerrainVanillaForest extends TerrainBase {
 
-        private float hillStrength = 10f;// this needs to be linked to the
+        private final float hillStrength = 10f;// this needs to be linked to the
 
         public TerrainVanillaForest() {
 
@@ -75,26 +75,26 @@ public class RealisticBiomeCWGummySwamp extends RealisticBiomeCWBase {
 
     public static class SurfaceVanillaForest extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;
         private float sStrength = 65f;
         private float cCliff = 1.5f;
 
-        private IBlockState mixBlock;
-        private float mixHeight;
-        private IBlockState mix2Block;
-        private float mix2Height;
-        private IBlockState mix3Block;
-        private float mix3Height;
-        private IBlockState mix4Block;
-        private float mix4Height;
+        private final IBlockState mixBlock;
+        private final float mixHeight;
+        private final IBlockState mix2Block;
+        private final float mix2Height;
+        private final IBlockState mix3Block;
+        private final float mix3Height;
+        private final IBlockState mix4Block;
+        private final float mix4Height;
 
-        private IBlockState mixFillBlock;
-        private IBlockState mixFill2Block;
-        private IBlockState mixFill3Block;
-        private IBlockState mixFill4Block;
+        private final IBlockState mixFillBlock;
+        private final IBlockState mixFill2Block;
+        private final IBlockState mixFill3Block;
+        private final IBlockState mixFill4Block;
 
         public SurfaceVanillaForest(BiomeConfig config,
                                     IBlockState top, IBlockState fill, float minCliff, float stoneCliff,

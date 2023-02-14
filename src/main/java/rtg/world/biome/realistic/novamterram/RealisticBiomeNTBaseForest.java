@@ -37,8 +37,8 @@ public abstract class RealisticBiomeNTBaseForest extends RealisticBiomeNTBase {
 
     public static class TerrainBOPBrushland extends TerrainBase {
 
-        private float baseHeight = 65f;
-        private float hillStrength = 12f;
+        private final float baseHeight = 65f;
+        private final float hillStrength = 12f;
 
         public TerrainBOPBrushland() {
 

@@ -47,9 +47,9 @@ public class RealisticBiomeBOPSteppe extends RealisticBiomeBase {
 
     public static class TerrainBOPSteppe extends TerrainBase {
 
-        private float minHeight;
-        private float maxHeight;
-        private float hillStrength;
+        private final float minHeight;
+        private final float maxHeight;
+        private final float hillStrength;
 
         // 63f, 80f, 30f
 

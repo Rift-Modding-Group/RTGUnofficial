@@ -40,10 +40,10 @@ public abstract class RealisticBiomeBase implements IRealisticBiome {
     private final SurfaceBase surface;
     private final SurfaceBase surfaceRiver;
 
-    private Collection<DecoBase> decos;
+    private final Collection<DecoBase> decos;
     // TODO: [1.12] To be removed. All trees need to be a Deco and be added through #addDeco.
     @Deprecated
-    private Collection<TreeRTG> rtgTrees;
+    private final Collection<TreeRTG> rtgTrees;
 
 
     public RealisticBiomeBase(@Nonnull final Biome baseBiome) {

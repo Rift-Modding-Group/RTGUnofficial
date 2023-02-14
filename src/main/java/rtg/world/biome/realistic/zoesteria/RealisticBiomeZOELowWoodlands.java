@@ -23,7 +23,7 @@ public class RealisticBiomeZOELowWoodlands extends RealisticBiomeZOEBase {
 
     public static class TerrainVanillaForest extends TerrainBase {
 
-        private float hillStrength = 10f;
+        private final float hillStrength = 10f;
 
         public TerrainVanillaForest() {
 

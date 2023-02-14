@@ -17,7 +17,7 @@ import java.util.Random;
  */
 public class WorldGenPond extends WorldGenerator {
 
-    private IBlockState fill;
+    private final IBlockState fill;
 
     /**
      * @param fill
@@ -36,7 +36,6 @@ public class WorldGenPond extends WorldGenerator {
         x -= 8;
 
         for (z -= 8; y > 5 && world.isAirBlock(new BlockPos(x, y, z)); --y) {
-            ;
         }
 
         if (y <= 4) {

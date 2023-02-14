@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class RealisticBiomeBYGPineLowlands extends RealisticBiomeBYGBase {
 
-    private static IBlockState bygMixBlock = BlockUtil.getBlockStateFromCfgString("byg:peatgrass", Blocks.GRASS.getDefaultState());
+    private static final IBlockState bygMixBlock = BlockUtil.getBlockStateFromCfgString("byg:peatgrass", Blocks.GRASS.getDefaultState());
 
     public RealisticBiomeBYGPineLowlands(Biome biome) {
 
@@ -59,7 +59,7 @@ public class RealisticBiomeBYGPineLowlands extends RealisticBiomeBYGBase {
 
     public static class TerrainVanillaForest extends TerrainBase {
 
-        private float hillStrength = 12f;
+        private final float hillStrength = 12f;
 
         public TerrainVanillaForest() {
 
@@ -80,12 +80,12 @@ public class RealisticBiomeBYGPineLowlands extends RealisticBiomeBYGBase {
 
     public static class SurfaceVanillaExtremeHills extends SurfaceBase {
 
-        private IBlockState mixBlockTop;
-        private IBlockState mixBlockFill;
-        private float width;
-        private float height;
-        private float smallW;
-        private float smallS;
+        private final IBlockState mixBlockTop;
+        private final IBlockState mixBlockFill;
+        private final float width;
+        private final float height;
+        private final float smallW;
+        private final float smallS;
 
         public SurfaceVanillaExtremeHills(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFill, float mixWidth,
                                           float mixHeight, float smallWidth, float smallStrength) {

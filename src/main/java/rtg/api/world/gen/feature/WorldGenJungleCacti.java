@@ -13,8 +13,8 @@ import java.util.Random;
 
 public class WorldGenJungleCacti extends WorldGenerator {
 
-    private boolean sandOnly;
-    private int extraHeight;
+    private final boolean sandOnly;
+    private final int extraHeight;
 
     public WorldGenJungleCacti(boolean sandOnly, int extraHeight) {
 

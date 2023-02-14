@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class WorldGenJungleCane extends WorldGenerator {
 
-    private int height;
+    private final int height;
 
     public WorldGenJungleCane(int h) {
 

@@ -47,9 +47,9 @@ public class RealisticBiomeBOPMarsh extends RealisticBiomeBase {
 
     public static class TerrainBOPMarsh extends TerrainBase {
 
-        private float baseHeight = 62f;
-        private HeightVariation variation;
-        private HeightVariation smallVariation;
+        private final float baseHeight = 62f;
+        private final HeightVariation variation;
+        private final HeightVariation smallVariation;
 
         public TerrainBOPMarsh() {
 

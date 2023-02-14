@@ -45,10 +45,10 @@ public class RealisticBiomeRWBlueOakForest extends RealisticBiomeRWBase {
 
         private float baseHeight = 64f;
         private float hillStrength = 50f;
-        private BumpyHillsEffect hillEffect;
-        private float hillWidth = 60f;
-        private float hillBumpyness = 10f;
-        private float hillBumpynessWidth = 20f;
+        private final BumpyHillsEffect hillEffect;
+        private final float hillWidth = 60f;
+        private final float hillBumpyness = 10f;
+        private final float hillBumpynessWidth = 20f;
 
         public TerrainRWBlueOakForest() {
 
@@ -80,15 +80,15 @@ public class RealisticBiomeRWBlueOakForest extends RealisticBiomeRWBase {
 
     public static class SurfaceRWBlueOakForest extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;
         private float sStrength = 65f;
         private float cCliff = 1.5f;
 
-        private IBlockState mix;
-        private float mixHeight;
+        private final IBlockState mix;
+        private final float mixHeight;
 
         public SurfaceRWBlueOakForest(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff, float stoneCliff,
                                       float stoneHeight, float stoneStrength, float clayCliff, IBlockState mixBlock, float mixSize) {

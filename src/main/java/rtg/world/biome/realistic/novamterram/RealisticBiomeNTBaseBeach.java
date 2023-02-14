@@ -74,7 +74,7 @@ public abstract class RealisticBiomeNTBaseBeach extends RealisticBiomeNTBase {
 
     public static class SurfaceVanillaBeach extends SurfaceBase {
 
-        private IBlockState mixBlockFill;
+        private final IBlockState mixBlockFill;
 
         public SurfaceVanillaBeach(BiomeConfig config, IBlockState top, IBlockState filler) {
 

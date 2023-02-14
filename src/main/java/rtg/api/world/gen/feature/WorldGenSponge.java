@@ -18,8 +18,8 @@ public class WorldGenSponge extends WorldGenerator {
     protected ArrayList<Block> validGroundBlocks;
     protected ArrayList<Block> validAdjacentBlocks;
     protected int minAdjacents;
-    private IBlockState spongeBlock;
-    private int spongeSize;
+    private final IBlockState spongeBlock;
+    private final int spongeSize;
 
     public WorldGenSponge(IBlockState b, int s, Random rand) {
 

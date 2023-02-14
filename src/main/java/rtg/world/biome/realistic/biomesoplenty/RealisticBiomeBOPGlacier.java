@@ -47,8 +47,8 @@ public class RealisticBiomeBOPGlacier extends RealisticBiomeBase {
 
     public static class TerrainBOPGlacier extends TerrainBase {
 
-        private float width;
-        private float strength;
+        private final float width;
+        private final float strength;
 
         public TerrainBOPGlacier(float mountainWidth, float mountainStrength, float height) {
 
@@ -66,14 +66,14 @@ public class RealisticBiomeBOPGlacier extends RealisticBiomeBase {
 
     public static class SurfaceBOPGlacier extends SurfaceBase {
 
-        private IBlockState mixBlockTop;
-        private IBlockState mixBlockFill;
-        private IBlockState cliffBlock1;
-        private IBlockState cliffBlock2;
-        private float width;
-        private float height;
-        private float smallW;
-        private float smallS;
+        private final IBlockState mixBlockTop;
+        private final IBlockState mixBlockFill;
+        private final IBlockState cliffBlock1;
+        private final IBlockState cliffBlock2;
+        private final float width;
+        private final float height;
+        private final float smallW;
+        private final float smallS;
 
         public SurfaceBOPGlacier(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFill, IBlockState cliff1, IBlockState cliff2, float mixWidth, float mixHeight, float smallWidth, float smallStrength) {
 

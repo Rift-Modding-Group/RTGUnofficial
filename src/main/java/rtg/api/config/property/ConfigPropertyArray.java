@@ -13,8 +13,8 @@ import java.util.Collections;
 public abstract class ConfigPropertyArray<T extends Comparable<T>> extends ConfigProperty {
 
     private final Class<T> clazz;
-    private T minValue;
-    private T maxValue;
+    private final T minValue;
+    private final T maxValue;
     private Collection<T> values;
 
     @SafeVarargs

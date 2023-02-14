@@ -114,19 +114,19 @@ public abstract class RealisticBiomeNTBase extends RealisticBiomeBase {
 
     public static class SurfaceNTGeneric extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;
         private float sStrength = 65f;
         private float cCliff = 1.5f;
 
-        private IBlockState mixBlock;
-        private float mixHeight;
-        private IBlockState mix2Block;
-        private float mix2Height;
-        private IBlockState mix3Block;
-        private float mix3Height;
+        private final IBlockState mixBlock;
+        private final float mixHeight;
+        private final IBlockState mix2Block;
+        private final float mix2Height;
+        private final IBlockState mix3Block;
+        private final float mix3Height;
 
         public SurfaceNTGeneric(BiomeConfig config, IBlockState top, IBlockState fill,
                                 float minCliff, float stoneCliff, float stoneHeight, float stoneStrength, float clayCliff,

@@ -40,7 +40,7 @@ public class RealisticBiomeREDRedwoodForest extends RealisticBiomeREDBase {
 
     public static class TerrainBOPRedwoodForest extends TerrainBase {
 
-        private float hillStrength = 10f;// this needs to be linked to the
+        private final float hillStrength = 10f;// this needs to be linked to the
 
         public TerrainBOPRedwoodForest() {
 
@@ -61,7 +61,7 @@ public class RealisticBiomeREDRedwoodForest extends RealisticBiomeREDBase {
 
     public static class SurfaceBOPRedwoodForest extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;

@@ -57,13 +57,13 @@ public class RealisticBiomeVanillaTaigaM extends RealisticBiomeBase {
 
     public static class TerrainVanillaTaigaM extends TerrainBase {
 
-        private float hHeight;
-        private float hWidth;
-        private float vHeight;
-        private float vWidth;
-        private float lHeight;
-        private float lWidth;
-        private float bHeight;
+        private final float hHeight;
+        private final float hWidth;
+        private final float vHeight;
+        private final float vWidth;
+        private final float lHeight;
+        private final float lWidth;
+        private final float bHeight;
 
         public TerrainVanillaTaigaM(float hillHeight, float hillWidth, float varHeight, float varWidth, float lakeHeight, float lakeWidth, float baseHeight) {
 
@@ -88,7 +88,7 @@ public class RealisticBiomeVanillaTaigaM extends RealisticBiomeBase {
 
     public static class SurfaceVanillaTaigaM extends SurfaceBase {
 
-        private IBlockState mixBlock;
+        private final IBlockState mixBlock;
 
         public SurfaceVanillaTaigaM(BiomeConfig config, IBlockState top, IBlockState fill) {
 

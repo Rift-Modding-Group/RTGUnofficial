@@ -79,7 +79,7 @@ public class RealisticBiomeVanillaTaigaHills extends RealisticBiomeBase {
 
     public static class SurfaceVanillaTaigaHills extends SurfaceBase {
 
-        private IBlockState mixBlock;
+        private final IBlockState mixBlock;
 
         public SurfaceVanillaTaigaHills(BiomeConfig config, IBlockState top, IBlockState fill) {
 

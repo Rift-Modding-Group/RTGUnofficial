@@ -88,11 +88,11 @@ public class RealisticBiomeBOPGrove extends RealisticBiomeBase {
 
     public static class TerrainBOPGrove extends TerrainBase {
 
-        private float baseHeight = 64f;
-        private float peakyHillWavelength = 40f;
-        private float peakyHillStrength = 5f;
-        private float smoothHillWavelength = 20f;
-        private float smoothHillStrength = 10f;
+        private final float baseHeight = 64f;
+        private final float peakyHillWavelength = 40f;
+        private final float peakyHillStrength = 5f;
+        private final float smoothHillWavelength = 20f;
+        private final float smoothHillStrength = 10f;
 
         public TerrainBOPGrove() {
 
@@ -110,13 +110,13 @@ public class RealisticBiomeBOPGrove extends RealisticBiomeBase {
     public static class SurfaceBOPGrove extends SurfaceBase {
 
         public byte mixByte = (byte) 0;
-        private float min;
+        private final float min;
         private float sCliff = 1.5f;
         private float sHeight = 60f;
         private float sStrength = 65f;
         private float cCliff = 1.5f;
-        private IBlockState mix;
-        private float mixHeight;
+        private final IBlockState mix;
+        private final float mixHeight;
 
         public SurfaceBOPGrove(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff, float stoneCliff,
                                float stoneHeight, float stoneStrength, float clayCliff, IBlockState mixBlock, float mixSize) {

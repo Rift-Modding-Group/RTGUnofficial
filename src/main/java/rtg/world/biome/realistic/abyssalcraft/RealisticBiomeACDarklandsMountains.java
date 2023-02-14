@@ -52,10 +52,10 @@ public class RealisticBiomeACDarklandsMountains extends RealisticBiomeBase {
     public static class TerrainACDarklandsMountains extends TerrainBase {
 
         protected HeightEffect height;
-        private float width;
-        private float strength;
-        private float spikeWidth = 40;
-        private float spikeHeight = 60;
+        private final float width;
+        private final float strength;
+        private final float spikeWidth = 40;
+        private final float spikeHeight = 60;
 
         public TerrainACDarklandsMountains(float mountainWidth, float mountainStrength) {
 
@@ -93,15 +93,15 @@ public class RealisticBiomeACDarklandsMountains extends RealisticBiomeBase {
 
     public static class SurfaceACDarklandsMountains extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
-        private float sCliff = 1.5f;
-        private float sHeight = 60f;
-        private float sStrength = 65f;
-        private float iCliff = 0.3f;
-        private float iHeight = 100f;
-        private float iStrength = 50f;
-        private float cCliff = 1.5f;
+        private final float sCliff = 1.5f;
+        private final float sHeight = 60f;
+        private final float sStrength = 65f;
+        private final float iCliff = 0.3f;
+        private final float iHeight = 100f;
+        private final float iStrength = 50f;
+        private final float cCliff = 1.5f;
 
         public SurfaceACDarklandsMountains(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff) {
 

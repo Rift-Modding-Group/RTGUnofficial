@@ -113,9 +113,9 @@ public class RealisticBiomeVanillaSavannaPlateauM extends RealisticBiomeBase {
 
     public static class TerrainVanillaSavannaPlateauM extends TerrainBase {
 
-        private float[] height;
-        private int heightLength;
-        private float strength;
+        private final float[] height;
+        private final int heightLength;
+        private final float strength;
 
         /*
          * Example parameters:
@@ -159,7 +159,7 @@ public class RealisticBiomeVanillaSavannaPlateauM extends RealisticBiomeBase {
     public class SurfaceVanillaSavannaPlateauM extends SurfaceBase {
 
         private int grassRaise = 0;
-        private IBlockState mixBlock;
+        private final IBlockState mixBlock;
 
         public SurfaceVanillaSavannaPlateauM(BiomeConfig config, IBlockState top, IBlockState fill, int grassHeight) {
 

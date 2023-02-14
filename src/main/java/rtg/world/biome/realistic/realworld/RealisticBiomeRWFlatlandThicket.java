@@ -40,7 +40,7 @@ public class RealisticBiomeRWFlatlandThicket extends RealisticBiomeRWBase {
 
     public static class TerrainRWFlatlandThicket extends TerrainBase {
 
-        private GroundEffect groundEffect = new GroundEffect(4f);
+        private final GroundEffect groundEffect = new GroundEffect(4f);
 
         public TerrainRWFlatlandThicket() {
 

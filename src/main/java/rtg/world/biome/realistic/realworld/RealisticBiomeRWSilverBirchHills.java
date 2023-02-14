@@ -41,9 +41,9 @@ public class RealisticBiomeRWSilverBirchHills extends RealisticBiomeRWBase {
 
     public static class TerrainRWSilverBirchHills extends TerrainBase {
 
-        private float baseHeight = 90f;
-        private BumpyHillsEffect onTop = new BumpyHillsEffect();
-        private JitterEffect withJitter;
+        private final float baseHeight = 90f;
+        private final BumpyHillsEffect onTop = new BumpyHillsEffect();
+        private final JitterEffect withJitter;
 
         public TerrainRWSilverBirchHills() {
 

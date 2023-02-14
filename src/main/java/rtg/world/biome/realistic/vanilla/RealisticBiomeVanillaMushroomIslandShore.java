@@ -67,7 +67,7 @@ public class RealisticBiomeVanillaMushroomIslandShore extends RealisticBiomeBase
 
     public static class SurfaceVanillaMushroomIslandShore extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;

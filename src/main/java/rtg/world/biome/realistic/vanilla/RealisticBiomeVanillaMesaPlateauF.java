@@ -94,12 +94,12 @@ public class RealisticBiomeVanillaMesaPlateauF extends RealisticBiomeBase {
     public class SurfaceVanillaMesaPlateauF extends SurfaceBase {
 
         private int grassRaise = 0;
-        private IBlockState mixBlock;
-        private IBlockState mix2Block;
-        private IBlockState mix3Block;
-        private IBlockState mix4Block;
-        private float mix3Height;
-        private float mix4Height;
+        private final IBlockState mixBlock;
+        private final IBlockState mix2Block;
+        private final IBlockState mix3Block;
+        private final IBlockState mix4Block;
+        private final float mix3Height;
+        private final float mix4Height;
 
         public SurfaceVanillaMesaPlateauF(BiomeConfig config, IBlockState top, IBlockState fill, int grassHeight, float mix3Height, float mix4Height) {
 

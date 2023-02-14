@@ -85,10 +85,10 @@ public class RealisticBiomeVanillaMesaPlateau extends RealisticBiomeBase {
         private static final float stepHeight = 32;
         final VoronoiPlateauEffect plateau;
         final int groundNoise;
-        private float jitterWavelength = 30;
-        private float jitterAmplitude = 10;
-        private float bumpinessMultiplier = 0.05f;
-        private float bumpinessWavelength = 10f;
+        private final float jitterWavelength = 30;
+        private final float jitterAmplitude = 10;
+        private final float bumpinessMultiplier = 0.05f;
+        private final float bumpinessWavelength = 10f;
 
         public TerrainRTGMesaPlateau(float base) {
             plateau = new VoronoiPlateauEffect();
@@ -116,8 +116,8 @@ public class RealisticBiomeVanillaMesaPlateau extends RealisticBiomeBase {
     public class SurfaceVanillaMesaPlateau extends SurfaceBase {
 
         private int grassRaise = 0;
-        private IBlockState mixBlock;
-        private IBlockState mix2Block;
+        private final IBlockState mixBlock;
+        private final IBlockState mix2Block;
 
         public SurfaceVanillaMesaPlateau(BiomeConfig config, IBlockState top, IBlockState fill, int grassHeight) {
 

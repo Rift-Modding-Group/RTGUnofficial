@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class WorldGenCacti extends WorldGenerator {
 
-    private boolean sand;
-    private int eHeight;
+    private final boolean sand;
+    private final int eHeight;
     private IBlockState soilBlock;
 
     public WorldGenCacti(boolean sandOnly) {

@@ -95,7 +95,7 @@ public class RealisticBiomeBOPDeadForest extends RealisticBiomeBase {
         private float minHeight = 58f;
         private float maxHeight = 120f;
         private float hillStrength = 30f;
-        private float deadForestGroundAmplitude = 10f;
+        private final float deadForestGroundAmplitude = 10f;
 
         public TerrainBOPDeadForest() {
 
@@ -118,12 +118,12 @@ public class RealisticBiomeBOPDeadForest extends RealisticBiomeBase {
     public static class SurfaceBOPDeadForest extends SurfaceBase {
 
 
-        private IBlockState blockMixTop;
-        private IBlockState blockMixFiller;
-        private float floMixWidth;
-        private float floMixHeight;
-        private float floSmallWidth;
-        private float floSmallStrength;
+        private final IBlockState blockMixTop;
+        private final IBlockState blockMixFiller;
+        private final float floMixWidth;
+        private final float floMixHeight;
+        private final float floSmallWidth;
+        private final float floSmallStrength;
 
         public SurfaceBOPDeadForest(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFiller,
                                     float mixWidth, float mixHeight, float smallWidth, float smallStrength) {

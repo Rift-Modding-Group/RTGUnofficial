@@ -93,7 +93,7 @@ public class RealisticBiomeVanillaRedwoodTaigaHills extends RealisticBiomeBase {
 
     public static class TerrainVanillaRedwoodTaigaHills extends TerrainBase {
 
-        private float hillStrength = 40f;
+        private final float hillStrength = 40f;
 
         public TerrainVanillaRedwoodTaigaHills() {
 
@@ -109,7 +109,7 @@ public class RealisticBiomeVanillaRedwoodTaigaHills extends RealisticBiomeBase {
 
     public static class SurfaceVanillaRedwoodTaigaHills extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;

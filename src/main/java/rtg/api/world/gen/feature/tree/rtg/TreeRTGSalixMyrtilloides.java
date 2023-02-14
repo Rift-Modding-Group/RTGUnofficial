@@ -167,10 +167,6 @@ public class TreeRTGSalixMyrtilloides extends TreeRTG {
             }
         }
 
-        if (!(earth && water)) {
-            return false;
-        }
-
-        return true;
+        return earth && water;
     }
 }

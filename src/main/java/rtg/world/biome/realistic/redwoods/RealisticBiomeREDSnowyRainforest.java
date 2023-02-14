@@ -40,9 +40,9 @@ public class RealisticBiomeREDSnowyRainforest extends RealisticBiomeREDBase {
 
     public static class TerrainBOPTropicalRainforest extends TerrainBase {
 
-        private float start;
-        private float height;
-        private float width;
+        private final float start;
+        private final float height;
+        private final float width;
 
         public TerrainBOPTropicalRainforest(float hillStart, float landHeight, float baseHeight, float hillWidth) {
 

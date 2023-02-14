@@ -118,9 +118,9 @@ public class RealisticBiomeVanillaSwamplandM extends RealisticBiomeBase {
 
     public static class TerrainVanillaSwamplandM extends TerrainBase {
 
-        private float width;
-        private float strength;
-        private float terrainHeight;
+        private final float width;
+        private final float strength;
+        private final float terrainHeight;
 
         public TerrainVanillaSwamplandM(float mountainWidth, float mountainStrength, float height) {
 

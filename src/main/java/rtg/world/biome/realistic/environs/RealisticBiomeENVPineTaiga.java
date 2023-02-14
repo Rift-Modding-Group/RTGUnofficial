@@ -25,7 +25,7 @@ public class RealisticBiomeENVPineTaiga extends RealisticBiomeENVBase {
 
     public static class TerrainVanillaForest extends TerrainBase {
 
-        private float hillStrength = 10f;
+        private final float hillStrength = 10f;
 
         public TerrainVanillaForest() {
 

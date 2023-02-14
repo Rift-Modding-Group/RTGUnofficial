@@ -74,12 +74,12 @@ public class RealisticBiomeBOPOasis extends RealisticBiomeBase {
     public static class SurfaceBOPOasis extends SurfaceBase {
 
 
-        private IBlockState blockMixTop;
-        private IBlockState blockMixFiller;
-        private float floMixWidth;
-        private float floMixHeight;
-        private float floSmallWidth;
-        private float floSmallStrength;
+        private final IBlockState blockMixTop;
+        private final IBlockState blockMixFiller;
+        private final float floMixWidth;
+        private final float floMixHeight;
+        private final float floSmallWidth;
+        private final float floSmallStrength;
 
         public SurfaceBOPOasis(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFiller,
                                float mixWidth, float mixHeight, float smallWidth, float smallStrength) {

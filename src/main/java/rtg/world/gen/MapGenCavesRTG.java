@@ -29,9 +29,9 @@ public class MapGenCavesRTG extends MapGenCaves {
         }
 
         for (int j = 0; j < density; ++j) {
-            double x = (double) (chunkX * 16 + this.rand.nextInt(16));
-            double y = (double) this.rand.nextInt(this.rand.nextInt(120) + 8);
-            double z = (double) (chunkZ * 16 + this.rand.nextInt(16));
+            double x = chunkX * 16 + this.rand.nextInt(16);
+            double y = this.rand.nextInt(this.rand.nextInt(120) + 8);
+            double z = chunkZ * 16 + this.rand.nextInt(16);
             int k = 1;
 
             if (this.rand.nextInt(4) == 0) {

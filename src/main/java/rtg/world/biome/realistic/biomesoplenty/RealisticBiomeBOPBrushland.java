@@ -68,9 +68,9 @@ public class RealisticBiomeBOPBrushland extends RealisticBiomeBase {
 
     public static class SurfaceBOPBrushland extends SurfaceBase {
 
-        private IBlockState mixBlock;
-        private float width;
-        private float height;
+        private final IBlockState mixBlock;
+        private final float width;
+        private final float height;
 
         public SurfaceBOPBrushland(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mix, float mixWidth, float mixHeight) {
 

@@ -52,7 +52,7 @@ public class RealisticBiomeBOPDeadSwamp extends RealisticBiomeBase {
 
     public static class TerrainBOPDeadSwamp extends TerrainBase {
 
-        private HeightEffect height;
+        private final HeightEffect height;
 
         public TerrainBOPDeadSwamp() {
 
@@ -74,8 +74,8 @@ public class RealisticBiomeBOPDeadSwamp extends RealisticBiomeBase {
 
     public static class SurfaceBOPDeadSwamp extends SurfaceBase {
 
-        private IBlockState mix;
-        private float mixHeight;
+        private final IBlockState mix;
+        private final float mixHeight;
 
         public SurfaceBOPDeadSwamp(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixBlock) {
 

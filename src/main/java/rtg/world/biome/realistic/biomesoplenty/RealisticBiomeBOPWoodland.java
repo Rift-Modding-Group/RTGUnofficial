@@ -63,9 +63,9 @@ public class RealisticBiomeBOPWoodland extends RealisticBiomeBase {
 
     public static class TerrainBOPWoodland extends TerrainBase {
 
-        private float start;
-        private float height;
-        private float width;
+        private final float start;
+        private final float height;
+        private final float width;
 
         public TerrainBOPWoodland(float hillStart, float landHeight, float baseHeight, float hillWidth) {
 
@@ -131,12 +131,12 @@ public class RealisticBiomeBOPWoodland extends RealisticBiomeBase {
     private static class DecoCollectionWoodland extends DecoCollectionBase {
 
         // Tends to return values between -3f to 5f, with some overflow.
-        private DecoTree.Distribution forestDistribution = new DecoTree.Distribution(100f, 6f, 0.8f);
+        private final DecoTree.Distribution forestDistribution = new DecoTree.Distribution(100f, 6f, 0.8f);
 
-        private float tallMin = -1f;
-        private float tallMax = 3f;
-        private float short1Min = -3f;
-        private float short1Max = -1f;
+        private final float tallMin = -1f;
+        private final float tallMax = 3f;
+        private final float short1Min = -3f;
+        private final float short1Max = -1f;
 
         DecoCollectionWoodland(BiomeConfig config) {
 

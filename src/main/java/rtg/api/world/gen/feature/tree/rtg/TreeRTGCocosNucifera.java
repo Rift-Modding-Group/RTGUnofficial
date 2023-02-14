@@ -15,8 +15,8 @@ import java.util.Random;
  */
 public class TreeRTGCocosNucifera extends TreeRTG {
 
-    private static int leavesLength = 133;
-    private static int[] leaves = new int[]{
+    private static final int leavesLength = 133;
+    private static final int[] leaves = new int[]{
             1, 0, 0,
             2, 0, 0,
             3, -1, 0,
@@ -63,8 +63,8 @@ public class TreeRTGCocosNucifera extends TreeRTG {
             -3, 2, -3,
             3, 2, 3
     };
-    private static int cocoasLength = 16;
-    private static int[] cocoas = new int[]{
+    private static final int cocoasLength = 16;
+    private static final int[] cocoas = new int[]{
             2, 0, -2, 1,
             1, 1, -2, 0,
             0, 0, -2, -1,

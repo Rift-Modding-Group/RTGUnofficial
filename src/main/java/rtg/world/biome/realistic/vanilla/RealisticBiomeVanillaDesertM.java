@@ -68,9 +68,9 @@ public class RealisticBiomeVanillaDesertM extends RealisticBiomeBase {
 
     public static class TerrainVanillaDesertM extends TerrainBase {
 
-        private float start;
-        private float height;
-        private float width;
+        private final float start;
+        private final float height;
+        private final float width;
 
         public TerrainVanillaDesertM(float hillStart, float landHeight, float baseHeight, float hillWidth) {
 
@@ -89,7 +89,7 @@ public class RealisticBiomeVanillaDesertM extends RealisticBiomeBase {
 
     public static class SurfaceVanillaDesertM extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;

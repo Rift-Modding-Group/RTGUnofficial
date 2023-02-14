@@ -40,9 +40,9 @@ public class RealisticBiomeRWBambooMarsh extends RealisticBiomeRWBase {
 
     public static class TerrainRWBambooMarsh extends TerrainBase {
 
-        private float baseHeight = 62f;
-        private HeightVariation variation;
-        private HeightVariation smallVariation;
+        private final float baseHeight = 62f;
+        private final HeightVariation variation;
+        private final HeightVariation smallVariation;
 
         public TerrainRWBambooMarsh() {
 

@@ -26,8 +26,8 @@ public class RealisticBiomeTRAVGlacier extends RealisticBiomeTRAVBase {
 
     public static class TerrainBOPGlacier extends TerrainBase {
 
-        private float width;
-        private float strength;
+        private final float width;
+        private final float strength;
 
         public TerrainBOPGlacier(float mountainWidth, float mountainStrength, float height) {
 

@@ -20,8 +20,8 @@ import java.util.Random;
 
 public class RealisticBiomeSFSugiForest extends RealisticBiomeSFBase {
 
-    private static IBlockState sugiLogBlock = BlockUtil.getBlockStateFromCfgString("sugiforest:sugi_log", Blocks.LOG.getDefaultState());
-    private static IBlockState sugiLeavesBlock = BlockUtil.getBlockStateFromCfgString("sugiforest:sugi_leaves", Blocks.LEAVES.getDefaultState());
+    private static final IBlockState sugiLogBlock = BlockUtil.getBlockStateFromCfgString("sugiforest:sugi_log", Blocks.LOG.getDefaultState());
+    private static final IBlockState sugiLeavesBlock = BlockUtil.getBlockStateFromCfgString("sugiforest:sugi_leaves", Blocks.LEAVES.getDefaultState());
 
     public RealisticBiomeSFSugiForest(Biome biome) {
 
@@ -94,11 +94,11 @@ public class RealisticBiomeSFSugiForest extends RealisticBiomeSFBase {
 
     public static class TerrainSFSugiForest extends TerrainBase {
 
-        private float baseHeight = 72f;
-        private float peakyHillWavelength = 40f;
-        private float peakyHillStrength = 10f;
-        private float smoothHillWavelength = 20f;
-        private float smoothHillStrength = 20f;
+        private final float baseHeight = 72f;
+        private final float peakyHillWavelength = 40f;
+        private final float peakyHillStrength = 10f;
+        private final float smoothHillWavelength = 20f;
+        private final float smoothHillStrength = 20f;
 
         public TerrainSFSugiForest() {
 
@@ -118,12 +118,12 @@ public class RealisticBiomeSFSugiForest extends RealisticBiomeSFBase {
     public static class SurfaceSFSugiForest extends SurfaceBase {
 
 
-        private IBlockState blockMixTop;
-        private IBlockState blockMixFiller;
-        private float floMixWidth;
-        private float floMixHeight;
-        private float floSmallWidth;
-        private float floSmallStrength;
+        private final IBlockState blockMixTop;
+        private final IBlockState blockMixFiller;
+        private final float floMixWidth;
+        private final float floMixHeight;
+        private final float floSmallWidth;
+        private final float floSmallStrength;
 
         public SurfaceSFSugiForest(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFiller,
                                    float mixWidth, float mixHeight, float smallWidth, float smallStrength) {

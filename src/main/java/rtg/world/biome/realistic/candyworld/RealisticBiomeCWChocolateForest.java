@@ -25,7 +25,7 @@ public class RealisticBiomeCWChocolateForest extends RealisticBiomeCWBase {
 
     public static class TerrainVanillaForest extends TerrainBase {
 
-        private float hillStrength = 10f;// this needs to be linked to the
+        private final float hillStrength = 10f;// this needs to be linked to the
 
         public TerrainVanillaForest() {
 

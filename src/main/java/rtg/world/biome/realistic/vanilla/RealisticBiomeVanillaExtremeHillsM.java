@@ -55,9 +55,9 @@ public class RealisticBiomeVanillaExtremeHillsM extends RealisticBiomeBase {
 
     public static class TerrainVanillaExtremeHillsM extends TerrainBase {
 
-        private float start;
-        private float height;
-        private float width;
+        private final float start;
+        private final float height;
+        private final float width;
 
         public TerrainVanillaExtremeHillsM(float hillStart, float landHeight, float baseHeight, float hillWidth) {
 
@@ -76,12 +76,12 @@ public class RealisticBiomeVanillaExtremeHillsM extends RealisticBiomeBase {
 
     public static class SurfaceVanillaExtremeHillsM extends SurfaceBase {
 
-        private IBlockState mixBlockTop;
-        private IBlockState mixBlockFill;
-        private float width;
-        private float height;
-        private float smallW;
-        private float smallS;
+        private final IBlockState mixBlockTop;
+        private final IBlockState mixBlockFill;
+        private final float width;
+        private final float height;
+        private final float smallW;
+        private final float smallS;
 
         public SurfaceVanillaExtremeHillsM(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFill, float mixWidth,
                                            float mixHeight, float smallWidth, float smallStrength) {

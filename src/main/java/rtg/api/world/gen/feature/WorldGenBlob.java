@@ -23,9 +23,9 @@ public class WorldGenBlob extends WorldGenerator {
 
     private final IBlockState blobBlock;
     private final int blobSize;
-    private boolean allowInWater;
-    private Collection<Block> validGroundBlocks;
-    private boolean enabled = true;
+    private final boolean allowInWater;
+    private final Collection<Block> validGroundBlocks;
+    private final boolean enabled = true;
 
     public WorldGenBlob(IBlockState block, int size, Collection<Block> validGroundBlocks, boolean allowInWater) {
 

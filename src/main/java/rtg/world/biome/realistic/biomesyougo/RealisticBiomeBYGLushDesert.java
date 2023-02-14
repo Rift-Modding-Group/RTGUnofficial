@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class RealisticBiomeBYGLushDesert extends RealisticBiomeBYGBase {
 
-    private static IBlockState bygMixBlock = Blocks.HARDENED_CLAY.getDefaultState();
+    private static final IBlockState bygMixBlock = Blocks.HARDENED_CLAY.getDefaultState();
 
     public RealisticBiomeBYGLushDesert(Biome biome) {
 
@@ -64,13 +64,13 @@ public class RealisticBiomeBYGLushDesert extends RealisticBiomeBYGBase {
 
     public static class TerrainBOPLushDesert extends TerrainBase {
 
-        private float minHeight;
-        private float mesaWavelength;
-        private float hillStrength;
-        private float topBumpinessHeight = 2;
-        private float topBumpinessWavelength = 15;
-        private HeightEffect height;
-        private HeightEffect groundEffect;
+        private final float minHeight;
+        private final float mesaWavelength;
+        private final float hillStrength;
+        private final float topBumpinessHeight = 2;
+        private final float topBumpinessWavelength = 15;
+        private final HeightEffect height;
+        private final HeightEffect groundEffect;
 
 
         public TerrainBOPLushDesert(float minHeight, float maxHeight, float hillStrength) {
@@ -111,12 +111,12 @@ public class RealisticBiomeBYGLushDesert extends RealisticBiomeBYGBase {
     public static class SurfaceBOPLushDesert extends SurfaceBase {
 
 
-        private IBlockState blockMixTop;
-        private IBlockState blockMixFiller;
-        private float floMixWidth;
-        private float floMixHeight;
-        private float floSmallWidth;
-        private float floSmallStrength;
+        private final IBlockState blockMixTop;
+        private final IBlockState blockMixFiller;
+        private final float floMixWidth;
+        private final float floMixHeight;
+        private final float floSmallWidth;
+        private final float floSmallStrength;
 
         public SurfaceBOPLushDesert(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFiller,
                                     float mixWidth, float mixHeight, float smallWidth, float smallStrength) {

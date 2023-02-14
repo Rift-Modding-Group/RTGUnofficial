@@ -54,7 +54,7 @@ public class RealisticBiomeBYGBaobabSavanna extends RealisticBiomeBYGBase {
 
     public static class TerrainBYGBiome extends TerrainBase {
 
-        private GroundEffect groundEffect = new GroundEffect(4f);
+        private final GroundEffect groundEffect = new GroundEffect(4f);
 
         public TerrainBYGBiome() {
 
@@ -69,9 +69,9 @@ public class RealisticBiomeBYGBaobabSavanna extends RealisticBiomeBYGBase {
 
     public static class SurfaceBYGBiome extends SurfaceBase {
 
-        private IBlockState mixBlock;
-        private float width;
-        private float height;
+        private final IBlockState mixBlock;
+        private final float width;
+        private final float height;
 
         public SurfaceBYGBiome(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mix, float mixWidth, float mixHeight) {
 

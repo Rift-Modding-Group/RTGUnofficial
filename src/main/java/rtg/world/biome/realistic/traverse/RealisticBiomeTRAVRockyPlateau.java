@@ -34,10 +34,10 @@ public class RealisticBiomeTRAVRockyPlateau extends RealisticBiomeTRAVBase {
         private static final float stepHeight = 32;
         final VoronoiPlateauEffect plateau;
         final int groundNoise;
-        private float jitterWavelength = 30;
-        private float jitterAmplitude = 10;
-        private float bumpinessMultiplier = 0.05f;
-        private float bumpinessWavelength = 10f;
+        private final float jitterWavelength = 30;
+        private final float jitterAmplitude = 10;
+        private final float bumpinessMultiplier = 0.05f;
+        private final float bumpinessWavelength = 10f;
 
         public TerrainRTGMesaPlateau(float base) {
             plateau = new VoronoiPlateauEffect();

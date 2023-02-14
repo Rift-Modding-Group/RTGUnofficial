@@ -62,7 +62,7 @@ public class RealisticBiomeBOPGravelBeach extends RealisticBiomeBase {
 
     public static class SurfaceBOPGravelBeach extends SurfaceBase {
 
-        private IBlockState mixBlockFill;
+        private final IBlockState mixBlockFill;
 
         public SurfaceBOPGravelBeach(BiomeConfig config, IBlockState top, IBlockState filler) {
 

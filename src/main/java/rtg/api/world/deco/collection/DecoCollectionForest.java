@@ -27,14 +27,14 @@ import static net.minecraft.block.BlockFlower.EnumFlowerType.*;
 public class DecoCollectionForest extends DecoCollectionBase {
 
     // Tends to return values between -3f to 5f, with some overflow.
-    private DecoTree.Distribution forestDistribution = new DecoTree.Distribution(100f, 6f, 0.8f);
+    private final DecoTree.Distribution forestDistribution = new DecoTree.Distribution(100f, 6f, 0.8f);
 
-    private float short1Min = -3f;
-    private float short1Max = -1f;
-    private float tallMin = -1f;
-    private float tallMax = 3f;
-    private float short2Min = 3f;
-    private float short2Max = 5f;
+    private final float short1Min = -3f;
+    private final float short1Max = -1f;
+    private final float tallMin = -1f;
+    private final float tallMax = 3f;
+    private final float short2Min = 3f;
+    private final float short2Max = 5f;
 
     public DecoCollectionForest(BiomeConfig config) {
 

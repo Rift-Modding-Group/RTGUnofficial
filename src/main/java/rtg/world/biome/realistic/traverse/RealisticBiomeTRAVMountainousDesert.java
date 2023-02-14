@@ -30,13 +30,13 @@ public class RealisticBiomeTRAVMountainousDesert extends RealisticBiomeTRAVBase 
     public static class TerrainHLGreyMountains extends TerrainBase {
 
         private float width;
-        private float strength;
+        private final float strength;
         private float terrainHeight;
 
 
-        private int wavelength = 39;
-        private ISimplexData2D jitter = SimplexData2D.newDisk();
-        private double amplitude = 12;
+        private final int wavelength = 39;
+        private final ISimplexData2D jitter = SimplexData2D.newDisk();
+        private final double amplitude = 12;
 
         public TerrainHLGreyMountains(float mountainWidth, float mountainStrength, float height) {
             width = mountainWidth;

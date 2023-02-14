@@ -42,10 +42,10 @@ public class RealisticBiomeBOPColdDesert extends RealisticBiomeBase {
 
     public static class TerrainBOPColdDesert extends TerrainBase {
 
-        private float ruggedness = 3f;
-        private float ruggednessWavelength = 100f;
-        private float heightPitch = 35f;// the ruggedness parameter will multiply this by 0.2
-        private float heightDivisor = 1f;
+        private final float ruggedness = 3f;
+        private final float ruggednessWavelength = 100f;
+        private final float heightPitch = 35f;// the ruggedness parameter will multiply this by 0.2
+        private final float heightDivisor = 1f;
 
         public TerrainBOPColdDesert() {
 
@@ -62,12 +62,12 @@ public class RealisticBiomeBOPColdDesert extends RealisticBiomeBase {
 
     public static class SurfaceBOPColdDesert extends SurfaceBase {
 
-        private IBlockState blockMixTop;
-        private IBlockState blockMixFiller;
-        private float floMixWidth;
-        private float floMixHeight;
-        private float floSmallWidth;
-        private float floSmallStrength;
+        private final IBlockState blockMixTop;
+        private final IBlockState blockMixFiller;
+        private final float floMixWidth;
+        private final float floMixHeight;
+        private final float floSmallWidth;
+        private final float floSmallStrength;
 
         public SurfaceBOPColdDesert(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFiller,
                                     float mixWidth, float mixHeight, float smallWidth, float smallStrength) {

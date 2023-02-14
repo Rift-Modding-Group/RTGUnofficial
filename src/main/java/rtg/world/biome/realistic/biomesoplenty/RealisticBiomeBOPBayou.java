@@ -30,15 +30,15 @@ import java.util.Random;
 
 public class RealisticBiomeBOPBayou extends RealisticBiomeBase {
 
-    private static IBlockState mudBlock = BOPBlocks.mud.getDefaultState();
-    private static IBlockState logBlock = BlockBOPLog.paging.getVariantState(BOPWoods.WILLOW)
+    private static final IBlockState mudBlock = BOPBlocks.mud.getDefaultState();
+    private static final IBlockState logBlock = BlockBOPLog.paging.getVariantState(BOPWoods.WILLOW)
             .withProperty(BlockLog.LOG_AXIS, EnumAxis.Y);
-    private static IBlockState leavesBlock = BlockBOPLeaves
+    private static final IBlockState leavesBlock = BlockBOPLeaves
             .paging.getVariantState(BOPTrees.WILLOW)
             .withProperty(BlockLeaves.CHECK_DECAY, false)
             .withProperty(BlockLeaves.DECAYABLE, false);
-    private double lakeWaterLevel = 0.04;// the lakeStrength below which things should be below water
-    private double lakeDepressionLevel = 0.3;// the lakeStrength below which land should start to be lowered
+    private final double lakeWaterLevel = 0.04;// the lakeStrength below which things should be below water
+    private final double lakeDepressionLevel = 0.3;// the lakeStrength below which land should start to be lowered
 
     public RealisticBiomeBOPBayou(final Biome biome) {
         super(biome);
@@ -204,15 +204,15 @@ public class RealisticBiomeBOPBayou extends RealisticBiomeBase {
 
     public static class SurfaceBOPBayou extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;
         private float sStrength = 65f;
         private float cCliff = 1.5f;
 
-        private IBlockState mixBlock;
-        private float mixHeight;
+        private final IBlockState mixBlock;
+        private final float mixHeight;
 
         public SurfaceBOPBayou(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff, float stoneCliff,
                                float stoneHeight, float stoneStrength, float clayCliff, IBlockState mix, float mixSize) {

@@ -44,14 +44,14 @@ public class RealisticBiomeBYGBambooForest extends RealisticBiomeBYGBase {
          * using a transition that also generates the hills
          */
 
-        private float hillockWavelength = 30;
-        private float hillockBoost = 5;
-        private float hillockVariance = 10;
-        private float hillockSpikeWidth = 8;
-        private float hillockSpikeHeight = 4;
-        private float terrainBase = 68;
+        private final float hillockWavelength = 30;
+        private final float hillockBoost = 5;
+        private final float hillockVariance = 10;
+        private final float hillockSpikeWidth = 8;
+        private final float hillockSpikeHeight = 4;
+        private final float terrainBase = 68;
 
-        private JitterEffect biomeHeight;// this includes the base
+        private final JitterEffect biomeHeight;// this includes the base
 
 
         public TerrainBYGBiome() {
@@ -96,15 +96,15 @@ public class RealisticBiomeBYGBambooForest extends RealisticBiomeBYGBase {
 
     public static class SurfaceBYGBiome extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;
         private float sStrength = 65f;
         private float cCliff = 1.5f;
 
-        private IBlockState mix;
-        private float mixHeight;
+        private final IBlockState mix;
+        private final float mixHeight;
 
         public SurfaceBYGBiome(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff, float stoneCliff,
                                float stoneHeight, float stoneStrength, float clayCliff, IBlockState mixBlock, float mixSize) {

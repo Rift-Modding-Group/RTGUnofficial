@@ -78,8 +78,8 @@ public class RealisticBiomeVanillaMesaPlateauM extends RealisticBiomeBase {
     public class SurfaceVanillaMesaPlateauM extends SurfaceBase {
 
         private int grassRaise = 0;
-        private IBlockState mixBlock;
-        private IBlockState mix2Block;
+        private final IBlockState mixBlock;
+        private final IBlockState mix2Block;
 
         public SurfaceVanillaMesaPlateauM(BiomeConfig config, IBlockState top, IBlockState fill, int grassHeight) {
 

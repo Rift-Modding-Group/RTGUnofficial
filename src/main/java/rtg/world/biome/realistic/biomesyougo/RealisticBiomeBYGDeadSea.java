@@ -23,7 +23,7 @@ import java.util.Random;
 
 public class RealisticBiomeBYGDeadSea extends RealisticBiomeBYGBase {
 
-    private static IBlockState bygMixBlock = BlockUtil.getBlockStateFromCfgString("byg:sodalite", BlockUtil.getStateStone(BlockStone.EnumType.GRANITE));
+    private static final IBlockState bygMixBlock = BlockUtil.getBlockStateFromCfgString("byg:sodalite", BlockUtil.getStateStone(BlockStone.EnumType.GRANITE));
 
     public RealisticBiomeBYGDeadSea(Biome biome) {
 
@@ -100,8 +100,8 @@ public class RealisticBiomeBYGDeadSea extends RealisticBiomeBYGBase {
     public class SurfaceVanillaMesaBryce extends SurfaceBase {
 
         private int grassRaise = 0;
-        private IBlockState mixBlock;
-        private IBlockState mix2Block;
+        private final IBlockState mixBlock;
+        private final IBlockState mix2Block;
 
         public SurfaceVanillaMesaBryce(BiomeConfig config, IBlockState top, IBlockState fill, int grassHeight) {
 

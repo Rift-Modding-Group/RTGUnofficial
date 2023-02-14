@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class RealisticBiomeBYGCanyons extends RealisticBiomeBYGBase {
 
-    private static IBlockState bygMixBlock = BlockUtil.getBlockStateFromCfgString("byg:hardeneddirt", Blocks.DIRT.getDefaultState());
+    private static final IBlockState bygMixBlock = BlockUtil.getBlockStateFromCfgString("byg:hardeneddirt", Blocks.DIRT.getDefaultState());
 
     public RealisticBiomeBYGCanyons(Biome biome) {
 
@@ -48,11 +48,11 @@ public class RealisticBiomeBYGCanyons extends RealisticBiomeBYGBase {
 
     public static class TerrainBOPOvergrownCliffs extends TerrainBase {
 
-        private float width;
-        private float strength;
-        private float lakeDepth;
-        private float lakeWidth;
-        private float terrainHeight;
+        private final float width;
+        private final float strength;
+        private final float lakeDepth;
+        private final float lakeWidth;
+        private final float terrainHeight;
 
         /*
          * width = 230f
@@ -85,7 +85,7 @@ public class RealisticBiomeBYGCanyons extends RealisticBiomeBYGBase {
 
     public static class SurfaceBOPOvergrownCliffs extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 3.5f;
         private float sHeight = 60f;

@@ -52,9 +52,9 @@ public class RealisticBiomeBYGOrchard extends RealisticBiomeBYGBase {
 
     public static class TerrainBOPOrchard extends TerrainBase {
 
-        private float minHeight;
-        private float maxHeight;
-        private float hillStrength;
+        private final float minHeight;
+        private final float maxHeight;
+        private final float hillStrength;
 
         public TerrainBOPOrchard(float minHeight, float maxHeight, float hillStrength) {
 

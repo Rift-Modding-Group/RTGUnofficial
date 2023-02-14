@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class RealisticBiomeBYGChaparralLowlands extends RealisticBiomeBYGBase {
 
-    private static IBlockState bygMixBlock = Blocks.STONE.getDefaultState();
+    private static final IBlockState bygMixBlock = Blocks.STONE.getDefaultState();
 
     public RealisticBiomeBYGChaparralLowlands(Biome biome) {
 
@@ -44,12 +44,12 @@ public class RealisticBiomeBYGChaparralLowlands extends RealisticBiomeBYGBase {
     public static class TerrainBOPChaparral extends TerrainBase {
 
         private float baseHeight = 76f;
-        private float peakyHillWavelength = 40f;
+        private final float peakyHillWavelength = 40f;
         private float peakyHillStrength = 40f;
-        private float smoothHillWavelength = 60f;
-        private float smoothHillStrength = 30f;
-        private float wavelength = 10f;// of jitter
-        private float amplitude = 2f;// of jitter
+        private final float smoothHillWavelength = 60f;
+        private final float smoothHillStrength = 30f;
+        private final float wavelength = 10f;// of jitter
+        private final float amplitude = 2f;// of jitter
 
         public TerrainBOPChaparral() {
 
@@ -80,9 +80,9 @@ public class RealisticBiomeBYGChaparralLowlands extends RealisticBiomeBYGBase {
 
     public static class SurfaceBOPChaparral extends SurfaceBase {
 
-        private IBlockState mixBlock;
-        private float width;
-        private float height;
+        private final IBlockState mixBlock;
+        private final float width;
+        private final float height;
 
         public SurfaceBOPChaparral(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mix, float mixWidth, float mixHeight) {
 

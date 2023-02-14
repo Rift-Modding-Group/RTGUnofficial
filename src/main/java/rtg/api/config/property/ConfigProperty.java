@@ -5,9 +5,9 @@ import net.minecraftforge.common.config.Configuration;
 
 public abstract class ConfigProperty {
 
-    private Type type;
-    private String name;
-    private String category;
+    private final Type type;
+    private final String name;
+    private final String category;
     private String description;
 
     ConfigProperty(Type type, String name, String category, String description) {

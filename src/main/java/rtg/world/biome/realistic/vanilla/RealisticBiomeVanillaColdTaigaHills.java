@@ -68,7 +68,7 @@ public class RealisticBiomeVanillaColdTaigaHills extends RealisticBiomeBase {
 
     public static class SurfaceVanillaColdTaigaHills extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;

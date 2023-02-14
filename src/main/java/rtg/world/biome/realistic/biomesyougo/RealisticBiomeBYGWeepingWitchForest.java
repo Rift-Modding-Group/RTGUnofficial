@@ -55,7 +55,7 @@ public class RealisticBiomeBYGWeepingWitchForest extends RealisticBiomeBYGBase {
 
     public static class TerrainVanillaRoofedForest extends TerrainBase {
 
-        private GroundEffect groundEffect = new GroundEffect(4f);
+        private final GroundEffect groundEffect = new GroundEffect(4f);
 
         public TerrainVanillaRoofedForest() {
 
@@ -70,15 +70,15 @@ public class RealisticBiomeBYGWeepingWitchForest extends RealisticBiomeBYGBase {
 
     public static class SurfaceVanillaRoofedForest extends SurfaceBase {
 
-        private float min;
+        private final float min;
 
         private float sCliff = 1.5f;
         private float sHeight = 60f;
         private float sStrength = 65f;
         private float cCliff = 1.5f;
 
-        private IBlockState mixBlock;
-        private float mixHeight;
+        private final IBlockState mixBlock;
+        private final float mixHeight;
 
         public SurfaceVanillaRoofedForest(BiomeConfig config, IBlockState top, IBlockState fill, float minCliff, float stoneCliff,
                                           float stoneHeight, float stoneStrength, float clayCliff, IBlockState mix, float mixSize) {

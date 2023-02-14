@@ -55,9 +55,9 @@ public class RealisticBiomeBYGSkyrisHighlands extends RealisticBiomeBYGBase {
 
     public static class TerrainBOPHighland extends TerrainBase {
 
-        private float baseHeight = 90f;
-        private BumpyHillsEffect onTop = new BumpyHillsEffect();
-        private JitterEffect withJitter;
+        private final float baseHeight = 90f;
+        private final BumpyHillsEffect onTop = new BumpyHillsEffect();
+        private final JitterEffect withJitter;
 
         public TerrainBOPHighland() {
 

@@ -26,11 +26,11 @@ public class RealisticBiomeTRAVCliffs extends RealisticBiomeTRAVBase {
 
     public static class TerrainBOPOvergrownCliffs extends TerrainBase {
 
-        private float width;
-        private float strength;
-        private float lakeDepth;
-        private float lakeWidth;
-        private float terrainHeight;
+        private final float width;
+        private final float strength;
+        private final float lakeDepth;
+        private final float lakeWidth;
+        private final float terrainHeight;
 
         /*
          * width = 230f

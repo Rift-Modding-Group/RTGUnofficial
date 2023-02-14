@@ -33,11 +33,11 @@ public class RealisticBiomePLANTSCrystalForest extends RealisticBiomePLANTSBase 
 
     public static class TerrainPLANTSCrystalForest extends TerrainBase {
 
-        private float baseHeight = 72f;
-        private float peakyHillWavelength = 40f;
-        private float peakyHillStrength = 20f;
-        private float smoothHillWavelength = 20f;
-        private float smoothHillStrength = 10f;
+        private final float baseHeight = 72f;
+        private final float peakyHillWavelength = 40f;
+        private final float peakyHillStrength = 20f;
+        private final float smoothHillWavelength = 20f;
+        private final float smoothHillStrength = 10f;
 
         public TerrainPLANTSCrystalForest() {
 

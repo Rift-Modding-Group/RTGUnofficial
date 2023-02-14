@@ -64,9 +64,9 @@ public class RealisticBiomeVanillaFrozenOcean extends RealisticBiomeBase {
 
     public static class SurfaceVanillaFrozenOcean extends SurfaceBase {
 
-        private IBlockState mixBlock;
-        private float width;
-        private float height;
+        private final IBlockState mixBlock;
+        private final float width;
+        private final float height;
         private float mixCheck;
 
         public SurfaceVanillaFrozenOcean(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mix, float mixWidth, float mixHeight) {

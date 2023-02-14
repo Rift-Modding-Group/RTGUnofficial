@@ -56,7 +56,7 @@ public abstract class RealisticBiomeNTBasePlains extends RealisticBiomeNTBase {
 
     public static class TerrainVanillaPlains extends TerrainBase {
 
-        private GroundEffect groundEffect = new GroundEffect(4f);
+        private final GroundEffect groundEffect = new GroundEffect(4f);
 
         public TerrainVanillaPlains() {
 

@@ -79,8 +79,8 @@ public class RealisticBiomeVanillaIcePlains extends RealisticBiomeBase {
 
     public static class SurfaceVanillaIcePlains extends SurfaceBase {
 
-        private IBlockState cliffBlock1;
-        private IBlockState cliffBlock2;
+        private final IBlockState cliffBlock1;
+        private final IBlockState cliffBlock2;
 
         public SurfaceVanillaIcePlains(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState cliff1, IBlockState cliff2) {
             super(config, top, filler);
@@ -123,12 +123,12 @@ public class RealisticBiomeVanillaIcePlains extends RealisticBiomeBase {
 
     public static class SurfacePolar extends SurfaceBase {
 
-        private IBlockState blockMixTop;
-        private IBlockState blockMixFiller;
-        private float floMixWidth;
-        private float floMixHeight;
-        private float floSmallWidth;
-        private float floSmallStrength;
+        private final IBlockState blockMixTop;
+        private final IBlockState blockMixFiller;
+        private final float floMixWidth;
+        private final float floMixHeight;
+        private final float floSmallWidth;
+        private final float floSmallStrength;
 
         public SurfacePolar(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFiller,
                             float mixWidth, float mixHeight, float smallWidth, float smallStrength) {

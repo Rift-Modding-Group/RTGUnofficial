@@ -240,16 +240,16 @@ public class OpenSimplexNoise implements SimplexNoise {
         }
     }
 
-    private int[] perm;
+    private final int[] perm;
 
 
     /* Standard functions */
-    private int[] perm2D;
-    private int[] perm2D_sph2;
+    private final int[] perm2D;
+    private final int[] perm2D_sph2;
 
 
     /* Multi-eval */
-    private int[] perm3D;
+    private final int[] perm3D;
 
     public OpenSimplexNoise(long seed) {
 
@@ -463,10 +463,10 @@ public class OpenSimplexNoise implements SimplexNoise {
 
     private static final class LatticePoint2D {
 
-        private int xsv;
-        private int ysv;
-        private double dx;
-        private double dy;
+        private final int xsv;
+        private final int ysv;
+        private final double dx;
+        private final double dy;
 
         private LatticePoint2D(int xsv, int ysv) {
             this.xsv = xsv;
@@ -494,12 +494,12 @@ public class OpenSimplexNoise implements SimplexNoise {
 
     private static final class Contribution3D {
 
-        private int xsb;
-        private int ysb;
-        private int zsb;
-        private double dx;
-        private double dy;
-        private double dz;
+        private final int xsb;
+        private final int ysb;
+        private final int zsb;
+        private final double dx;
+        private final double dy;
+        private final double dz;
         private Contribution3D next;
 
         private Contribution3D(double multiplier, int xsb, int ysb, int zsb) {

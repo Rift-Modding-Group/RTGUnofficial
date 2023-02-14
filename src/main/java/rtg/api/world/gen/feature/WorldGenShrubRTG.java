@@ -13,10 +13,10 @@ import java.util.Random;
 
 public class WorldGenShrubRTG extends WorldGenerator {
 
-    private int varSize;
-    private IBlockState logBlock;
-    private IBlockState leaveBlock;
-    private boolean varSand;
+    private final int varSize;
+    private final IBlockState logBlock;
+    private final IBlockState leaveBlock;
+    private final boolean varSand;
 
     public WorldGenShrubRTG(int size, IBlockState log, IBlockState leav, boolean sand) {
 

@@ -55,7 +55,7 @@ public class TreeRTGCupressusSempervirens extends TreeRTG {
             y++;
         }
 
-        int small = (int) Math.ceil((double) (this.crownSize / 2));
+        int small = (int) Math.ceil(this.crownSize / 2);
         int large = small;
 
         for (i = 0; i < large; i++) {

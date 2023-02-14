@@ -42,6 +42,7 @@ public final class RTGAPI {
     private static IBlockState
             shadowStoneBlock = null,
             shadowDesertBlock = null;
+
     private RTGAPI() {
     }
 

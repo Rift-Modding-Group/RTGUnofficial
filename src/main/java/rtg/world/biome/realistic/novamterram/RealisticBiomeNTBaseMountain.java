@@ -69,11 +69,11 @@ public abstract class RealisticBiomeNTBaseMountain extends RealisticBiomeNTBase 
 
     public static class TerrainBOPMountainPeaks extends TerrainBase {
 
-        private float width;
-        private float strength;
-        private float terrainHeight;
-        private float spikeWidth = 30;
-        private float spikeHeight = 50;
+        private final float width;
+        private final float strength;
+        private final float terrainHeight;
+        private final float spikeWidth = 30;
+        private final float spikeHeight = 50;
         private HeightEffect heightEffect;
 
         public TerrainBOPMountainPeaks(float mountainWidth, float mountainStrength) {
@@ -108,12 +108,12 @@ public abstract class RealisticBiomeNTBaseMountain extends RealisticBiomeNTBase 
     public static class SurfaceBOPMountainPeaks extends SurfaceBase {
 
 
-        private IBlockState blockMixTop;
-        private IBlockState blockMixFiller;
-        private float floMixWidth;
-        private float floMixHeight;
-        private float floSmallWidth;
-        private float floSmallStrength;
+        private final IBlockState blockMixTop;
+        private final IBlockState blockMixFiller;
+        private final float floMixWidth;
+        private final float floMixHeight;
+        private final float floSmallWidth;
+        private final float floSmallStrength;
 
         public SurfaceBOPMountainPeaks(BiomeConfig config, IBlockState top, IBlockState filler, IBlockState mixTop, IBlockState mixFiller,
                                        float mixWidth, float mixHeight, float smallWidth, float smallStrength) {

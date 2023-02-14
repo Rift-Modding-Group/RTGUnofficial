@@ -42,14 +42,14 @@ public class RealisticBiomeBOPCoralReef extends RealisticBiomeBase {
 
     public static class TerrainBOPCoralReef extends TerrainBase {
 
-        private boolean booRiver;
-        private float[] height;
-        private int heightLength;
-        private float strength;
-        private float cWidth;
-        private float cHeigth;
-        private float cStrength;
-        private float base;
+        private final boolean booRiver;
+        private final float[] height;
+        private final int heightLength;
+        private final float strength;
+        private final float cWidth;
+        private final float cHeigth;
+        private final float cStrength;
+        private final float base;
 
         /*
          * Example parameters:
