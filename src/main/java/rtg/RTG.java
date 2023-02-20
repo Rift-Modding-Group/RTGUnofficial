@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 @Mod(
         modid = RTG.MOD_ID,
         name = "RTG Unofficial",
-        version = "1.0.1",
+        version = "1.0.2",
         dependencies = "required-after:forge@[14.23.5.2847,);after:biomesoplenty@[7.0.1.2441,);after:traverse@[1.6.0,2.0.0)",
         guiFactory = RTGGuiConfigFactory.LOCATION,
         acceptableRemoteVersions = "*"
