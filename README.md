@@ -3,7 +3,7 @@ This mod is a fork of the [Realistic Terrain Generation](https://www.curseforge.
 ### Overview
 ----
 
-- Added support for more than 256 biomes. ([JEIDs](https://github.com/DimensionalDevelopment/JustEnoughIDs)/[REIDs](https://github.com/TerraFirmaCraft-The-Final-Frontier/RoughlyEnoughIDs))
+- Added support for more than 256 biomes. (Requires [RoughlyEnoughIDs](https://github.com/TerraFirmaCraft-The-Final-Frontier/RoughlyEnoughIDs))
 - Contains bugfixes for some remaining issues.
 
 ### Credits
