@@ -2,7 +2,7 @@
 (Please list other mods and their versions if you feel they are relevant to this issue. i.e. Biomes O' Plenty)
 
 - Forge version:
-- RTG version:
+- RTGU version:
 
 ##### Issue Description:
 (Please provide screenshots if neccessary/possible. Images can be dragged & dropped into this window.)
