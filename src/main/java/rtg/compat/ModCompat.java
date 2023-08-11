@@ -1,4 +1,4 @@
-package rtg.util;
+package rtg.compat;
 
 import com.google.common.collect.Lists;
 import net.minecraft.init.Biomes;
@@ -208,10 +208,10 @@ public final class ModCompat {
 
                 supportedBiomes.forEach(b -> supported[0] +=
                         System.lineSeparator() + "|| " + String.format(ID_FORMAT, Biome.getIdForBiome(b))
-                                + " | " + String.format(BIOME_NAME_FORMAT, b.biomeName)
+                                + " | " + String.format(BIOME_NAME_FORMAT, b.getBiomeName())
                                 + " | " + String.format(BIOME_CLASS_FORMAT, b.getBiomeClass().getSimpleName())
                                 + " | " + String.format(BIOME_RESLOC_FORMAT, b.getRegistryName())
-                                + " | " + String.format(BEACH_NAME_FORMAT, RTGAPI.getRTGBiome(b).getBeachBiome().baseBiome().biomeName)
+                                + " | " + String.format(BEACH_NAME_FORMAT, RTGAPI.getRTGBiome(b).getBeachBiome().baseBiome().getBiomeName())
                                 + " ||");
 
                 supported[0] += System.lineSeparator() + ".= " + String.format(ID_FORMAT, new String(new char[ID_LENGTH]).replace('\0', '='))
@@ -258,6 +258,7 @@ public final class ModCompat {
         redwoods,
         rockhounding_surface,
         spookybiomes,
+        subaquatic,
         sugiforest,
         terscraft,
         thaumcraft,

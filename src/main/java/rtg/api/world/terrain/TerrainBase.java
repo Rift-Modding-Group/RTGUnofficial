@@ -371,7 +371,7 @@ public abstract class TerrainBase {
         float h = simplex.noise2f(x / 300f, y / 300f) * 8f * river;
         //h = h > 3f ? 3f : h;
         h += simplex.noise2f(x / 50f, y / 50f) * 2f;
-        h += simplex.noise2f(x / 15f, y / 15f) * 1f;
+        h += simplex.noise2f(x / 15f, y / 15f);
 
         float floNoise = averageFloor + h;
         floNoise = floNoise < minimumOceanFloor ? minimumOceanFloor : floNoise;

@@ -114,14 +114,14 @@ public interface IRealisticBiome {
         }
 
         // Add this collection's decos to master deco list.
-        if (decoCollection.decos.size() > 0) {
+        if (!decoCollection.decos.isEmpty()) {
             for (int i = 0; i < decoCollection.decos.size(); i++) {
                 this.addDeco(decoCollection.decos.get(i));
             }
         }
 
         // If there are any tree decos in this collection, then add the individual TreeRTG objects to master tree list.
-        if (decoCollection.rtgTrees.size() > 0) {
+        if (!decoCollection.rtgTrees.isEmpty()) {
             for (int i = 0; i < decoCollection.rtgTrees.size(); i++) {
                 this.addTree(decoCollection.rtgTrees.get(i));
             }

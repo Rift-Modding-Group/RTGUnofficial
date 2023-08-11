@@ -8,7 +8,7 @@ import rtg.RTGConfig;
 import rtg.api.RTGAPI;
 import rtg.api.util.UtilityClass;
 import rtg.api.world.biome.RealisticBiomeBase;
-import rtg.util.ModCompat.Mods;
+import rtg.compat.ModCompat.Mods;
 import rtg.world.biome.realistic.abyssalcraft.*;
 import rtg.world.biome.realistic.auxiliarybiomes.*;
 import rtg.world.biome.realistic.betteragriculture.RealisticBiomeBAFarmlandBiome;
@@ -45,6 +45,7 @@ import rtg.world.biome.realistic.redwoods.*;
 import rtg.world.biome.realistic.rockhounding.RealisticBiomeRHWhiteSands;
 import rtg.world.biome.realistic.spookybiomes.RealisticBiomeSBGhostlyForest;
 import rtg.world.biome.realistic.spookybiomes.RealisticBiomeSBWitchwoodForest;
+import rtg.world.biome.realistic.subaquatic.*;
 import rtg.world.biome.realistic.sugiforest.RealisticBiomeSFSugiForest;
 import rtg.world.biome.realistic.terscraft.RealisticBiomeTERSBiomeDemonite;
 import rtg.world.biome.realistic.thaumcraft.RealisticBiomeTCEerie;
@@ -143,6 +144,9 @@ public final class BiomeInit {
         }
         if (Mods.spookybiomes.isLoaded()) {
             init_spookybiomes();
+        }
+        if (Mods.subaquatic.isLoaded()) {
+            init_subaquatic();
         }
         if (Mods.sugiforest.isLoaded()) {
             init_sugiforest();
@@ -1376,6 +1380,32 @@ public final class BiomeInit {
         }
         if ((biome = getBiome(Mods.spookybiomes.getResourceLocation("ghostly_forest"))) != null) {
             RTGAPI.addRTGBiomes(new RealisticBiomeSBGhostlyForest(biome));
+        }
+    }
+
+    private static void init_subaquatic() {
+
+        Biome biome;
+        if ((biome = getBiome(Mods.subaquatic.getResourceLocation("deep_warm_ocean"))) != null) {
+            RTGAPI.addRTGBiomes(new RealisticBiomeSubaquaticDeepWarmOcean(biome));
+        }
+        if ((biome = getBiome(Mods.subaquatic.getResourceLocation("deep_lukewarm_ocean"))) != null) {
+            RTGAPI.addRTGBiomes(new RealisticBiomeSubaquaticDeepLukewarmOcean(biome));
+        }
+        if ((biome = getBiome(Mods.subaquatic.getResourceLocation("deep_cold_ocean"))) != null) {
+            RTGAPI.addRTGBiomes(new RealisticBiomeSubaquaticDeepColdOcean(biome));
+        }
+        if ((biome = getBiome(Mods.subaquatic.getResourceLocation("deep_frozen_ocean"))) != null) {
+            RTGAPI.addRTGBiomes(new RealisticBiomeSubaquaticDeepFrozenOcean(biome));
+        }
+        if ((biome = getBiome(Mods.subaquatic.getResourceLocation("warm_ocean"))) != null) {
+            RTGAPI.addRTGBiomes(new RealisticBiomeSubaquaticWarmOcean(biome));
+        }
+        if ((biome = getBiome(Mods.subaquatic.getResourceLocation("lukewarm_ocean"))) != null) {
+            RTGAPI.addRTGBiomes(new RealisticBiomeSubaquaticLukewarmOcean(biome));
+        }
+        if ((biome = getBiome(Mods.subaquatic.getResourceLocation("cold_ocean"))) != null) {
+            RTGAPI.addRTGBiomes(new RealisticBiomeSubaquaticColdOcean(biome));
         }
     }
 

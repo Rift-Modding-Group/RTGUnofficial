@@ -546,7 +546,8 @@ public class ChunkGeneratorRTG implements IChunkGenerator {
         // get area biome map
         for (int x = -sampleSize; x < sampleSize + 5; x++) {
             for (int z = -sampleSize; z < sampleSize + 5; z++) {
-                biomeData[(x + sampleSize) * sampleArraySize + (z + sampleSize)] = Biome.getIdForBiome(biomeProvider.getBiome(new BlockPos(worldX + ((x * 8)), 0, worldZ + ((z * 8)))));
+                biomeData[(x + sampleSize) * sampleArraySize + (z + sampleSize)] =
+                        Biome.getIdForBiome(biomeProvider.getBiome(new BlockPos(worldX + ((x * 8)), 0, worldZ + ((z * 8)))));
             }
         }
 

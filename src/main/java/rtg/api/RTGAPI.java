@@ -13,6 +13,7 @@ import net.minecraft.world.gen.layer.GenLayerRiverMix;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.Loader;
 import org.apache.logging.log4j.Level;
+import rtg.RTG;
 import rtg.api.util.Logger;
 import rtg.api.util.UtilityClass;
 import rtg.api.util.storage.SparseList;
@@ -30,7 +31,7 @@ public final class RTGAPI {
 
     public static final String
             RTG_API_ID = "rtgapi",
-            VERSION = "@API_VERSION@",
+            VERSION = RTG.VERSION,
             RTG_MOD_ID = "rtg",
             RTG_WORLDTYPE_ID = "RTG";
     public static final SparseList<Map.Entry<Biome, IRealisticBiome>> RTG_BIOMES = new SparseList<>();

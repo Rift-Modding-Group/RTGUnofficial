@@ -14,7 +14,7 @@ import rtg.api.world.deco.DecoFallenTree;
 import rtg.api.world.deco.DecoShrub;
 import rtg.api.world.surface.SurfaceBase;
 import rtg.api.world.terrain.TerrainBase;
-import rtg.util.ModCompat.Mods;
+import rtg.compat.ModCompat.Mods;
 
 import java.util.Random;
 

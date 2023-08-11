@@ -53,7 +53,7 @@ public final class BiomeAnalyzer {
 
         for (int i = 0; i < 256; i++) {
             if (result[result[i]] != i) {
-                throw new RuntimeException("" + i + " " + result[i] + " " + result[result[i]]);
+                throw new RuntimeException(i + " " + result[i] + " " + result[result[i]]);
             }
         }
 
