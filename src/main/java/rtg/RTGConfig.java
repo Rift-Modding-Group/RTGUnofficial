@@ -333,7 +333,7 @@ public final class RTGConfig {
 
         barkCoveredLogs(Type.BOOLEAN, Category.trees,
                 "Set this to FALSE to prevent the trunks of RTG trees from using the 'all-bark' texture model.\n" +
-                        "For more information, visit http://minecraft.gamepedia.com/Wood#Block_data",
+                        "For more information, visit https://minecraft.wiki/w/Java_Edition_data_values/Pre-flattening#Wood",
                 true);
 
         private final Type type;
